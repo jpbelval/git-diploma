@@ -54,6 +54,8 @@ jobs:
       with:
         java-version: '17'
         distribution: 'temurin'
+    - name: Go to working directory
+      run: cd Backend/backend/
 
     # Generates and submits a dependency graph, enabling Dependabot Alerts for all project dependencies.
     # See: https://github.com/gradle/actions/blob/main/dependency-submission/README.md
