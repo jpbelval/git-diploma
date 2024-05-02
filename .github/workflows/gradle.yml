@@ -30,14 +30,9 @@ jobs:
 
     # Configure Gradle for optimal use in GiHub Actions, including caching of downloaded dependencies.
     # See: https://github.com/gradle/actions/blob/main/setup-gradle/README.md
-    - name: Go to working directory
-      run: cd Backend/backend/
     
     - name: Setup Gradle
       uses: gradle/actions/setup-gradle@417ae3ccd767c252f5661f1ace9f835f9654f2b5
-
-    - name: Print current directory
-      run: ls -la
 
     - name: Build with Gradle Wrapper
       working-directory: ./Backend/backend
@@ -57,11 +52,10 @@ jobs:
       with:
         java-version: '17'
         distribution: 'temurin'
-        
-    - name: Go to working directory
-      run: cd Backend/backend/
 
     # Generates and submits a dependency graph, enabling Dependabot Alerts for all project dependencies.
     # See: https://github.com/gradle/actions/blob/main/dependency-submission/README.md
     - name: Generate and submit dependency graph
       uses: gradle/actions/dependency-submission@417ae3ccd767c252f5661f1ace9f835f9654f2b5 # v3.1.0
+      with:
+        build-root-directory: ./Backend/backend
