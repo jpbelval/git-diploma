@@ -2,8 +2,8 @@ spring:
   application:
     name: backend
   datasource:
-    url: jdbc:postgresql://db-cut-history.dev.dcitech.cloud:5432/cut_history?currentSchema=cut_history
+    url: jdbc:postgresql://localhost:5432/gd
     driver-class-name: org.postgresql.Driver
-    username: postgres
-    password: postgres
-    schema-name: cut_history
+    username: gd-admin
+    password: secret
+#    schema-name: public
