@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: backend
+  datasource:
+    url: jdbc:postgresql://localhost:5432/gd
+    driver-class-name: org.postgresql.Driver
+    username: gd-admin
+    password: secret
+#    schema-name: public

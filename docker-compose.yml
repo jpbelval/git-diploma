@@ -1,0 +1,45 @@
+version: '3.2'
+
+services:
+
+  #app:
+   # container_name: gitdiploma
+    #build:
+     # context: .
+      #dockerfile: ./Backend/backend/Dockerfile
+    #restart: always
+    #ports:
+    #  - "3000:3000"
+    #environment:
+    #  DATABASE_URL: postgres://gitdiploma:secret@db/gitdiploma
+
+  db:
+    container_name: git-diploma-db
+    image: postgres:15
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=secret
+      - POSTGRES_USER=gd-admin
+      - POSTGRES_DB=gd
+    volumes:
+      - ./init_db/init.sql:/docker-entrypoint-initdb.d/init.sql
+      #- gd-db:/var/lib/postgresql/data
+      
+      
+  pgadmin:
+    container_name: git-diploma-pgadmin
+    image: dpage/pgadmin4
+    restart: always
+    ports:
+      - "8888:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: gd-admin@gd-admin.org
+      PGADMIN_DEFAULT_PASSWORD: postgres
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+
+volumes:
+  #gd-db:
+  pgadmin-data:
