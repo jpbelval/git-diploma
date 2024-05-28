@@ -3,10 +3,20 @@ import { FaBars } from "react-icons/fa";
 import { NavLink as Link } from "react-router-dom";
 import styled from "styled-components";
 
+export const Title = styled(Link)`
+    padding-left:400px;
+    font-size: 20px;
+    color: #000000;
+    margin: 10px;
+    &:hover {
+        color: #000000;
+    }
+`;
+
 export const Nav = styled.nav`
     /*background: #018849;*/
     border-bottom: 10px solid #018849;
-    height: 85px;
+    height: 30px;
     display: flex;
     justify-content: space-between;
     padding: 10px;
