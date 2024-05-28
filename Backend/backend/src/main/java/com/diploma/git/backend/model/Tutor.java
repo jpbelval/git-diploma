@@ -8,6 +8,7 @@ public class Tutor {
     private String email;
     private String phone;
     private List<Course> courseList;
+    private String cip;
 
     public String getFirstName() {
         return firstName;
@@ -47,5 +48,13 @@ public class Tutor {
 
     public void setCourseList(List<Course> courseList) {
         this.courseList = courseList;
+    }
+
+    public String getCip() {
+        return cip;
+    }
+
+    public void setCip(String cip) {
+        this.cip = cip;
     }
 }
