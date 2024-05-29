@@ -8,6 +8,7 @@ import {
     NavBtnLink,
     Title,
 } from "./navbarElements";
+import { Outlet, Link } from "react-router-dom";
 
 const Navbar = () => {
     return (
@@ -21,7 +22,7 @@ const Navbar = () => {
                 <NavLink to="/" >
                   home
                 </NavLink>
-                <NavLink to="/aide" activeStyle>
+                <NavLink to="/aide">
                   aide
                 </NavLink>
                 {/* Second Nav */}

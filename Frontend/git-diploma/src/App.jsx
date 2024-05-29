@@ -5,6 +5,7 @@ import {
     BrowserRouter as Router,
     Routes,
     Route,
+    Outlet,
 } from "react-router-dom";
 import api from './api/axiosConfig';
 
@@ -30,9 +31,12 @@ function App() {
   }, [])
 
   return (
-    <Router>
+    <>
       <Navbar />
-    </Router>
+      <div>
+        <Outlet />
+      </div>
+    </>
   );
 }
 

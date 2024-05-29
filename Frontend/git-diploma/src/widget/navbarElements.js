@@ -4,9 +4,9 @@ import { NavLink as Link } from "react-router-dom";
 import styled from "styled-components";
 
 export const Title = styled(Link)`
-    padding-left:400px;
+    padding-left:25%;
     font-size: 20px;
-    color: #000000;
+    color: white;
     margin: 10px;
     &:hover {
         color: #000000;
@@ -28,7 +28,7 @@ export const Nav = styled.nav`
 `;
 
 export const NavLink = styled(Link)`
-    color: #000000;
+    color: white;
     display: flex;
     align-items: end;
     text-decoration: none;
@@ -64,7 +64,7 @@ export const NavMenu = styled.div`
     display: flex;
     align-items: end;
     margin-right: -24px;
-    padding-left:400px;
+    padding-left:25%;
     /* Second Nav */
     /* margin-right: 24px; */
     /* Third Nav */
@@ -88,7 +88,7 @@ export const NavBtn = styled.nav`
 `;
 
 export const NavBtnLink = styled(Link)`
-    color: #000000;
+    color: white;
     display: flex;
     align-items: end;
     text-decoration: none;
