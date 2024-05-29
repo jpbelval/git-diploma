@@ -1,13 +1,13 @@
 package com.diploma.git.backend;
 
 import com.diploma.git.backend.mapper.StudentMapper;
-import com.diploma.git.backend.model.Project;
-import com.diploma.git.backend.model.Student;
+import com.diploma.git.backend.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.lang.Class;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,11 +16,11 @@ public class StudentController {
     @Autowired
     StudentMapper studentMapper;
 
-    @GetMapping("/getStudent")
-    public List<Student> getStudent(@RequestParam(value = "cip") String cip) {
+    @GetMapping("/getStudents")
+    public List<Student> getStudents(@RequestParam(value = "id_project") String id_project) {
         Student s;
         List<Project> projects;
-        List<Student>  students = studentMapper.getStudentsFromProject("1");
+        List<Student>  students = studentMapper.getStudentsFromProject(id_project);
         for (int i = 0; i < students.size(); i++) {
             s = students.get(i);
             projects = studentMapper.getProjectsFromStudent(s.getCip());
@@ -29,9 +29,28 @@ public class StudentController {
         return students;
     }
 
+    @GetMapping("/getProjects")
+    public List<Project> getProjects(@RequestParam(value = "cip") String cip) {
+        return studentMapper.getProjectsFromStudent(cip);
+    }
 
-    @GetMapping("/getProject")
-    public Project getProjects(@RequestParam(value = "id") int id) {
-        return new Project();
+    @GetMapping("/getClass")
+    public List<Class> getClasses(@RequestParam(value = "id_project") String id_project) {
+        return studentMapper.getClassesFromProject(id_project);
+    }
+
+    @GetMapping("/getTutors")
+    public List<Tutor> getTutors(@RequestParam(value = "id_project") String id_project) {
+        return studentMapper.getTutorsFromProject(id_project);
+    }
+
+    @GetMapping("/getEvents")
+    public List<Event> getEvents(@RequestParam(value = "id_project") String id_project) {
+        return studentMapper.getEventFromProject(id_project);
+    }
+
+    @GetMapping("/getFiles")
+    public List<File> getFiles(@RequestParam(value = "id_project") String id_project) {
+        return studentMapper.getFilesFromProject(id_project);
     }
 }

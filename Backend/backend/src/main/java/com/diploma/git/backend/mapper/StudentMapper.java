@@ -1,12 +1,12 @@
 package com.diploma.git.backend.mapper;
 
-import com.diploma.git.backend.model.Project;
-import com.diploma.git.backend.model.Student;
+import com.diploma.git.backend.model.*;
 import jakarta.websocket.server.PathParam;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
+import java.lang.Class;
 import java.util.List;
 
 @Mapper
@@ -24,4 +24,30 @@ public interface StudentMapper {
             "ON p.id_project = student_project.id_project " +
             "WHERE student_project.cip = #{cip} ")
     List<Project> getProjectsFromStudent(@PathParam("cip") String cip);
+
+    @Select("SELECT t.cip, t.firstname, t.lastname, t.email " +
+            "FROM tutor t " +
+            "INNER JOIN tutor_class " +
+            "ON t.cip = tutor_class.cip " +
+            "INNER JOIN class_project " +
+            "ON tutor_class.sigle = class_project.sigle " +
+            "WHERE class_project.id_project = #{id_project} ")
+    List<Tutor> getTutorsFromProject(@PathParam("id_project") String id_project);
+
+    @Select("SELECT c.sigle, c.name " +
+            "FROM class c " +
+            "INNER JOIN class_project " +
+            "ON c.sigle = class_project.sigle " +
+            "WHERE class_project.id_project = #{id_project} ")
+    List<Class> getClassesFromProject(@PathParam("id_project") String id_project);
+
+    @Select("SELECT e.id_event, e.cip, e.date_event " +
+            "FROM event e " +
+            "WHERE e.id_project = #{id_project} ")
+    List<Event> getEventFromProject(@PathParam("id_project") String id_project);
+
+    @Select("SELECT f.id_file, f.name, f.size, f.last_change " +
+            "FROM file " +
+            "WHERE f.id_project = #{id_project} ")
+    List<File> getFilesFromProject(@PathParam("id_project") String id_project);
 }
