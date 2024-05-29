@@ -39,15 +39,15 @@ public interface StudentMapper {
             "INNER JOIN class_project " +
             "ON c.sigle = class_project.sigle " +
             "WHERE class_project.id_project = #{id_project} ")
-    List<Class> getClassesFromProject(@PathParam("id_project") String id_project);
+    List<Classe> getClassesFromProject(@PathParam("id_project") String id_project);
 
-    @Select("SELECT e.id_event, e.cip, e.date_event " +
+    @Select("SELECT e.id_event, e.cip, e.date_event, e.id_project " +
             "FROM event e " +
             "WHERE e.id_project = #{id_project} ")
     List<Event> getEventFromProject(@PathParam("id_project") String id_project);
 
-    @Select("SELECT f.id_file, f.name, f.size, f.last_change " +
-            "FROM file " +
+    @Select("SELECT f.id_file, f.name, f.size, f.last_change, f.id_project " +
+            "FROM file f " +
             "WHERE f.id_project = #{id_project} ")
     List<File> getFilesFromProject(@PathParam("id_project") String id_project);
 }

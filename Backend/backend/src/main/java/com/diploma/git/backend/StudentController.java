@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.lang.Class;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,13 +34,15 @@ public class StudentController {
     }
 
     @GetMapping("/getClass")
-    public List<Class> getClasses(@RequestParam(value = "id_project") String id_project) {
+    public List<Classe> getClasses(@RequestParam(value = "id_project") String id_project) {
         return studentMapper.getClassesFromProject(id_project);
     }
 
     @GetMapping("/getTutors")
     public List<Tutor> getTutors(@RequestParam(value = "id_project") String id_project) {
-        return studentMapper.getTutorsFromProject(id_project);
+        //ajouter le get courses
+        List<Tutor> tutors = studentMapper.getTutorsFromProject(id_project);
+        return tutors;
     }
 
     @GetMapping("/getEvents")

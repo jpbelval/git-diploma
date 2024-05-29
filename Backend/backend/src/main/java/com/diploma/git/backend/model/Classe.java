@@ -1,6 +1,6 @@
 package com.diploma.git.backend.model;
 
-public class Class {
+public class Classe {
     private String sigle;
     private String name;
 
