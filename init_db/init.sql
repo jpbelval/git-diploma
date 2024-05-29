@@ -44,7 +44,7 @@ CREATE TABLE Class(
    PRIMARY KEY(sigle)
 );
 
-CREATE TABLE Student_Projet(
+CREATE TABLE Student_Project(
    cip VARCHAR(8),
    id_project VARCHAR(50),
    PRIMARY KEY(cip, id_project),
@@ -52,7 +52,7 @@ CREATE TABLE Student_Projet(
    FOREIGN KEY(id_project) REFERENCES Project(id_project)
 );
 
-CREATE TABLE Tutors_Class(
+CREATE TABLE Tutor_Class(
    cip VARCHAR(8),
    sigle VARCHAR(50),
    PRIMARY KEY(cip, sigle),
