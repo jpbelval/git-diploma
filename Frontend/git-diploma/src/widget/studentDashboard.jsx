@@ -1,28 +1,9 @@
 import React from "react";
 import styles from './studentDashboard.module.css';
+import {projet} from './data.js'
+import { Link } from "react-router-dom";
 
 const StudentDashboard = () => {
-    const projet = [{
-        id: 0,
-        name: 'Test',
-        cour: 'S2-APP2',
-        remise: new Date('2024-05-01')
-    },{
-        id: 1,
-        name: 'Test 2',
-        cour: 'Projet',
-        remise: new Date('2024-06-01')
-    },{
-        id: 2,
-        name: 'Test 3',
-        cour: 'S2-APP3',
-        remise: new Date('2024-06-15')
-    },{
-        id: 3,
-        name: 'Test 4',
-        cour: 'S2-APP4',
-        remise: new Date('2024-06-29')
-    }];
 
     const openProjet = projet.filter(projet => projet.remise > Date.now());
     const closedProjet = projet.filter(projet => projet.remise < Date.now());
@@ -30,7 +11,7 @@ const StudentDashboard = () => {
 
     const listeProjet = openProjet.map(openProjet =>
         <tr>
-            <td>{openProjet.name}</td>
+            <td><Link to={`/project/${openProjet.projectId}`} params>{openProjet.name}</Link></td>
             <td>{openProjet.cour}</td>
             <td>--:--:--</td>
         </tr>
@@ -59,12 +40,16 @@ const StudentDashboard = () => {
                     <h2>projets</h2>
                     <div>
                         <table className={styles.tableProjet}>
-                            <tr>
-                                <th>nom</th>
-                                <th>cours</th>
-                                <th>last commit</th>
-                            </tr>
-                            {listeProjet}
+                            <thead>
+                                <tr>
+                                    <th>nom</th>
+                                    <th>cours</th>
+                                    <th>last commit</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {listeProjet}
+                            </tbody>
                         </table>
                     </div>
                 </div>

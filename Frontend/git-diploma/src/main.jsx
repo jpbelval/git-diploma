@@ -7,6 +7,7 @@ import {
   RouterProvider 
 } from 'react-router-dom';
 import StudentDashboard from './widget/studentDashboard.jsx';
+import ProjectDetails from './widget/projectDetails.jsx';
 
 const router = createBrowserRouter([
   {
@@ -17,6 +18,10 @@ const router = createBrowserRouter([
         path: "/",
         element: <StudentDashboard />,
       },
+      {
+        path: "project/:projectId",
+        element: <ProjectDetails />
+      }
     ]
   },
 ]);
