@@ -2,6 +2,17 @@ version: '3.2'
 
 services:
 
+  app:
+    container_name: gitdiploma-backend
+    image: gd-backend:latest
+    restart: always
+    ports:
+      - "8080:8080"
+    networks:
+      gd-net:
+    # environment:
+    #   JAR_FILE: ./Backend/backend/build/libs/backend-1.0.0.jar
+
   auth:
     image: quay.io/keycloak/keycloak:19.0.3
     container_name: auth
