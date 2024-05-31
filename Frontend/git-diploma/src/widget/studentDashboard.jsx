@@ -1,5 +1,5 @@
 import React from "react";
-import styles from './studentDashboard.module.css';
+import styles from './styles.module.css';
 import {projet} from './data.js'
 import { Link } from "react-router-dom";
 
