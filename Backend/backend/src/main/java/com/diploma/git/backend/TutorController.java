@@ -13,8 +13,8 @@ public class TutorController {
     public Tutor getTutor(@RequestParam(value = "cip") String cip) {
         Tutor tutor = new Tutor();
         tutor.setCip(cip);
-        tutor.setFirstName("Biggus");
-        tutor.setLastName("Maccus");
+        tutor.setFirstname("Biggus");
+        tutor.setLastname("Maccus");
         return tutor;
     }
 

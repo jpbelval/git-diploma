@@ -38,13 +38,13 @@ CREATE TABLE Tutor(
    PRIMARY KEY(cip)
 );
 
-CREATE TABLE Class(
+CREATE TABLE Course(
    sigle VARCHAR(50),
    name VARCHAR(50),
    PRIMARY KEY(sigle)
 );
 
-CREATE TABLE Student_Projet(
+CREATE TABLE Student_Project(
    cip VARCHAR(8),
    id_project VARCHAR(50),
    PRIMARY KEY(cip, id_project),
@@ -52,20 +52,20 @@ CREATE TABLE Student_Projet(
    FOREIGN KEY(id_project) REFERENCES Project(id_project)
 );
 
-CREATE TABLE Tutors_Class(
+CREATE TABLE Tutor_Course(
    cip VARCHAR(8),
    sigle VARCHAR(50),
    PRIMARY KEY(cip, sigle),
    FOREIGN KEY(cip) REFERENCES Tutor(cip),
-   FOREIGN KEY(sigle) REFERENCES Class(sigle)
+   FOREIGN KEY(sigle) REFERENCES Course(sigle)
 );
 
-CREATE TABLE Class_Project(
-   id_project VARCHAR(50),
+CREATE TABLE Course_Project(
    sigle VARCHAR(50),
-   PRIMARY KEY(id_project, sigle),
-   FOREIGN KEY(id_project) REFERENCES Project(id_project),
-   FOREIGN KEY(sigle) REFERENCES Class(sigle)
+   id_project VARCHAR(50),
+   PRIMARY KEY(sigle, id_project),
+   FOREIGN KEY(sigle) REFERENCES Course(sigle),
+   FOREIGN KEY(id_project) REFERENCES Project(id_project)
 );
 
 
@@ -75,3 +75,7 @@ INSERT INTO Student VALUES ('belj1922', 'belval', 'jean-philippe', 'belj1922@ush
 INSERT INTO Student VALUES ('lepl1501', 'lépine', 'luka', 'lepl1501@usherbrooke.ca');
 INSERT INTO Student VALUES ('ouej2018', 'ouellet', 'jérôme', 'ouej2018@usherbrooke.ca');
 INSERT INTO Tutor VALUES ('maif1401', 'mailhot', 'frédéric', 'maif1401@usherbrooke.ca');
+INSERT INTO Course VALUES ('gif333', 'math');
+INSERT INTO Tutor_Course VALUES ('maif1401', 'gif333');
+INSERT INTO Project VALUES ('1');
+INSERT INTO Course_Project VALUES ('gif333', '1');
