@@ -6,7 +6,6 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
-import java.lang.Class;
 import java.util.List;
 
 @Mapper
@@ -27,19 +26,26 @@ public interface StudentMapper {
 
     @Select("SELECT t.cip, t.firstname, t.lastname, t.email " +
             "FROM tutor t " +
-            "INNER JOIN tutor_class " +
-            "ON t.cip = tutor_class.cip " +
-            "INNER JOIN class_project " +
-            "ON tutor_class.sigle = class_project.sigle " +
-            "WHERE class_project.id_project = #{id_project} ")
+            "INNER JOIN tutor_course " +
+            "ON t.cip = tutor_course.cip " +
+            "INNER JOIN course_project " +
+            "ON tutor_course.sigle = course_project.sigle " +
+            "WHERE course_project.id_project = #{id_project} ")
     List<Tutor> getTutorsFromProject(@PathParam("id_project") String id_project);
 
     @Select("SELECT c.sigle, c.name " +
-            "FROM class c " +
-            "INNER JOIN class_project " +
-            "ON c.sigle = class_project.sigle " +
-            "WHERE class_project.id_project = #{id_project} ")
-    List<Classe> getClassesFromProject(@PathParam("id_project") String id_project);
+            "FROM course c " +
+            "INNER JOIN course_project " +
+            "ON c.sigle = course_project.sigle " +
+            "WHERE course_project.id_project = #{id_project} ")
+    List<Course> getCoursesFromProject(@PathParam("id_project") String id_project);
+
+    @Select("SELECT c.sigle, c.name " +
+            "FROM course c " +
+            "INNER JOIN tutor_course " +
+            "ON c.sigle = tutor_course.sigle " +
+            "WHERE tutor_course.cip = #{cip} ")
+    List<Course> getCoursesFromTutor(@PathParam("cip") String cip);
 
     @Select("SELECT e.id_event, e.cip, e.date_event, e.id_project " +
             "FROM event e " +

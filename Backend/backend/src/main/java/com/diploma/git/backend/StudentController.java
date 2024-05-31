@@ -34,14 +34,16 @@ public class StudentController {
     }
 
     @GetMapping("/getClass")
-    public List<Classe> getClasses(@RequestParam(value = "id_project") String id_project) {
-        return studentMapper.getClassesFromProject(id_project);
+    public List<Course> getCourses(@RequestParam(value = "id_project") String id_project) {
+        return studentMapper.getCoursesFromProject(id_project);
     }
 
     @GetMapping("/getTutors")
     public List<Tutor> getTutors(@RequestParam(value = "id_project") String id_project) {
-        //ajouter le get courses
         List<Tutor> tutors = studentMapper.getTutorsFromProject(id_project);
+        for (int i = 0; i < tutors.size(); i++) {
+            tutors.get(i).setCourseList(studentMapper.getCoursesFromTutor(tutors.get(i).getCip()));
+        }
         return tutors;
     }
 
