@@ -2,6 +2,16 @@ version: '3.2'
 
 services:
 
+  git-server:
+    image: git-server:latest
+    container_name: git-server
+    volumes:
+      - git-repo-data:/home/git/
+      - ./git-master-password:/run/secrets/git_password:ro
+    ports:
+      - "2222:22"
+    environment:
+      GIT_PASSWORD_FILE: /run/secrets/git_password
   auth:
     image: quay.io/keycloak/keycloak:19.0.3
     container_name: auth
@@ -49,6 +59,7 @@ services:
 volumes:
   #gd-db:
   pgadmin-data:
+  git-repo-data:
 
 networks:
   gd-net:
