@@ -10,8 +10,8 @@ services:
       - "8080:8080"
     networks:
       gd-net:
-    # environment:
-    #   JAR_FILE: ./Backend/backend/build/libs/backend-1.0.0.jar
+        # environment:
+        #   JAR_FILE: ./Backend/backend/build/libs/backend-1.0.0.jar
 
   auth:
     image: quay.io/keycloak/keycloak:19.0.3
@@ -26,6 +26,7 @@ services:
       KC_PROXY: edge
     ports:
       - 8180:8180
+
   db:
     container_name: git-diploma-db
     image: postgres:15
@@ -40,9 +41,8 @@ services:
       - ./init_db/init.sql:/docker-entrypoint-initdb.d/init.sql
     networks:
       gd-net:
-      #- gd-db:/var/lib/postgresql/data
-      
-      
+        #- gd-db:/var/lib/postgresql/data 
+
   pgadmin:
     container_name: git-diploma-pgadmin
     image: dpage/pgadmin4
@@ -57,9 +57,11 @@ services:
     networks:
       gd-net:
 
+
 volumes:
   #gd-db:
   pgadmin-data:
+
 
 networks:
   gd-net:

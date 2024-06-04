@@ -1,55 +1,23 @@
-FROM alpine:3.20.0
+FROM alpine:3.20
 
-RUN set -ex; \
-    apk add --no-cache \
-        git=2.45.1-r0 \
-        openssh=9.7_p1-r3 \
-    ;
+# Install OpenSSH server and Gitolite
+# Unlock the automatically-created git user
+RUN set -x \
+    && apk add --no-cache gitolite openssh \
+    && passwd -u git
 
-# Generate SSH host keys
-RUN ssh-keygen -A
+# Volume used to store SSH host keys, generated on first run
+VOLUME /etc/ssh/keys
 
-# Define variables
-ENV GIT_USER=git \
-    GIT_GROUP=git
-ENV GIT_HOME=/home/${GIT_USER}
-ENV SSH_AUTHORIZED_KEYS_FILE=${GIT_HOME}/.ssh/authorized_keys \
-    GIT_REPOSITORIES_PATH=/srv/git
+# Volume used to store all Gitolite data (keys, config and repositories), initialized on first run
+VOLUME /var/lib/git
 
-# Create the git user and enable login by assigning a simple password
-# Note that BusyBox implementation of `adduser` differs from Debian's
-# and therefore options behave slightly differently
-RUN set -eux; \
-    addgroup "${GIT_GROUP}"; \
-    adduser \
-        --gecos "Git User" \
-        --ingroup "${GIT_GROUP}" \
-        --disabled-password \
-        --shell "$(which git-shell)" \
-        "${GIT_USER}" ; \
-    echo "${GIT_USER}:12345" | chpasswd
-
-# Restrict git user to git commands
-# See `git-shell(1)`
-COPY git-shell-commands ${GIT_HOME}/git-shell-commands
-RUN set -eux; \
-    cd ${GIT_HOME}/git-shell-commands; \
-    cmds="ls mkdir rm vi"; \
-    for c in $cmds; do \
-        ln -s $(which $c) .; \
-    done
-
-# Delete Alpine welcome message
-RUN rm /etc/motd
-
-# Set up entrypoint script and directory
-ENV DOCKER_ENTRYPOINT_DIR=/docker-entrypoint.d
-RUN set -eux; \
-    mkdir ${DOCKER_ENTRYPOINT_DIR}
+# Entrypoint responsible for SSH host keys generation, and Gitolite data initialization
 COPY docker-entrypoint.sh /
-COPY 10-setup.sh ${DOCKER_ENTRYPOINT_DIR}
+ENTRYPOINT ["/docker-entrypoint.sh"]
 
+# Expose port 22 to access SSH
 EXPOSE 22
 
-ENTRYPOINT ["/docker-entrypoint.sh"]
-CMD ["/usr/sbin/sshd", "-D"]
+# Default command is to run the SSH server
+CMD ["sshd"]
