@@ -37,7 +37,7 @@
     padding-left: 1%;
     padding-bottom: 1%;
     width:20%;
-    border: solid green;
+    border: solid #018849;
     border-radius: 25px;
 }
 
@@ -58,6 +58,6 @@
 
 .buttonForm{
     width: 40%;
-    background-color: green;
+    background-color: #018849;
 }
 
