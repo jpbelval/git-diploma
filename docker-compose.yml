@@ -2,6 +2,18 @@ version: '3.2'
 
 services:
 
+  git-server:
+    image: git-server:latest
+    container_name: git-server
+    volumes:
+      - gitolite-sshkeys:/etc/ssh/keys
+      - gitolite-git:/var/lib/git
+    ports:
+      - "2222:22"
+    environment:
+      SSH_KEY_NAME: ${SSH_KEY_NAME}
+      SSH_KEY: ${SSH_KEY}
+
   auth:
     image: quay.io/keycloak/keycloak:19.0.3
     container_name: auth
@@ -15,6 +27,7 @@ services:
       KC_PROXY: edge
     ports:
       - 8180:8180
+
   db:
     container_name: git-diploma-db
     image: postgres:15
@@ -29,9 +42,8 @@ services:
       - ./init_db/init.sql:/docker-entrypoint-initdb.d/init.sql
     networks:
       gd-net:
-      #- gd-db:/var/lib/postgresql/data
-      
-      
+        #- gd-db:/var/lib/postgresql/data
+
   pgadmin:
     container_name: git-diploma-pgadmin
     image: dpage/pgadmin4
@@ -46,9 +58,14 @@ services:
     networks:
       gd-net:
 
+
 volumes:
   #gd-db:
   pgadmin-data:
+  git-repo-data:
+  gitolite-sshkeys:
+  gitolite-git:
+
 
 networks:
   gd-net:
