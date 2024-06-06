@@ -47,6 +47,11 @@ public interface StudentMapper {
             "WHERE tutor_course.cip = #{cip} ")
     List<Course> getCoursesFromTutor(@PathParam("cip") String cip);
 
+    @Select("SELECT s.sigle " +
+            "FROM student_course s " +
+            "WHERE s.cip = #{cip} ")
+    List<Course> getCoursesFromStudent(@PathParam("cip") String cip);
+
     @Select("SELECT e.id_event, e.cip, e.date_event, e.id_project " +
             "FROM event e " +
             "WHERE e.id_project = #{id_project} ")

@@ -2,6 +2,7 @@ package com.diploma.git.backend;
 
 import com.diploma.git.backend.mapper.StudentMapper;
 import com.diploma.git.backend.model.*;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -35,9 +36,9 @@ public class StudentController {
         return studentMapper.getProjectsFromStudent(cip);
     }
 
-    @GetMapping("/getClass")
-    public List<Course> getCourses(@RequestParam(value = "id_project") String id_project) {
-        return studentMapper.getCoursesFromProject(id_project);
+    @GetMapping("/getCourses")
+    public List<Course> getCourses(@RequestParam(value = "cip") String cip) {
+        return studentMapper.getCoursesFromStudent(cip);
     }
 
     @GetMapping("/getTutors")

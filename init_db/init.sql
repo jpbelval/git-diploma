@@ -52,6 +52,14 @@ CREATE TABLE Student_Project(
    FOREIGN KEY(id_project) REFERENCES Project(id_project)
 );
 
+CREATE TABLE Student_Course(
+   cip VARCHAR(8),
+   sigle VARCHAR(50),
+   PRIMARY KEY(cip, sigle),
+   FOREIGN KEY (cip) REFERENCES Student(cip),
+   FOREIGN KEY (sigle) REFERENCES Course(sigle)
+);
+
 CREATE TABLE Tutor_Course(
    cip VARCHAR(8),
    sigle VARCHAR(50),
@@ -117,3 +125,4 @@ INSERT INTO Course VALUES ('gif333', 'math');
 INSERT INTO Tutor_Course VALUES ('maif1401', 'gif333');
 INSERT INTO Project VALUES ('1');
 INSERT INTO Course_Project VALUES ('gif333', '1');
+INSERT INTO Student_Course VALUES ('lepl1501', 'gif333');
