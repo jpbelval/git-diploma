@@ -17,27 +17,27 @@ public class TeamController {
     TeamMapper teamMapper;
 
     @GetMapping("/getProjects")
-    public List<Project> getTeams(@RequestParam(value = "sigle") String sigle) {
+    public List<Project> getProjects(@RequestParam(value = "sigle") String sigle) {
         List<Project> teams = teamMapper.getProjectsFromCourse(sigle);
         for(int i = 0; i < teams.size(); i++)
             teams.get(i).setStudents(teamMapper.getStudentsFromProject(teams.get(i).getId_project()));
         return teams;
     }
 
-    @GetMapping("/RegisterInProject")
-    public boolean RegisterInTeam(@RequestParam(value = "sigle") String sigle,
+    @GetMapping("/registerInProject")
+    public boolean registerInProject(@RequestParam(value = "sigle") String sigle,
                                   @RequestParam(value = "id_project") String id_project,
                                   @RequestParam(value = "cip") String cip) {
-        if (!IsInProject(sigle, cip))
+        if (isInProject(sigle, cip))
             return false;
         teamMapper.registerStudentInProject(id_project, cip);
         return true;
     }
 
-    @GetMapping("/IsInProject")
-    public boolean IsInProject(@RequestParam(value = "sigle") String sigle,
+    @GetMapping("/isInProject")
+    public boolean isInProject(@RequestParam(value = "sigle") String sigle,
                                @RequestParam(value = "cip") String cip) {
-        List<Project> teams = getTeams(sigle);
+        List<Project> teams = getProjects(sigle);
         for (int i = 0; i < teams.size(); i++) {
             List<Student> students = teams.get(i).getStudents();
             for (int j = 0; j < students.size(); j++)

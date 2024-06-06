@@ -11,8 +11,8 @@ import java.util.List;
 
 @Mapper
 public interface TeamMapper {
-    @Select("SELECT c.sigle " +
-            "FROM class_project " +
+    @Select("SELECT c.id_project " +
+            "FROM course_project c " +
             "WHERE c.sigle = #{sigle} ")
     List<Project> getProjectsFromCourse(@PathParam("sigle") String sigle);
 
