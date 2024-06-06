@@ -26,7 +26,7 @@ const CourseSelection = () => {
   const courseList = courses.map((course, index) => (
     <tr key={index}>
       <td><Link to={`/student/teamSelection/${course.sigle}`} className={styles.courseLink}>{course.sigle}</Link></td>
-      <td>--:--:--</td> {/* Placeholder for additional info, adjust as needed */}
+      <td>--:--:--</td>
     </tr>
   ));
 

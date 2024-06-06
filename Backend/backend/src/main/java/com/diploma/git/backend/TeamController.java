@@ -46,11 +46,4 @@ public class TeamController {
         }
         return false;
     }
-
-    /*
-    @GetMapping("/getProjects")
-    public List<Project> getProjects(@RequestParam(value = "cip") String cip) {
-        return studentMapper.getProjectsFromStudent(cip);
-    }
-     */
 }

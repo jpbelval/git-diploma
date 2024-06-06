@@ -21,9 +21,14 @@ const TeamSelection = () => {
   };
 
   //modifier pour le bon cip et attends pour le team controller
-  const registerInTeam = () => {
-
-  }
+   const registerInProject = () => {
+      await api.get("/api/team/registerInProject", {
+         params: {
+            sigle: sigle,
+            id_project: project.id_project,
+            cip = "lepl1501"
+         }
+   }
 
   useEffect(() => {
     if (sigle) {
