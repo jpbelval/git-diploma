@@ -12,7 +12,7 @@ import api from './api/axiosConfig';
 function App() {
   const [membre, setMembre] = useState();
 
-  /*const getMembres = async() => {
+  const getMembres = async() => {
     try{
       const response = await api.get("/api/student/getStudent", {
         params:{
@@ -24,11 +24,11 @@ function App() {
     }catch(err){
       console.log(err);
     }
-  }*/
+  }
 
-  /*useEffect(() =>{
+  useEffect(() =>{
     getMembres();
-  }, [])*/
+  }, [])
 
   return (
     <>

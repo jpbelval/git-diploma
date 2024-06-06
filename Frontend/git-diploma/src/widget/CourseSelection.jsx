@@ -1,62 +1,50 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import api from '../api/axiosConfig';
 
-const [membre, setMembre] = useState();
+const CourseSelection = () => {
+  const [membre, setMembre] = useState([]);
 
-const getMembres = async() => {
-    try{
+  const getMembres = async () => {
+    try {
       const response = await api.get("/api/student/getCourses", {
-        params:{
+        params: {
           cip: 'lepl1501'
         }
       });
-      console.log(response.data);
       setMembre(response.data);
-    }catch(err){
-      console.log(err);
+    } catch (err) {
+      console.log("Error fetching data:", err);
     }
   }
 
- useEffect(() =>{
-   getMembres();
- }, [])
+  useEffect(() => {
+    getMembres();
+  }, []);
 
-const listMembre = membre.map(membre =>
-      <tr>
-            <td><Link to={`/student/teamSelection/${membre.sigle}`}>{membre.sigle}</Link></td>
-
+  const listMembre = membre.map((membre, index) => {
+    console.log("Mapping member:", membre);
+    return (
+      <tr key={index}>
+        <td><Link to={`/student/teamSelection/${membre.sigle}`}>{membre.sigle}</Link></td>
       </tr>
-   );
-
-/*
-const listeProjet = openProjet.map(openProjet =>
-        <tr>
-            <td><Link to={`/project/${openProjet.projectId}`} params>{openProjet.name}</Link></td>
-            <td>{openProjet.cour}</td>
-            <td>--:--:--</td>
-        </tr>
     );
+  });
 
-   const getMembres = async() => {
-       try{
-         const response = await api.get("/api/student/getStudent", {
-           params:{
-             cip: 'aubm1811'
-           }
-         });
-         console.log(response.data);
-         setMembre(response.data);
-       }catch(err){
-         console.log(err);
-       }
-     }
-*/
+  return (
+    <>
+      <table>
+        <thead>
+          <tr>
+            <th>Course Code</th>
+          </tr>
+        </thead>
+        <tbody>
+          {listMembre}
+        </tbody>
+      </table>
+    </>
+  );
+}
 
-const CourseSelection = () => {
-   return (
-         <>
-
-         </>
-      )
-   }
-
-export default CourseSelection
+export default CourseSelection;
