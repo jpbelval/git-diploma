@@ -19,3 +19,23 @@ export const projet = [{
     cour: 'S2-APP4',
     remise: new Date('2024-06-29')
 }];
+
+export const course = [{
+    courseId: 0,
+    name: 'gerard paquebot',
+    code: 's2-app1',
+    start: new Date('2024-04-21'),
+    end: new Date('2024-05-01')
+},{
+    courseId: 1,
+    name: 'bob gratton',
+    code: 's2-app2',
+    start: new Date('2024-06-02'),
+    end: new Date('2024-06-14')
+},{
+    courseId: 1,
+    name: 'plume latraverse',
+    code: 's2-app3',
+    start: new Date('2024-06-15'),
+    end: new Date('2024-06-29')
+} ]

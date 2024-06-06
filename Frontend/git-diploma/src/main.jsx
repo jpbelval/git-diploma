@@ -9,6 +9,7 @@ import {
 import StudentDashboard from './widget/studentDashboard.jsx';
 import ProjectDetails from './widget/projectDetails.jsx';
 import Login from './widget/loginPage.jsx'
+import TutorDashboard from './widget/tutorDashboard.jsx';
 
 const router = createBrowserRouter([
   {
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
       {
         path: "Login",
         element: <Login />
+      },
+      {
+        path: "tutorDashboard",
+        element: <TutorDashboard />
       }
     ]
   },
