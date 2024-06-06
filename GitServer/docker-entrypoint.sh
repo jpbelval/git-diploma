@@ -1,5 +1,7 @@
 #!/bin/sh
 
+echo "Entrypoint reached"
+
 # if command is sshd, set it up correctly
 if [ "${1}" = 'sshd' ]; then
   set -- /usr/sbin/sshd -D
@@ -12,7 +14,7 @@ if [ "${1}" = 'sshd' ]; then
     grep -q "HostKey $keyfile" /etc/ssh/sshd_config || echo "HostKey $keyfile" >> /etc/ssh/sshd_config
   done
   # Disable unwanted authentications
-  perl -i -pe 's/^#?((?!Kerberos|GSSAPI)\w*Authentication)\s.*/\1 no/; s/^(PubkeyAuthentication) no/\1 yes/' /etc/ssh/sshd_config
+  # perl -i -pe 's/^#?((?!Kerberos|GSSAPI)\w*Authentication)\s.*/\1 no/; s/^(PubkeyAuthentication) no/\1 yes/' /etc/ssh/sshd_config
   # Disable sftp subsystem
   perl -i -pe 's/^(Subsystem\ssftp\s)/#\1/' /etc/ssh/sshd_config
 fi

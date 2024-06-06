@@ -5,6 +5,9 @@ services:
   git-server:
     image: git-server:latest
     container_name: git-server
+    volumes:
+      - gitolite-sshkeys:/etc/ssh/keys
+      - gitolite-git:/var/lib/git
     ports:
       - "2222:22"
     environment:
@@ -60,6 +63,8 @@ volumes:
   #gd-db:
   pgadmin-data:
   git-repo-data:
+  gitolite-sshkeys:
+  gitolite-git:
 
 
 networks:
