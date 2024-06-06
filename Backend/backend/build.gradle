@@ -15,16 +15,16 @@ repositories {
 	mavenCentral()
 }
 
-task compileMavenProject(type: Exec) {
+/*task compileMavenProject(type: Exec) {
 	workingDir("../gitolite-manager")
 	commandLine "/etc/intellij/plugins/maven/lib/maven3/bin/mvn", "clean", "compile"
-}
+}*/
 
-dependencies {
-	implementation files("../gitolite-manager/src/main/java/nl/tudelft/ewi/gitolite") {
-		builtBy "compileMavenProject"
-	}
-	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.3'
+ dependencies {
+/*	 implementation files("../gitolite-manager/src/main/java/nl/tudelft/ewi/gitolite") {
+		 builtBy "compileMavenProject"
+	 }*/
+ 	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.3'
 	// https://mvnrepository.com/artifact/org.postgresql/postgresql
 	implementation 'org.postgresql:postgresql:42.7.3'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
