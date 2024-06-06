@@ -1,50 +1,57 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import api from '../api/axiosConfig';
+import styles from './styles.module.css';
 
 const CourseSelection = () => {
-  const [membre, setMembre] = useState([]);
+  const [courses, setCourses] = useState([]);
 
-  const getMembres = async () => {
+  const getCourses = async () => {
     try {
       const response = await api.get("/api/student/getCourses", {
         params: {
           cip: 'lepl1501'
         }
       });
-      setMembre(response.data);
+      setCourses(response.data);
     } catch (err) {
       console.log("Error fetching data:", err);
     }
-  }
+  };
 
   useEffect(() => {
-    getMembres();
+    getCourses();
   }, []);
 
-  const listMembre = membre.map((membre, index) => {
-    console.log("Mapping member:", membre);
-    return (
-      <tr key={index}>
-        <td><Link to={`/student/teamSelection/${membre.sigle}`}>{membre.sigle}</Link></td>
-      </tr>
-    );
-  });
+  const courseList = courses.map((course, index) => (
+    <tr key={index}>
+      <td><Link to={`/student/teamSelection/${course.sigle}`} className={styles.courseLink}>{course.sigle}</Link></td>
+      <td>--:--:--</td> {/* Placeholder for additional info, adjust as needed */}
+    </tr>
+  ));
 
   return (
-    <>
-      <table>
-        <thead>
-          <tr>
-            <th>Course Code</th>
-          </tr>
-        </thead>
-        <tbody>
-          {listMembre}
-        </tbody>
-      </table>
-    </>
+    <div className={styles.divContent}>
+      <div className={styles.divListe}>
+        <div>
+          <h2>Cours</h2>
+          <div>
+            <table className={styles.tableProjet}>
+              <thead>
+                <tr>
+                  <th>Sigle</th>
+                  <th>Informations supplementaires</th>
+                </tr>
+              </thead>
+              <tbody>
+                {courseList}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
   );
-}
+};
 
 export default CourseSelection;
