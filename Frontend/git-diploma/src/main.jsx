@@ -10,6 +10,7 @@ import StudentDashboard from './widget/studentDashboard.jsx';
 import ProjectDetails from './widget/projectDetails.jsx';
 import Login from './widget/loginPage.jsx';
 import CourseSelection from './widget/CourseSelection.jsx';
+import TeamSelection from './widget/TeamSelection.jsx';
 
 const router = createBrowserRouter([
   {
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
       {
          path: "equipe",
          element: <CourseSelection />
+      },
+      {
+         path: "student/teamSelection/:sigle",
+         element: <TeamSelection />
       }
     ]
   },
