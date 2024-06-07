@@ -22,12 +22,7 @@ const TeamSelection = () => {
 
   //modifier pour le bon cip et attends pour le team controller
    const registerInProject = () => {
-      await api.get("/api/team/registerInProject", {
-         params: {
-            sigle: sigle,
-            id_project: project.id_project,
-            cip = "lepl1501"
-         }
+
    }
 
   useEffect(() => {
@@ -39,7 +34,7 @@ const TeamSelection = () => {
   const ProjectList = projects.map((project, index) => (
     <tr key={index}>
       <div>
-         <button onClick={registerInTeam}> {project.id_project} </button>
+         <button onClick={registerInProject}> {project.id_project} </button>
       </div>
       <td>--:--:--</td>
     </tr>
