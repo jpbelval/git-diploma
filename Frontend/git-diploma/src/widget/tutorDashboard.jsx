@@ -82,6 +82,11 @@ const TutorDashboard = () =>{
                         </table>
                     </div>
                 </div>
+                <div className={styles.divAddButton}>
+                    <Link to="/addCourse">
+                        <button className={styles.buttonForm}>Ajouter un Cours</button>
+                    </Link>
+                </div>
             </div>
         </div>
         </>
