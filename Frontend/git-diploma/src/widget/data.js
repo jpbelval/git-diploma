@@ -33,9 +33,15 @@ export const course = [{
     start: new Date('2024-06-02'),
     end: new Date('2024-06-14')
 },{
-    courseId: 1,
+    courseId: 2,
     name: 'plume latraverse',
     code: 's2-app3',
     start: new Date('2024-06-15'),
     end: new Date('2024-06-29')
-} ]
+},{
+    courseId: 3,
+    name: 'Gerard Laflaque',
+    code: 's2-app4',
+    start: new Date('2024-07-01'),
+    end: new Date('2024-07-8')
+}  ]

@@ -10,6 +10,7 @@ import StudentDashboard from './widget/studentDashboard.jsx';
 import ProjectDetails from './widget/projectDetails.jsx';
 import Login from './widget/loginPage.jsx'
 import TutorDashboard from './widget/tutorDashboard.jsx';
+import CourseDetails from './widget/courseDetails.jsx';
 
 const router = createBrowserRouter([
   {
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
       {
         path: "tutorDashboard",
         element: <TutorDashboard />
+      },
+      {
+        path: "courses/:courseId",
+        element: <CourseDetails />
       }
     ]
   },
