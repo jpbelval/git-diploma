@@ -40,7 +40,7 @@ const router = createBrowserRouter([
         element: <CourseDetails />
       },
       {
-        path: "addCourse",
+        path: "tutorDashboard/addCourse",
         element: <AddCourse />
       }
     ]
