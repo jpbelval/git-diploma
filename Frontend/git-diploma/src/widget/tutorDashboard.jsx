@@ -11,21 +11,21 @@ const TutorDashboard = () =>{
 
     const pastCourseList = pastCourse.map(pastCourse =>
         <tr>
-            <td><Link to={`/courses/${pastCourse.courseId}`} params>{pastCourse.name}</Link></td>
+            <td><Link to={`/courses/${pastCourse.code}`} params>{pastCourse.name}</Link></td>
             <td>{pastCourse.code}</td>
         </tr>
     );
 
     const currentCourseList = currentCourse.map(currentCourse =>
         <tr>
-            <td><Link to={`/courses/${currentCourse.courseId}`} params>{currentCourse.name}</Link></td>
+            <td><Link to={`/courses/${currentCourse.code}`} params>{currentCourse.name}</Link></td>
             <td>{currentCourse.code}</td>
         </tr>
     );
 
     const futureCourseList = futureCourse.map(futureCourse =>
         <tr>
-            <td><Link to={`/courses/${futureCourse.courseId}`} params>{futureCourse.name}</Link></td>
+            <td><Link to={`/courses/${futureCourse.code}`} params>{futureCourse.name}</Link></td>
             <td>{futureCourse.code}</td>
         </tr>
     );

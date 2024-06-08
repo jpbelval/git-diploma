@@ -34,7 +34,7 @@ const router = createBrowserRouter([
         element: <TutorDashboard />
       },
       {
-        path: "courses/:courseId",
+        path: "courses/:code",
         element: <CourseDetails />
       }
     ]

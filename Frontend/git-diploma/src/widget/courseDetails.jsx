@@ -3,9 +3,8 @@ import { course } from "./data";
 import { useParams } from "react-router-dom";
 
 const CourseDetails = () => {
-    let c = useParams();
-    let cId = parseInt(c.courseId);
-    const cours = course.filter(course => course.courseId == cId);
+    const { code } = useParams();
+    const cours = course.filter(course => course.code === code);
 
     const courseInfo = cours.map(cours => 
         <p>{cours.name}</p>
