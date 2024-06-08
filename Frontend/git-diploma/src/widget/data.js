@@ -23,25 +23,31 @@ export const projet = [{
 export const course = [{
     courseId: 0,
     name: 'gerard paquebot',
-    code: 's2-app1',
+    code: 'S2-APP2',
     start: new Date('2024-04-21'),
     end: new Date('2024-05-01')
 },{
     courseId: 1,
     name: 'bob gratton',
-    code: 's2-app2',
+    code: 'S2-APP2',
     start: new Date('2024-06-02'),
     end: new Date('2024-06-14')
 },{
     courseId: 2,
     name: 'plume latraverse',
-    code: 's2-app3',
+    code: 'S2-APP3',
     start: new Date('2024-06-15'),
     end: new Date('2024-06-29')
 },{
     courseId: 3,
     name: 'Gerard Laflaque',
-    code: 's2-app4',
+    code: 'S2-APP4',
     start: new Date('2024-07-01'),
     end: new Date('2024-07-8')
-}  ]
+},{
+    courseId: 4,
+    name: 'mazda zoom zoom',
+    code: 'Projet',
+    start: new Date('2024-05-01'),
+    end: new Date('2024-07-8')
+}]
