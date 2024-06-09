@@ -23,7 +23,7 @@ export const projet = [{
 export const course = [{
     courseId: 0,
     name: 'gerard paquebot',
-    code: 'S2-APP2',
+    code: 'S2-APP1',
     start: new Date('2024-04-21'),
     end: new Date('2024-05-01')
 },{
