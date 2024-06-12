@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import api from '../api/axiosConfig';
 import styles from './styles.module.css';
 
@@ -10,9 +10,7 @@ const TeamSelection = () => {
   const getProjects = async () => {
     try {
       const response = await api.get("/api/student/getProjectsFromCourse", {
-        params: {
-          sigle: sigle
-        }
+        params: { sigle }
       });
       setProjects(response.data);
     } catch (err) {
@@ -20,10 +18,9 @@ const TeamSelection = () => {
     }
   };
 
-  //modifier pour le bon cip et attends pour le team controller
-   const registerInProject = () => {
-
-   }
+  const registerInProject = (id) => {
+    console.log(id);
+  };
 
   useEffect(() => {
     if (sigle) {
@@ -33,9 +30,11 @@ const TeamSelection = () => {
 
   const ProjectList = projects.map((project, index) => (
     <tr key={index}>
-      <div>
-         <button onClick={registerInProject}> {project.id_project} </button>
-      </div>
+      <td>
+        <button onClick={() => registerInProject(project.id_project)}>
+          {project.id_project}
+        </button>
+      </td>
       <td>--:--:--</td>
     </tr>
   ));
