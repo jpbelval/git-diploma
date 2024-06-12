@@ -1,6 +1,6 @@
 import React from "react";
 import { course, projet } from "./data";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 
 const CourseDetails = () => {
     const { code } = useParams();
@@ -16,6 +16,12 @@ const CourseDetails = () => {
         <p>{cours.start.toLocaleDateString("en-US")}</p>
     )
 
+    const projLink = coursProj.map(project => (
+        <li key={project.projectId}>
+            <Link to={`/project/${project.projectId}`} params>{project.name}</Link>              
+        </li>
+    ))
+
     return (
         <>
         <div>
@@ -27,9 +33,7 @@ const CourseDetails = () => {
                     <p>End Date: {/*{cours.end.toLocaleDateString("en-US")}*/}</p>
                     <h3>Projects:</h3>
                     <ul>
-                        {coursProj.map(project => (
-                            <li key={project.projectId}>{project.name}</li>
-                        ))}
+                        {projLink}
                     </ul>
                 </div>
             ) : (
