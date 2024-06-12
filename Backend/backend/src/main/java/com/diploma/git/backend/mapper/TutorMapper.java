@@ -45,4 +45,11 @@ public interface TutorMapper {
             "FROM file f " +
             "WHERE f.id_project = #{id_project} ")
     List<File> getFilesFromProject(@PathParam("id_project") String id_project);
+
+    @Select("SELECT s.cip, student.firstname, student.lastname " +
+            "FROM student_course s " +
+            "INNER JOIN student " +
+            "ON s.cip = student.cip " +
+            "WHERE s.sigle = #{sigle} ")
+    List<Student> getStudentsFromCourse(@PathParam("sigle") String sigle);
 }

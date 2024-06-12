@@ -44,4 +44,13 @@ public class TutorController {
     public List<File> getFiles(@RequestParam(value = "id_project") String id_project) {
         return tutorMapper.getFilesFromProject(id_project);
     }
+
+    @GetMapping("/getStudentsFromCourse")
+    public List<Student> getStudentFromSigle(@RequestParam(value = "sigle") String sigle) {
+        List<Student>  students = tutorMapper.getStudentsFromCourse(sigle);
+        for (int i = 0; i < students.size(); i++) {
+            students.get(i).setProjets(tutorMapper.getProjectsFromStudent(students.get(i).getCip()));
+        }
+        return students;
+    }
 }

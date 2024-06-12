@@ -117,3 +117,8 @@ INSERT INTO Course VALUES ('gif333', 'math');
 INSERT INTO Tutor_Course VALUES ('maif1401', 'gif333');
 INSERT INTO Project VALUES ('1');
 INSERT INTO Course_Project VALUES ('gif333', '1');
+<<<<<<< Updated upstream
+=======
+INSERT INTO Student_Project VALUES ('lepl1501', '1');
+INSERT INTO Student_Course VALUES ('lepl1501', 'gif333');
+>>>>>>> Stashed changes
