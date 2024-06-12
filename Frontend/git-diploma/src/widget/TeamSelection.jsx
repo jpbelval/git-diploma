@@ -9,17 +9,26 @@ const TeamSelection = () => {
 
   const getProjects = async () => {
     try {
-      const response = await api.get("/api/student/getProjectsFromCourse", {
+      const response = await api.get("/api/project/getProjectsFromCourse", {
         params: { sigle }
       });
+      console.log(response);
       setProjects(response.data);
     } catch (err) {
       console.log("Error fetching data:", err);
     }
   };
 
-  const registerInProject = (id) => {
-    console.log(id);
+  const registerInProject = async (id) => {
+    try {
+      const response = await api.get("/api/project/setTeamMember", {
+        params: { cip: 'aubm1811', project_id: id }
+      });
+      console.log(response);
+      
+    } catch (err) {
+      console.log("Error fetching data:", err);
+    }
   };
 
   useEffect(() => {
@@ -30,12 +39,8 @@ const TeamSelection = () => {
 
   const ProjectList = projects.map((project, index) => (
     <tr key={index}>
-      <td>
-        <button onClick={() => registerInProject(project.id_project)}>
-          {project.id_project}
-        </button>
-      </td>
-      <td>--:--:--</td>
+      <td><input type='radio' onClick={() => registerInProject(project.id_project)}/>{project.id_project}</td>
+      <td>{project.students.map(student => (<p>{student.firstname} {student.lastname},</p>))}</td>
     </tr>
   ));
 
@@ -47,7 +52,7 @@ const TeamSelection = () => {
           <thead>
             <tr>
               <th>Numéro d'équipe</th>
-              <th>Information supplémentaire</th>
+              <th>Membres de l'équipe</th>
             </tr>
           </thead>
           <tbody>

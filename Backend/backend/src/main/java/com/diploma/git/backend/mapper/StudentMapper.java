@@ -15,7 +15,7 @@ public interface StudentMapper {
             "INNER JOIN student_project " +
             "ON s.cip = student_project.cip " +
             "WHERE student_project.id_project = #{id_project} ")
-    List<Student> getStudentsFromProject(@PathParam("id_project") String id_project);
+    List<Student> getStudentsFromProject(@PathParam("id_project") int id_project);
 
     @Select("SELECT p.id_project " +
             "FROM project p " +
@@ -23,11 +23,6 @@ public interface StudentMapper {
             "ON p.id_project = student_project.id_project " +
             "WHERE student_project.cip = #{cip} ")
     List<Project> getProjectsFromStudent(@PathParam("cip") String cip);
-
-    @Select("SELECT c.id_project " +
-            "FROM course_project c " +
-            "WHERE c.sigle = #{sigle} ")
-    List<Project> getProjectsFromCourse(@PathParam("sigle") String sigle);
 
     @Select("SELECT t.cip, t.firstname, t.lastname, t.email " +
             "FROM tutor t " +

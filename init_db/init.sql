@@ -7,7 +7,8 @@ CREATE TABLE Student(
 );
 
 CREATE TABLE Project(
-   id_project VARCHAR(50),
+   id_project SERIAL,
+   max_member INTEGER,
    PRIMARY KEY(id_project)
 );
 
@@ -15,7 +16,7 @@ CREATE TABLE Event(
    id_event VARCHAR(50),
    cip VARCHAR(50),
    date_event timestamp,
-   id_project VARCHAR(50),
+   id_project INTEGER,
    PRIMARY KEY(id_event),
    FOREIGN KEY(id_project) REFERENCES Project(id_project)
 );
@@ -25,7 +26,7 @@ CREATE TABLE File(
    name VARCHAR(50),
    size BIGINT,
    last_change timestamp,
-   id_project VARCHAR(50) NOT NULL,
+   id_project INTEGER NOT NULL,
    PRIMARY KEY(id_file),
    FOREIGN KEY(id_project) REFERENCES Project(id_project)
 );
@@ -41,12 +42,13 @@ CREATE TABLE Tutor(
 CREATE TABLE Course(
    sigle VARCHAR(50),
    name VARCHAR(50),
+   team_size INTEGER,
    PRIMARY KEY(sigle)
 );
 
 CREATE TABLE Student_Project(
    cip VARCHAR(8),
-   id_project VARCHAR(50),
+   id_project INTEGER,
    PRIMARY KEY(cip, id_project),
    FOREIGN KEY(cip) REFERENCES Student(cip),
    FOREIGN KEY(id_project) REFERENCES Project(id_project)
@@ -70,7 +72,7 @@ CREATE TABLE Tutor_Course(
 
 CREATE TABLE Course_Project(
    sigle VARCHAR(50),
-   id_project VARCHAR(50),
+   id_project INTEGER,
    PRIMARY KEY(sigle, id_project),
    FOREIGN KEY(sigle) REFERENCES Course(sigle),
    FOREIGN KEY(id_project) REFERENCES Project(id_project)
@@ -126,3 +128,6 @@ INSERT INTO Tutor_Course VALUES ('maif1401', 'gif333');
 INSERT INTO Project VALUES ('1');
 INSERT INTO Course_Project VALUES ('gif333', '1');
 INSERT INTO Student_Course VALUES ('lepl1501', 'gif333');
+INSERT INTO Student_Course VALUES ('brol1606', 'gif333');
+INSERT INTO Student_Course VALUES ('aubm1811', 'gif333');
+INSERT INTO Student_Course VALUES ('belj1922', 'gif333');

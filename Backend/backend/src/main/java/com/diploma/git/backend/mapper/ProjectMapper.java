@@ -10,20 +10,20 @@ import org.apache.ibatis.annotations.Select;
 import java.util.List;
 
 @Mapper
-public interface TeamMapper {
-    @Select("SELECT c.id_project " +
-            "FROM course_project c " +
-            "WHERE c.sigle = #{sigle} ")
-    List<Project> getProjectsFromCourse(@PathParam("sigle") String sigle);
-
+public interface ProjectMapper {
     @Select("SELECT s.cip, s.lastname, s.firstname, s.email " +
             "FROM student s " +
             "INNER JOIN student_project " +
             "ON s.cip = student_project.cip " +
             "WHERE student_project.id_project = #{id_project} ")
-    List<Student> getStudentsFromProject(@PathParam("id_project") int id_project);
+    List<Student> getProjectMembers(@PathParam("id_project") int id_project);
+
+    @Select("SELECT c.id_project, p.max_member " +
+            "FROM course_project c " +
+            "JOIN Project p ON p.id_project = c.id_project " +
+            "WHERE c.sigle = #{sigle} ")
+    List<Project> getProjectsFromCourse(@PathParam("sigle") String sigle);
 
     @Insert("INSERT INTO student_project VALUES (#{cip}, #{id_project})")
-    void registerStudentInProject(@PathParam("id_project") String id_project,
-                                  @PathParam("cip") String cip);
+    void addTeamMember(@PathParam("id_project") int id_project, @PathParam("cip") String cip);
 }
