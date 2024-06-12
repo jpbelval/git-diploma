@@ -32,7 +32,7 @@ const TutorDashboard = () =>{
 
     return(
         <>
-        <div className={styles.divContent}>
+        <div className={styles.divContentTuteur}>
             <div className={styles.divListe}>
                 <div>
                     <h2>Cours Actifs</h2>

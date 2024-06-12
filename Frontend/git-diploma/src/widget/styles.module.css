@@ -65,3 +65,8 @@
 .divAddButton{
     padding-top: 10px;
 }
+
+.divContentTuteur{
+    display: flex;
+    padding-left: 25%;
+}
