@@ -11,4 +11,6 @@ const AddCourse = () => {
     );
 };
 
+//test
+
 export default AddCourse;
