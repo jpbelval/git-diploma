@@ -23,6 +23,11 @@ public interface TeamMapper {
             "WHERE student_project.id_project = #{id_project} ")
     List<Student> getStudentsFromProject(@PathParam("id_project") int id_project);
 
+    @Select("SELECT c.team_size " +
+            "FROM course c " +
+            "WHERE c.sigle = #{sigle} ")
+    int getTeamSizeFromCourse(@PathParam("sigle") String sigle);
+
     @Insert("INSERT INTO student_project VALUES (#{cip}, #{id_project})")
     void registerStudentInProject(@PathParam("id_project") String id_project,
                                   @PathParam("cip") String cip);

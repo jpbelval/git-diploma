@@ -6,10 +6,15 @@ import styles from './styles.module.css';
 const TeamSelection = () => {
   const { sigle } = useParams();
   const [projects, setProjects] = useState([]);
+  let id_project = -1;
+
+  const onValueChange = async (project_id) => {
+      id_project = project_id;
+    };
 
   const getProjects = async () => {
     try {
-      const response = await api.get("/api/project/getProjectsFromCourse", {
+      const response = await api.get("/api/team/getProjects", {
         params: { sigle }
       });
       console.log(response);
@@ -19,13 +24,13 @@ const TeamSelection = () => {
     }
   };
 
-  const registerInProject = async (id) => {
+  const registerInProject = async () => {
     try {
-      const response = await api.get("/api/project/setTeamMember", {
-        params: { cip: 'aubm1811', project_id: id }
+      const response = await api.get("/api/team/registerInProject", {
+        params: { sigle: sigle, project_id: id_project, cip: 'lepl1501' }
       });
       console.log(response);
-      
+      getProjects();
     } catch (err) {
       console.log("Error fetching data:", err);
     }
@@ -39,7 +44,7 @@ const TeamSelection = () => {
 
   const ProjectList = projects.map((project, index) => (
     <tr key={index}>
-      <td><input type='radio' onClick={() => registerInProject(project.id_project)}/>{project.id_project}</td>
+      <td>{project.max_member > project.students.length? <input type='radio' onClick={() => onValueChange(project.id_project)} /> : ""} {project.id_project}</td>
       <td>{project.students.map(student => (<p>{student.firstname} {student.lastname},</p>))}</td>
     </tr>
   ));
@@ -59,6 +64,7 @@ const TeamSelection = () => {
             {ProjectList}
           </tbody>
         </table>
+        <button onClick={registerInProject}> Confirmer </button>
       </div>
     </div>
   );

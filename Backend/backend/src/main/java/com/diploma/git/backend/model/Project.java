@@ -7,6 +7,14 @@ public class Project {
     private List<Student> students;
     private int max_member;
 
+    public int getMax_member() {
+        return max_member;
+    }
+
+    public void setMax_member(int max_member) {
+        this.max_member = max_member;
+    }
+
     public int getId_project() {
         return id_project;
     }

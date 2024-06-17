@@ -123,10 +123,12 @@ INSERT INTO Student (cip, lastname, firstname, email) VALUES ('fora1819', 'Forti
 INSERT INTO Student (cip, lastname, firstname, email) VALUES ('blam1614', 'Blais', 'Marianne', 'blam1614@usherbrooke.ca');
 INSERT INTO Student (cip, lastname, firstname, email) VALUES ('nicm1501', 'Nicol', 'Mathieu', 'nicm1501@usherbrooke.ca');
 
-INSERT INTO Course VALUES ('gif333', 'math');
+INSERT INTO Course VALUES ('gif333', 'math', 2);
 INSERT INTO Tutor_Course VALUES ('maif1401', 'gif333');
 INSERT INTO Project VALUES ('1');
+INSERT INTO Project VALUES ('2');
 INSERT INTO Course_Project VALUES ('gif333', '1');
+INSERT INTO Course_Project VALUES ('gif333', '2');
 INSERT INTO Student_Course VALUES ('lepl1501', 'gif333');
 INSERT INTO Student_Course VALUES ('brol1606', 'gif333');
 INSERT INTO Student_Course VALUES ('aubm1811', 'gif333');

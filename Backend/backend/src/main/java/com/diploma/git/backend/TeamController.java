@@ -19,8 +19,10 @@ public class TeamController {
     @GetMapping("/getProjects")
     public List<Project> getProjects(@RequestParam(value = "sigle") String sigle) {
         List<Project> teams = teamMapper.getProjectsFromCourse(sigle);
-        for(int i = 0; i < teams.size(); i++)
+        for(int i = 0; i < teams.size(); i++) {
             teams.get(i).setStudents(teamMapper.getStudentsFromProject(teams.get(i).getId_project()));
+            teams.get(i).setMax_member(teamMapper.getTeamSizeFromCourse(sigle));
+        }
         return teams;
     }
 
