@@ -1,5 +1,6 @@
 package com.diploma.git.backend;
 
+import com.diploma.git.backend.gitolite.GitoliteManager;
 import com.diploma.git.backend.model.Project;
 import com.diploma.git.backend.model.Student;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +12,13 @@ import java.util.List;
 
 @RestController
 public class StudentController {
+
+    private GitoliteManager gitoliteManager;
+
+    public StudentController(GitoliteManager gitoliteManager){
+        this.gitoliteManager = gitoliteManager;
+    }
+
     @GetMapping("/getStudent")
     public Student getStudent(@RequestParam(value = "cip") String cip) {
         Student etudiant = new Student();
