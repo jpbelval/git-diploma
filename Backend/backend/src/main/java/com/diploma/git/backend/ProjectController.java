@@ -33,4 +33,13 @@ public class ProjectController {
         }
         return true;
     }
+
+    @GetMapping("/studentInTeam")
+    public boolean studentInTeam(@RequestParam("cip") String cip, @RequestParam("sigle") String sigle){
+        boolean isInTeam = false;
+
+        isInTeam = projectMapper.studentInProject(cip, sigle) >= 1;
+
+        return isInTeam;
+    }
 }

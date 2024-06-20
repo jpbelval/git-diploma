@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import api from '../api/axiosConfig';
-import styles from './styles.module.css';
+import { redirect } from 'react-router-dom';
+import api from '../../api/axiosConfig';
+import styles from '../styles.module.css';
 
-const TeamSelection = () => {
-  const { sigle } = useParams();
+function TeamSelection({sigle}) {
   const [projects, setProjects] = useState([]);
   let id_project = -1;
 
@@ -30,7 +29,7 @@ const TeamSelection = () => {
         params: { sigle: sigle, id_project: id_project, cip: 'lepl1501' }
       });
       console.log(response);
-      getProjects();
+      window.location.href = '/student/teamBody/' + sigle;
     } catch (err) {
       console.log("Error fetching data:", err);
     }

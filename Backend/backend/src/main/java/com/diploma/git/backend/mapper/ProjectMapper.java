@@ -26,4 +26,10 @@ public interface ProjectMapper {
 
     @Insert("INSERT INTO student_project VALUES (#{cip}, #{id_project})")
     void addTeamMember(@PathParam("id_project") int id_project, @PathParam("cip") String cip);
+
+    @Select("SELECT COALESCE(COUNT(s.cip), 0) AS project_count " +
+            "FROM Course_Project c " +
+            "LEFT JOIN Student_Project s ON s.id_project = c.id_project AND s.cip = #{cip} " +
+            "WHERE c.sigle = #{sigle}")
+    int studentInProject(@PathParam("cip") String cip, @PathParam("sigle") String sigle);
 }
