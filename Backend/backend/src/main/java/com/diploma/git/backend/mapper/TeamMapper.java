@@ -29,6 +29,6 @@ public interface TeamMapper {
     int getTeamSizeFromCourse(@PathParam("sigle") String sigle);
 
     @Insert("INSERT INTO student_project VALUES (#{cip}, #{id_project})")
-    void registerStudentInProject(@PathParam("id_project") String id_project,
+    void registerStudentInProject(@PathParam("id_project") int id_project,
                                   @PathParam("cip") String cip);
 }

@@ -27,7 +27,7 @@ const TeamSelection = () => {
   const registerInProject = async () => {
     try {
       const response = await api.get("/api/team/registerInProject", {
-        params: { sigle: sigle, project_id: id_project, cip: 'lepl1501' }
+        params: { sigle: sigle, id_project: id_project, cip: 'lepl1501' }
       });
       console.log(response);
       getProjects();

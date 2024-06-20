@@ -28,7 +28,7 @@ public class TeamController {
 
     @GetMapping("/registerInProject")
     public boolean registerInProject(@RequestParam(value = "sigle") String sigle,
-                                  @RequestParam(value = "id_project") String id_project,
+                                  @RequestParam(value = "id_project") int id_project,
                                   @RequestParam(value = "cip") String cip) {
         if (isInProject(sigle, cip))
             return false;
