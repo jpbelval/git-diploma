@@ -70,3 +70,12 @@
     display: flex;
     padding-left: 25%;
 }
+
+.tableSectionName{
+    width: 30%;
+}
+
+.tableSectionMembers{
+    width: 70%;
+    text-align: center;
+}

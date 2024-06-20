@@ -1,4 +1,5 @@
 import React from "react";
+import styles from './styles.module.css';
 import { course, projet } from "./data";
 import { useParams, Link } from "react-router-dom";
 
@@ -13,32 +14,51 @@ const CourseDetails = () => {
     )
 
     const courseStart = cours.map(cours =>
-        <p>{cours.start.toLocaleDateString("en-US")}</p>
+        <p>Start Date: {cours.start.toLocaleDateString("en-US")}</p>
+    )
+
+    const courseEnd = cours.map(cours =>
+        <p>End Date: {cours.end.toLocaleDateString("en-US")}</p>
     )
 
     const projLink = coursProj.map(project => (
-        <li key={project.projectId}>
-            <Link to={`/project/${project.projectId}`} params>{project.name}</Link>              
-        </li>
+        <tr>
+            <td key={project.projectId} className={styles.tableSectionName}>
+                <Link to={`/project/${project.projectId}`} params>{project.name}</Link>              
+            </td>
+            <td className={styles.tableSectionMembers}>aucun membre a date lol</td>
+        </tr>
     ))
 
     return (
         <>
-        <div>
-            <h1>Course Details</h1>
-            {cours ? (
+        <div className={styles.divContentTuteur}>
+            <div className={styles.divListe}>
                 <div>
-                    <h2>{courseInfo}</h2>
-                    <p>Start Date: {courseStart}</p>
-                    <p>End Date: {/*{cours.end.toLocaleDateString("en-US")}*/}</p>
-                    <h3>Projects:</h3>
-                    <ul>
-                        {projLink}
-                    </ul>
+                    <h1>Course Info:</h1>
+                    <div>
+                        <h2>{courseInfo}</h2>
+                        {courseStart}
+                        {courseEnd}
+                    </div>
                 </div>
-            ) : (
-                <p>Course not found</p>
-            )}
+                <div>
+                    <h2>Projects:</h2>
+                    <div>
+                        <table className={styles.tableProjet}>
+                            <thead>
+                                <tr>
+                                    <th>Team</th>
+                                    <th>Membres</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {projLink}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>    
         </div>
         </>
     );
