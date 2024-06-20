@@ -5,6 +5,7 @@ import java.util.List;
 public class Project {
     private int id_project;
     private List<Student> students;
+    List<Course> courses;
     private int max_member;
 
     public int getMax_member() {
@@ -29,5 +30,13 @@ public class Project {
 
     public void setStudents(List<Student> students) {
         this.students = students;
+    }
+
+    public List<Course> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(List<Course> courses) {
+        this.courses = courses;
     }
 }

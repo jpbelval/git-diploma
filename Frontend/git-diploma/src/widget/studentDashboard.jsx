@@ -1,21 +1,26 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styles from './styles.module.css';
-import {projet} from './data.js'
+import { projet } from './data.js';
+import api from '../api/axiosConfig';
 import { Link } from "react-router-dom";
 
 const StudentDashboard = () => {
 
-    const openProjet = projet.filter(projet => projet.remise > Date.now());
+    const [projects, setProjects] = useState([]);
+
     const closedProjet = projet.filter(projet => projet.remise < Date.now());
     const upcomingP = projet.filter(projet => projet.remise > Date.now()).sort(projet => projet.remise).reverse();
 
-    const listeProjet = openProjet.map(openProjet =>
-        <tr>
-            <td><Link to={`/project/${openProjet.projectId}`} params>{openProjet.name}</Link></td>
-            <td>{openProjet.cour}</td>
-            <td>--:--:--</td>
-        </tr>
-    );
+    const listeProjet = projects.map((project, index) => {
+        const sigles = project.courses.map(course => course.sigle).join(", ");
+        return (
+            <tr key={index}>
+                <td><Link to={`/project/${project.id_project}`}>{sigles}</Link></td>
+                <td>--:--:--</td>
+            </tr>
+        );
+    });
+
     const ancienProjet = closedProjet.map(closedProjet =>
         <tr>
             <td>{closedProjet.name}</td>
@@ -31,6 +36,22 @@ const StudentDashboard = () => {
         </li>
     )
 
+    const getProjects = async () => {
+        try {
+            const response = await api.get("/api/student/getProjects", {
+                params: { cip: "lepl1501" }
+            });
+            console.log(response);
+            setProjects(response.data);
+        } catch (err) {
+            console.log("Error fetching data:", err);
+        }
+    };
+
+    useEffect(() => {
+        getProjects();
+    }, []);
+
     return (
         <>
         <div className={styles.divContent}>
@@ -42,8 +63,7 @@ const StudentDashboard = () => {
                         <table className={styles.tableProjet}>
                             <thead>
                                 <tr>
-                                    <th>nom</th>
-                                    <th>cours</th>
+                                    <th>Identifiant</th>
                                     <th>last commit</th>
                                 </tr>
                             </thead>
