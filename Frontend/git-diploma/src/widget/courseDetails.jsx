@@ -49,7 +49,7 @@ const CourseDetails = () => {
                             <thead>
                                 <tr>
                                     <th>Team</th>
-                                    <th>Membres</th>
+                                    <th>Members</th>
                                 </tr>
                             </thead>
                             <tbody>
