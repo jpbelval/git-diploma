@@ -42,7 +42,7 @@ public class StudentController {
     }
 
     @GetMapping("/getTutors")
-    public List<Tutor> getTutors(@RequestParam(value = "id_project") String id_project) {
+    public List<Tutor> getTutors(@RequestParam(value = "id_project") int id_project) {
         List<Tutor> tutors = studentMapper.getTutorsFromProject(id_project);
         for (int i = 0; i < tutors.size(); i++) {
             tutors.get(i).setCourseList(studentMapper.getCoursesFromTutor(tutors.get(i).getCip()));
@@ -51,12 +51,12 @@ public class StudentController {
     }
 
     @GetMapping("/getEvents")
-    public List<Event> getEvents(@RequestParam(value = "id_project") String id_project) {
+    public List<Event> getEvents(@RequestParam(value = "id_project") int id_project) {
         return studentMapper.getEventFromProject(id_project);
     }
 
     @GetMapping("/getFiles")
-    public List<File> getFiles(@RequestParam(value = "id_project") String id_project) {
+    public List<File> getFiles(@RequestParam(value = "id_project") int id_project) {
         return studentMapper.getFilesFromProject(id_project);
     }
 }
