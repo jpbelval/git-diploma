@@ -5,9 +5,9 @@ import { Link } from "react-router-dom";
 
 
 const TutorDashboard = () =>{
-    const pastCourse = course.filter(course => course.end < Date.now());
-    const currentCourse = course.filter(course => course.start < Date.now() && course.end > Date.now());
-    const futureCourse = course.filter(course => course.start > Date.now()).sort(course => course.start);
+    const pastCourse = course.filter(course => course.end != null && course.end < Date.now());
+    const currentCourse = course.filter(course => course.end != null && course.start < Date.now() && course.end > Date.now());
+    const futureCourse = course.filter(course => course.end != null && course.start > Date.now()).sort(course => course.start);
 
     const pastCourseList = pastCourse.map(pastCourse =>
         <tr>
