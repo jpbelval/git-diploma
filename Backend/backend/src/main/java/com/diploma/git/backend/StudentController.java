@@ -33,7 +33,10 @@ public class StudentController {
 
     @GetMapping("/getProjects")
     public List<Project> getProjects(@RequestParam(value = "cip") String cip) {
-        return studentMapper.getProjectsFromStudent(cip);
+        List<Project> projects = studentMapper.getProjectsFromStudent(cip);
+        for (int i = 0; i < projects.size(); i++)
+            projects.get(i).setStudents(getStudents(projects.get(i).getId_project()));
+        return projects;
     }
 
     @GetMapping("/getCourses")
