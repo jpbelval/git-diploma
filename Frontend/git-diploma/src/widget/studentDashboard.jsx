@@ -8,16 +8,18 @@ const StudentDashboard = () => {
 
     const [projects, setProjects] = useState([]);
 
-    const openProjet = projet.filter(projet => projet.remise > Date.now());
     const closedProjet = projet.filter(projet => projet.remise < Date.now());
     const upcomingP = projet.filter(projet => projet.remise > Date.now()).sort(projet => projet.remise).reverse();
 
-    const listeProjet = projects.map((project, index) =>
-        <tr key={index}>
-            <td><Link to={`/project/${project.id_project}`} params>{project.id_project}</Link></td>
-            <td>--:--:--</td>
-        </tr>
-    );
+    const listeProjet = projects.map((project, index) => {
+        const sigles = project.courses.map(course => course.sigle).join(", ");
+        return (
+            <tr key={index}>
+                <td><Link to={`/project/${project.id_project}`}>{sigles}</Link></td>
+                <td>--:--:--</td>
+            </tr>
+        );
+    });
 
     const ancienProjet = closedProjet.map(closedProjet =>
         <tr>

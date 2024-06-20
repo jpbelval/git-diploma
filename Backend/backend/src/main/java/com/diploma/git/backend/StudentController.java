@@ -34,9 +34,16 @@ public class StudentController {
     @GetMapping("/getProjects")
     public List<Project> getProjects(@RequestParam(value = "cip") String cip) {
         List<Project> projects = studentMapper.getProjectsFromStudent(cip);
-        for (int i = 0; i < projects.size(); i++)
+        for (int i = 0; i < projects.size(); i++) {
             projects.get(i).setStudents(getStudents(projects.get(i).getId_project()));
+            projects.get(i).setCourses(getCoursesFromProject(projects.get(i).getId_project()));
+        }
         return projects;
+    }
+
+    @GetMapping("/getCoursesFromProject")
+    public List<Course> getCoursesFromProject(@RequestParam(value = "id_project") int id_project) {
+        return studentMapper.getCoursesFromProject(id_project);
     }
 
     @GetMapping("/getCourses")
