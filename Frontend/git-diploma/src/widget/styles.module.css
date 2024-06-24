@@ -59,6 +59,7 @@
 .buttonForm{
     width: 40%;
     background-color: #018849;
+    color: white
 }
 
 
@@ -79,3 +80,31 @@
     width: 70%;
     text-align: center;
 }
+.setEndDateButton{
+    width:60%;
+    background-color: #018849;
+    color: white;
+    margin: 10px 0;
+}
+
+.divCenteredList{
+    display: flex;
+    flex-direction: column;
+}
+
+.divCentered{
+    padding-left: 40%;
+    padding-right: 40%;
+    padding-top: 5%;
+}
+
+.divCenteredBorder{
+   border: solid #018849;
+   border-radius: 25px;
+   padding-left: 15px;
+}
+
+.inputGroup{
+    margin: 10px 0;
+}
+
