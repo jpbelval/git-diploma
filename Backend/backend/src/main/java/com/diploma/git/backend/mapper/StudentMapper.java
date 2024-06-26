@@ -33,7 +33,7 @@ public interface StudentMapper {
             "WHERE course_project.id_project = #{id_project} ")
     List<Tutor> getTutorsFromProject(@PathParam("id_project") int id_project);
 
-    @Select("SELECT c.sigle, c.name " +
+    @Select("SELECT c.sigle, c.name, c.remise " +
             "FROM course c " +
             "INNER JOIN course_project " +
             "ON c.sigle = course_project.sigle " +

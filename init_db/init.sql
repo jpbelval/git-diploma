@@ -43,6 +43,7 @@ CREATE TABLE Course(
    sigle VARCHAR(50),
    name VARCHAR(50),
    team_size INTEGER,
+   remise DATE,
    PRIMARY KEY(sigle)
 );
 
@@ -123,7 +124,7 @@ INSERT INTO Student (cip, lastname, firstname, email) VALUES ('fora1819', 'Forti
 INSERT INTO Student (cip, lastname, firstname, email) VALUES ('blam1614', 'Blais', 'Marianne', 'blam1614@usherbrooke.ca');
 INSERT INTO Student (cip, lastname, firstname, email) VALUES ('nicm1501', 'Nicol', 'Mathieu', 'nicm1501@usherbrooke.ca');
 
-INSERT INTO Course VALUES ('gif333', 'math', 2);
+INSERT INTO Course VALUES ('gif333', 'math', 2, '2024-07-08');
 INSERT INTO Tutor_Course VALUES ('maif1401', 'gif333');
 INSERT INTO Project VALUES ('1');
 INSERT INTO Project VALUES ('2');

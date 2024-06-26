@@ -8,32 +8,40 @@ const StudentDashboard = () => {
 
     const [projects, setProjects] = useState([]);
 
-    const closedProjet = projet.filter(projet => projet.remise < Date.now());
-    const upcomingP = projet.filter(projet => projet.remise > Date.now()).sort(projet => projet.remise).reverse();
-
-    const listeProjet = projects.map((project, index) => {
+    const openProjet = projects.filter(project => new Date(project.courses[0].remise) >= Date.now());
+    const closedProjet = projects.filter(project => new Date(project.courses[0].remise) < Date.now());
+    const upcomingP = projects.filter(project => new Date(project.courses[0].remise) > Date.now()).sort(project => project.courses[0].remise).reverse();
+    
+    const listeProjet = openProjet.map((project, index) => {
         const sigles = project.courses.map(course => course.sigle).join(", ");
         return (
             <tr key={index}>
                 <td><Link to={`/project/${project.id_project}`}>{sigles}</Link></td>
-                <td>--:--:--</td>
+                <td>{new Date(project.courses[0].remise).toLocaleDateString("en-US")}</td>
             </tr>
         );
     });
 
-    const ancienProjet = closedProjet.map(closedProjet =>
-        <tr>
-            <td>{closedProjet.name}</td>
-            <td>{closedProjet.cour}</td>
-            <td>--:--:--</td>
-        </tr>
+    const ancienProjet = closedProjet.map((project, index) =>{
+        const sigles = project.courses.map(course => course.sigle).join(", ");
+        return(
+            <tr key={index}>
+                <td><Link to={`/project/${project.id_project}`}>{sigles}</Link></td>
+                <td>{new Date(project.courses[0].remise).toLocaleDateString("en-US")}</td>
+            </tr>
+        );
+    }
     );
 
-    const upcoming = upcomingP.map(upcomingP =>
-        <li>
-            <p>{upcomingP.name}</p>
-            <p>{upcomingP.remise.toLocaleDateString("en-US")}</p>
-        </li>
+    const upcoming = upcomingP.map(project =>{
+        const sigles = project.courses.map(course => course.sigle).join(", ");
+        return(
+            <li>
+                <p>{sigles}</p>
+                <p>{new Date(project.courses[0].remise).toLocaleDateString("en-US")}</p>
+            </li>
+        )
+    }
     )
 
     const getProjects = async () => {
@@ -77,12 +85,15 @@ const StudentDashboard = () => {
                     <h2>anciens projets</h2>
                     <div>
                         <table className={styles.tableProjet}>
-                            <tr>
-                                <th>nom</th>
-                                <th>cours</th>
-                                <th>last commit</th>
-                            </tr>
-                            {ancienProjet}
+                            <thead>
+                                <tr>
+                                    <th>cours</th>
+                                    <th>last commit</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {ancienProjet}
+                            </tbody>
                         </table>
                     </div>
                 </div>
