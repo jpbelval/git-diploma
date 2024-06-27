@@ -3,31 +3,22 @@ package com.diploma.git.backend.model;
 import java.util.List;
 
 public class Project {
-    private List<Student> team;
-    private List<File> currentFile;
-    private List<Log> Logs;
+    private String id_project;
+    private List<Student> students;
 
-    public List<Student> getTeam() {
-        return team;
+    public String getId_project() {
+        return id_project;
     }
 
-    public void setTeam(List<Student> team) {
-        this.team = team;
+    public void setId_project(String id_project) {
+        this.id_project = id_project;
     }
 
-    public List<File> getCurrentFile() {
-        return currentFile;
+    public List<Student> getStudents() {
+        return students;
     }
 
-    public void setCurrentFile(List<File> currentFile) {
-        this.currentFile = currentFile;
-    }
-
-    public List<Log> getLogs() {
-        return Logs;
-    }
-
-    public void setLogs(List<Log> logs) {
-        Logs = logs;
+    public void setStudents(List<Student> students) {
+        this.students = students;
     }
 }

@@ -3,23 +3,31 @@ package com.diploma.git.backend.model;
 import java.util.List;
 
 public class Course {
-    private String courseName;
-    private List<Project> teamList;
+    private String sigle;
+    private String name;
+    private List<Project> teamProjects;
 
-    public String getCourseName() {
-        return courseName;
+    public String getName() {
+        return name;
     }
 
-    public void setCourseName(String courseName) {
-        this.courseName = courseName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public List<Project> getTeamList() {
-        return teamList;
+    public String getSigle() {
+        return sigle;
     }
 
-    public void setTeamList(List<Project> teamList) {
-        this.teamList = teamList;
+    public void setSigle(String sigle) {
+        this.sigle = sigle;
     }
 
+    public List<Project> getTeamProjects() {
+        return teamProjects;
+    }
+
+    public void setTeamProjects(List<Project> teamProjects) {
+        this.teamProjects = teamProjects;
+    }
 }

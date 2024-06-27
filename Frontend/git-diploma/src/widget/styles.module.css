@@ -1,0 +1,63 @@
+.tableProjet{
+    width: 100%;
+}
+
+.tableProjet > tr, td {
+    padding: 8px;
+    border-top: 1px solid #ddd;
+    text-align: left;
+}
+
+.divListe{
+    color: white;
+    width: 70%;
+}
+
+.divContent{
+    display: flex;
+    padding-left: 25%;
+    width: 60%;
+}
+
+.divUpcoming{
+    border-left: #ddd 5px solid;
+    width: 30%;
+    height: inherit;
+    margin: 5%;
+}
+
+.h2Upcoming{
+    margin: 5%;
+}
+
+.divForm{
+    margin-left: 40%;
+    margin-top: 10%;
+    padding-top: 1%;
+    padding-left: 1%;
+    padding-bottom: 1%;
+    width:20%;
+    border: solid #018849;
+    border-radius: 25px;
+}
+
+.labelForm{
+    font-size: 30px;
+}
+
+.inputTextForm{
+    width: 80%;
+    height: 35px;
+    font-size: 20px;
+}
+
+.formStyle{
+    display: inline-grid;
+    justify-content: space-between;
+}
+
+.buttonForm{
+    width: 40%;
+    background-color: #018849;
+}
+

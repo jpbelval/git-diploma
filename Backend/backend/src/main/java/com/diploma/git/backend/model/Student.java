@@ -4,9 +4,9 @@ import java.util.List;
 
 public class Student {
     private String cip;
-    private String nom;
-    private String prenom;
-    private String courriel;
+    private String firstname;
+    private String lastname;
+    private String email;
     private List<Project> projets;
 
     public String getCip() {
@@ -17,28 +17,28 @@ public class Student {
         this.cip = cip;
     }
 
-    public String getNom() {
-        return nom;
+    public String getFirstname() {
+        return firstname;
     }
 
-    public void setNom(String nom) {
-        this.nom = nom;
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
     }
 
-    public String getPrenom() {
-        return prenom;
+    public String getLastname() {
+        return lastname;
     }
 
-    public void setPrenom(String prenom) {
-        this.prenom = prenom;
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
 
-    public String getCourriel() {
-        return courriel;
+    public String getEmail() {
+        return email;
     }
 
-    public void setCourriel(String courriel) {
-        this.courriel = courriel;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public List<Project> getProjets() {
