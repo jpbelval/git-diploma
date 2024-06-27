@@ -53,7 +53,7 @@ public class KeyStoreTest {
 				.collect(Collectors.toList());
 		}
 
-		private final Key pathKey;
+		private Key pathKey;
 
 		/**
 		 * Test that the validation fails for an invalid key.
@@ -85,7 +85,7 @@ public class KeyStoreTest {
 				.collect(Collectors.toList());
 		}
 
-		private final Key pathKey;
+		private Key pathKey;
 
 		/**
 		 * Test that the key validation passes.
@@ -130,8 +130,12 @@ public class KeyStoreTest {
 
 	@SneakyThrows
 	private static KeyHolder createKeyHolder(File contents) {
-		return new KeyHolder(identifiable, Files.readFirstLine(contents, Charset.defaultCharset()));
-	}
+        try {
+            return new KeyHolder(identifiable, Files.readFirstLine(contents, Charset.defaultCharset()));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
 	protected abstract static class BaseKeyStoreTest {
 
