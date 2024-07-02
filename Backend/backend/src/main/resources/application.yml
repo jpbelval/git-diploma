@@ -7,3 +7,17 @@ spring:
     username: gd-admin
     password: secret
 #    schema-name: public
+  security:
+    oauth2:
+      client:
+        registration:
+          keycloak:
+            client-id: backend
+            client-secret: secret
+        provider:
+          keycloak:
+            issuer-uri: http://localhost:8180/realms/usager
+      resourceserver:
+        issuer-uri: http://localhost:8180/realms/usager
+        jwt:
+          jwk-set-uri: http://localhost:8180/realms/usager/protocol/openid-connect/certs
