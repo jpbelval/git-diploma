@@ -1,5 +1,6 @@
 package com.diploma.git.backend;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
@@ -16,16 +17,13 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+@RequiredArgsConstructor
 @Component
 public class JwtConverter implements Converter<Jwt, AbstractAuthenticationToken> {
 
     private final JwtGrantedAuthoritiesConverter jwtGrantedAuthoritiesConverter = new JwtGrantedAuthoritiesConverter();
 
     private final JwtConverterProperties properties;
-
-    public JwtConverter(JwtConverterProperties properties) {
-        this.properties = properties;
-    }
 
     @Override
     public AbstractAuthenticationToken convert(Jwt jwt) {
@@ -44,17 +42,16 @@ public class JwtConverter implements Converter<Jwt, AbstractAuthenticationToken>
     }
 
     private Collection<? extends GrantedAuthority> extractResourceRoles(Jwt jwt) {
-        Map<String, Object> resourceAccess = jwt.getClaim("resource_access");
-        Map<String, Object> resource;
-        Collection<String> resourceRoles;
-
-        if (resourceAccess == null
-                || (resource = (Map<String, Object>) resourceAccess.get(properties.getResourceId())) == null
-                || (resourceRoles = (Collection<String>) resource.get("roles")) == null) {
-            return Set.of();
-        }
-        return resourceRoles.stream()
-                .map(role -> new SimpleGrantedAuthority("ROLE_" + role))
-                .collect(Collectors.toSet());
+            Map<String, Object> resourceAccess = jwt.getClaim("realm_access");
+            Map<String, Object> realmAccess;
+            Collection<String> resourceRoles;
+            realmAccess = jwt.getClaim("realm_access");
+            if (resourceAccess == null
+                    || (resourceRoles = (Collection<String>) realmAccess.get("roles")) == null) {
+                return Set.of();
+            }
+            return resourceRoles.stream()
+                    .map(role -> new SimpleGrantedAuthority("ROLE_" + role))
+                    .collect(Collectors.toSet());
     }
 }

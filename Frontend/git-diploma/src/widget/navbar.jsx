@@ -11,6 +11,7 @@ import {
 import { Outlet, Link } from "react-router-dom";
 
 const Navbar = () => {
+
     return (
         <>
           <Title to="/">
@@ -22,16 +23,16 @@ const Navbar = () => {
                 <NavLink to="/" >
                   home
                 </NavLink>
-                <NavLink to="/aide">
-                  aide
+                <NavLink to="/equipe">
+                  équipe
                 </NavLink>
                 {/* Second Nav */}
                 {/* <NavBtnLink to='/sign-in'>Sign In</NavBtnLink> */}
               </NavMenu>
               <NavBtn>
-                <NavBtnLink to="/login">
+                {/*<button type="button" onClick={login}>
                   sign in
-                </NavBtnLink>
+                </button>*/}
               </NavBtn>
           </Nav>
         </>

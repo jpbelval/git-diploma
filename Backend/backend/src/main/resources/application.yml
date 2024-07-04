@@ -21,3 +21,8 @@ spring:
         issuer-uri: http://localhost:8180/realms/usager
         jwt:
           jwk-set-uri: http://localhost:8180/realms/usager/protocol/openid-connect/certs
+jwt:
+  auth:
+    converter:
+      resource-id: frontend
+      principal-attribute: preferred_username
