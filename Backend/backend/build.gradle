@@ -1,11 +1,11 @@
-plugins {
+ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '3.2.5'
 	id 'io.spring.dependency-management' version '1.1.4'
 }
 
 group = 'com.diploma.git'
-version = '0.0.1-SNAPSHOT'
+version = '1.0.0'
 
 java {
 	sourceCompatibility = '17'
@@ -15,8 +15,16 @@ repositories {
 	mavenCentral()
 }
 
-dependencies {
-	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.3'
+/*task compileMavenProject(type: Exec) {
+	workingDir("../gitolite-manager")
+	commandLine "/etc/intellij/plugins/maven/lib/maven3/bin/mvn", "clean", "compile"
+}*/
+
+ dependencies {
+/*	 implementation files("../gitolite-manager/src/main/java/nl/tudelft/ewi/gitolite") {
+		 builtBy "compileMavenProject"
+	 }*/
+ 	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.3'
 	// https://mvnrepository.com/artifact/org.postgresql/postgresql
 	implementation 'org.postgresql:postgresql:42.7.3'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
