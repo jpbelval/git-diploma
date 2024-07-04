@@ -3,15 +3,17 @@ import api from '../../api/axiosConfig';
 import { useParams } from 'react-router-dom';
 import TeamSelection from './TeamSelection';
 import TeamDetails from './TeamDetails';
+import { useKeycloak } from '@react-keycloak/web'
 
 const TeamBody = () => {
+    const { keycloak } = useKeycloak()
     const { sigle } = useParams();
     const [inTeam, setInTeam] = useState([]);
 
     const isInTeam = async () => {
         try {
           const response = await api.get("/api/project/studentInTeam", {
-            params: { cip:'lepl1501', sigle:sigle }
+            params: { cip: keycloak.tokenParsed.preferred_username, sigle:sigle }
           });
           console.log(response);
           setInTeam(response.data);
