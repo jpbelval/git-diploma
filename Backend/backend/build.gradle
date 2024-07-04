@@ -21,6 +21,9 @@ repositories {
 }*/
 
  dependencies {
+	 // https://mvnrepository.com/artifact/org.projectlombok/lombok
+	 compileOnly 'org.projectlombok:lombok:1.18.34'
+
 /*	 implementation files("../gitolite-manager/src/main/java/nl/tudelft/ewi/gitolite") {
 		 builtBy "compileMavenProject"
 	 }*/
