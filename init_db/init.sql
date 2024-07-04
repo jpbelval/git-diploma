@@ -42,6 +42,7 @@ CREATE TABLE Tutor(
 CREATE TABLE Course(
    sigle VARCHAR(50),
    name VARCHAR(100),
+   team_size INTEGER,
    PRIMARY KEY(sigle)
 );
 
@@ -363,35 +364,35 @@ INSERT INTO Tutor VALUES ('rosj2103', 'Julien', 'Rossignol', 'Julien.Rossignol@U
 INSERT INTO Tutor VALUES ('taxc2001', 'Cao Minh', 'Ta', 'cao.minh.ta@usherbrooke.ca');
 INSERT INTO Tutor VALUES ('verc2604', 'Catherine', 'Veronneau', 'catherine.veronneau2@usherbrooke.ca');
 
-INSERT INTO Course VALUES ('GRO301', 'Moteurs e courant continu');
+INSERT INTO Course VALUES ('GRO301', 'Moteurs e courant continu', 2);
 INSERT INTO Course VALUES ('GRO303', 'Dynamique');
-INSERT INTO Course VALUES ('GRO300', 'Systemes dexploitation et architecture des ordinateurs');
-INSERT INTO Course VALUES ('GRO304', 'Alimentation energetique');
-INSERT INTO Course VALUES ('GRO305', 'Mathematiques pour lingenieur I');
-INSERT INTO Course VALUES ('GEN241', 'Programmation orientee objet');
-INSERT INTO Course VALUES ('GEL342', 'Transformateurs');
-INSERT INTO Course VALUES ('GEL362', 'Transformateurs');
-INSERT INTO Course VALUES ('GEL355', 'Calcul vectoriel');
-INSERT INTO Course VALUES ('GEL315', 'electromagnetisme');
-INSERT INTO Course VALUES ('GEL331', 'electronique de puissance');
-INSERT INTO Course VALUES ('GIF350', 'Modeles de conception');
-INSERT INTO Course VALUES ('GIF391', 'Systemes repartis');
-INSERT INTO Course VALUES ('GIF325', 'Bases de donnees');
-INSERT INTO Course VALUES ('GRO600', 'Robotisation de procedes #1');
-INSERT INTO Course VALUES ('GRO645', 'Transferts thermiques');
-INSERT INTO Course VALUES ('GRO655', 'Impacts ethiques');
-INSERT INTO Course VALUES ('GRO620', 'Vision');
-INSERT INTO Course VALUES ('GRO650', 'Professionnalisme et deontologie');
-INSERT INTO Course VALUES ('GIF672', 'Neuds capteurs reseaute');
-INSERT INTO Course VALUES ('GIF680', 'Neuds capteurs reseaute');
-INSERT INTO Course VALUES ('GIF644', 'Application temps reel');
-INSERT INTO Course VALUES ('GIF673', 'Antennes et rayonnement');
-INSERT INTO Course VALUES ('GIF642', 'Systeme deexploitation');
-INSERT INTO Course VALUES ('GIF643', 'Systeme deexploitation');
-INSERT INTO Course VALUES ('GIF692', 'Systeme deexploitation');
-INSERT INTO Course VALUES ('GEL651', 'electronique analogique 2eme partie');
-INSERT INTO Course VALUES ('GEL662', 'elements de Statistiques');
-INSERT INTO Course VALUES ('GEL655', 'electronique analogique 1ere partie');
+INSERT INTO Course VALUES ('GRO300', 'Systemes dexploitation et architecture des ordinateurs', 2);
+INSERT INTO Course VALUES ('GRO304', 'Alimentation energetique', 2);
+INSERT INTO Course VALUES ('GRO305', 'Mathematiques pour lingenieur I', 2);
+INSERT INTO Course VALUES ('GEN241', 'Programmation orientee objet', 2);
+INSERT INTO Course VALUES ('GEL342', 'Transformateurs', 2);
+INSERT INTO Course VALUES ('GEL362', 'Transformateurs', 2);
+INSERT INTO Course VALUES ('GEL355', 'Calcul vectoriel', 2);
+INSERT INTO Course VALUES ('GEL315', 'electromagnetisme', 2);
+INSERT INTO Course VALUES ('GEL331', 'electronique de puissance', 2);
+INSERT INTO Course VALUES ('GIF350', 'Modeles de conception', 2);
+INSERT INTO Course VALUES ('GIF391', 'Systemes repartis', 2);
+INSERT INTO Course VALUES ('GIF325', 'Bases de donnees', 2);
+INSERT INTO Course VALUES ('GRO600', 'Robotisation de procedes #1', 2);
+INSERT INTO Course VALUES ('GRO645', 'Transferts thermiques', 2);
+INSERT INTO Course VALUES ('GRO655', 'Impacts ethiques', 2);
+INSERT INTO Course VALUES ('GRO620', 'Vision', 2);
+INSERT INTO Course VALUES ('GRO650', 'Professionnalisme et deontologie', 2);
+INSERT INTO Course VALUES ('GIF672', 'Neuds capteurs reseaute', 2);
+INSERT INTO Course VALUES ('GIF680', 'Neuds capteurs reseaute', 2);
+INSERT INTO Course VALUES ('GIF644', 'Application temps reel', 2);
+INSERT INTO Course VALUES ('GIF673', 'Antennes et rayonnement', 2);
+INSERT INTO Course VALUES ('GIF642', 'Systeme deexploitation', 2);
+INSERT INTO Course VALUES ('GIF643', 'Systeme deexploitation', 2);
+INSERT INTO Course VALUES ('GIF692', 'Systeme deexploitation', 2);
+INSERT INTO Course VALUES ('GEL651', 'electronique analogique 2eme partie', 2);
+INSERT INTO Course VALUES ('GEL662', 'elements de Statistiques', 2);
+INSERT INTO Course VALUES ('GEL655', 'electronique analogique 1ere partie', 2);
 
 INSERT INTO Project VALUES ('1');
 INSERT INTO Project VALUES ('2');
