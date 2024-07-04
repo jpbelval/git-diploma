@@ -11,6 +11,7 @@ const CourseSelection = () => {
   const getCourses = async () => {
     try {
       const response = await api.get("/api/student/getCourses", {
+        headers: {'Authorization': 'Bearer ' + keycloak.token},
         params: {
           cip: keycloak.tokenParsed.preferred_username
         }

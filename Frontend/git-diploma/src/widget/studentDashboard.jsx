@@ -16,6 +16,8 @@ const StudentDashboard = () => {
 
     if(!keycloak?.authenticated)
         login();
+    else
+        console.log(keycloak.token);
 
     const [projects, setProjects] = useState([]);
 
@@ -58,6 +60,7 @@ const StudentDashboard = () => {
     const getProjects = async () => {
         try {
             const response = await api.get("/api/student/getProjects", {
+                headers: {'Authorization' : 'Bearer' + keycloak.token},
                 params: { cip: keycloak.tokenParsed.preferred_username }
             });
             console.log(response);
