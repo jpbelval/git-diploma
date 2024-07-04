@@ -8,9 +8,13 @@ import {
     Outlet,
 } from "react-router-dom";
 import api from './api/axiosConfig';
+import { useKeycloak } from '@react-keycloak/web'
+
 
 function App() {
   const [membre, setMembre] = useState();
+
+  const { keycloak, initialized } = useKeycloak()
 
   const getMembres = async() => {
     try{
@@ -27,8 +31,13 @@ function App() {
   }
 
   useEffect(() =>{
-    getMembres();
+    if (keycloak?.authenticated)
+      getMembres();
   }, [])
+  
+  if (!initialized) {
+    return <div>Loading...</div>
+  }
 
   return (
     <>
