@@ -66,6 +66,5 @@ volumes:
   gitolite-sshkeys:
   gitolite-git:
 
-
 networks:
   gd-net:
