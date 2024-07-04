@@ -1,6 +1,7 @@
 package com.diploma.git.backend;
 
 import jakarta.annotation.security.DeclareRoles;
+import lombok.RequiredArgsConstructor;
 import org.bouncycastle.jcajce.provider.symmetric.TEA;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -18,7 +19,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
-
+@RequiredArgsConstructor
 public class SecurityConfig{
 
     @Value("${spring.security.oauth2.resourceserver.jwt.jwk-set-uri}")
