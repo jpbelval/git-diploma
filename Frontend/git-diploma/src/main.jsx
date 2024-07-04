@@ -9,9 +9,11 @@ import {
 import StudentDashboard from './widget/studentDashboard.jsx';
 import ProjectDetails from './widget/projectDetails.jsx';
 import Login from './widget/loginPage.jsx'
+import CourseSelection from './widget/CourseSelection.jsx';
+import TeamBody from './widget/Team/TeamBody.jsx';
+
 import { ReactKeycloakProvider } from '@react-keycloak/web'
 import keycloak from './keycloak'
-
 
 const router = createBrowserRouter([
   {
@@ -29,6 +31,14 @@ const router = createBrowserRouter([
       {
         path: "Login",
         element: <Login />
+      },
+      {
+         path: "equipe",
+         element: <CourseSelection />
+      },
+      {
+         path: "student/teamBody/:sigle",
+         element: <TeamBody />
       }
     ]
   },

@@ -12,28 +12,28 @@ import { useKeycloak } from '@react-keycloak/web'
 
 
 function App() {
-  const [membre, setMembre] = useState();
+  const { initialized } = useKeycloak();
 
-  const { keycloak, initialized } = useKeycloak()
-
-  const getMembres = async() => {
-    try{
-      const response = await api.get("/api/student/getStudent", {
-        params:{
-          cip: 'aubm1811'
-        }
-      });
-      console.log(response.data);
-      setMembre(response.data);
-    }catch(err){
-      console.log(err);
-    }
-  }
-
-  useEffect(() =>{
-    if (keycloak?.authenticated)
-      getMembres();
-  }, [])
+  //const [membre, setMembre] = useState();
+  //
+  //const getMembres = async() => {
+  //  try{
+  //    const response = await api.get("/api/student/getStudent", {
+  //      params:{
+  //        cip: 'aubm1811'
+  //      }
+  //    });
+  //    console.log(response.data);
+  //    setMembre(response.data);
+  //  }catch(err){
+  //    console.log(err);
+  //  }
+  //}
+  //
+  //useEffect(() =>{
+  //  getMembres();
+  //}, [])
+  //
   
   if (!initialized) {
     return <div>Loading...</div>
