@@ -41,7 +41,7 @@ CREATE TABLE Tutor(
 
 CREATE TABLE Course(
    sigle VARCHAR(50),
-   name VARCHAR(50),
+   name VARCHAR(100),
    PRIMARY KEY(sigle)
 );
 
@@ -51,6 +51,14 @@ CREATE TABLE Student_Project(
    PRIMARY KEY(cip, id_project),
    FOREIGN KEY(cip) REFERENCES Student(cip),
    FOREIGN KEY(id_project) REFERENCES Project(id_project)
+);
+
+CREATE TABLE Student_Course(
+   cip VARCHAR(8),
+   sigle VARCHAR(50),
+   PRIMARY KEY(cip, sigle),
+   FOREIGN KEY(cip) REFERENCES Student(cip),
+   FOREIGN KEY(sigle) REFERENCES Course(sigle) 
 );
 
 CREATE TABLE Tutor_Course(
