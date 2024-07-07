@@ -108,3 +108,37 @@
     margin: 10px 0;
 }
 
+.projectContainer {
+    border: 1px solid #ddd;
+    padding: 20px;
+    margin: 20px;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+  }
+  
+  .projectFileList {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .projectItem {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+  }
+  
+  .projectItem:last-child {
+    border-bottom: none;
+  }
+  
+  .projectPath {
+    flex: 3;
+  }
+  
+  .projectSize,
+  .projectUser,
+  .projectDate {
+    flex: 1;
+    text-align: right;
+  }
