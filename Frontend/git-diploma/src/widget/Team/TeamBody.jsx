@@ -10,9 +10,13 @@ const TeamBody = () => {
     const { sigle } = useParams();
     const [inTeam, setInTeam] = useState([]);
 
+    if(!keycloak?.authenticated)
+      window.location.href = '/';
+
     const isInTeam = async () => {
         try {
           const response = await api.get("/api/project/studentInTeam", {
+            headers: {'Authorization': 'Bearer ' + keycloak.token},
             params: { cip: keycloak.tokenParsed.preferred_username, sigle:sigle }
           });
           console.log(response);

@@ -16,8 +16,6 @@ const StudentDashboard = () => {
 
     if(!keycloak?.authenticated)
         login();
-    else
-        console.log(keycloak.token);
 
     const [projects, setProjects] = useState([]);
 

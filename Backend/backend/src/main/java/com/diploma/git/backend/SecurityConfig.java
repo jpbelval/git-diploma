@@ -28,10 +28,6 @@ public class SecurityConfig{
     public static final String STUDENT = "student";
     private final JwtConverter jwtConverter;
 
-    public SecurityConfig(JwtConverter jwtConverter) {
-        this.jwtConverter = jwtConverter;
-    }
-
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests((authz) ->

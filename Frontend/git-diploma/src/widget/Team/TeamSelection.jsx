@@ -9,6 +9,9 @@ function TeamSelection({sigle}) {
   const [projects, setProjects] = useState([]);
   let id_project = -1;
 
+  if(!keycloak?.authenticated)
+    window.location.href = '/';
+
   const onValueChange = async (project_id) => {
       id_project = project_id;
     };
@@ -16,6 +19,7 @@ function TeamSelection({sigle}) {
   const getProjects = async () => {
     try {
       const response = await api.get("/api/team/getProjects", {
+        headers: {'Authorization': 'Bearer ' + keycloak.token},
         params: { sigle }
       });
       console.log(response);
@@ -28,6 +32,7 @@ function TeamSelection({sigle}) {
   const registerInProject = async () => {
     try {
       const response = await api.get("/api/team/registerInProject", {
+        headers: {'Authorization': 'Bearer ' + keycloak.token},
         params: { sigle: sigle, id_project: id_project, cip: keycloak.tokenParsed.preferred_username }
       });
       console.log(response);

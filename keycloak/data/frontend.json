@@ -12,6 +12,9 @@
     "redirectUris": [
         "*"
     ],
+    "postLogoutRedirectUris": [
+        "*"
+    ],
     "webOrigins": [
         "*"
     ],

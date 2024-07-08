@@ -7,7 +7,6 @@ import {
   RouterProvider 
 } from 'react-router-dom';
 import StudentDashboard from './widget/studentDashboard.jsx';
-import ProjectDetails from './widget/projectDetails.jsx';
 import Login from './widget/loginPage.jsx'
 import CourseSelection from './widget/CourseSelection.jsx';
 import TeamBody from './widget/Team/TeamBody.jsx';
@@ -23,10 +22,6 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <StudentDashboard />,
-      },
-      {
-        path: "project/:projectId",
-        element: <ProjectDetails />
       },
       {
         path: "Login",
