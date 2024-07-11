@@ -8,10 +8,14 @@ import {
     Outlet,
 } from "react-router-dom";
 import api from './api/axiosConfig';
+import { useKeycloak } from '@react-keycloak/web'
+
 
 function App() {
+  const { initialized } = useKeycloak();
+
   //const [membre, setMembre] = useState();
-//
+  //
   //const getMembres = async() => {
   //  try{
   //    const response = await api.get("/api/student/getStudent", {
@@ -25,10 +29,15 @@ function App() {
   //    console.log(err);
   //  }
   //}
-//
+  //
   //useEffect(() =>{
   //  getMembres();
   //}, [])
+  //
+  
+  if (!initialized) {
+    return <div>Loading...</div>
+  }
 
   return (
     <>
