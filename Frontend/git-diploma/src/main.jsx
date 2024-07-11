@@ -35,6 +35,7 @@ const router = createBrowserRouter([
       },
       {
         path: "tutorDashboard",
+
         element: <TutorDashboard />
       },
       {
@@ -52,6 +53,7 @@ const router = createBrowserRouter([
       {
          path: "student/teamBody/:sigle",
          element: <TeamBody />
+
       }
     ]
   },
