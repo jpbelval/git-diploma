@@ -2,17 +2,24 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import api from '../api/axiosConfig';
 import styles from './styles.module.css';
+import { useKeycloak } from '@react-keycloak/web'
 
 const CourseSelection = () => {
   const [courses, setCourses] = useState([]);
+  const { keycloak } = useKeycloak()
+
+  if(!keycloak?.authenticated)
+    window.location.href = '/';
 
   const getCourses = async () => {
     try {
       const response = await api.get("/api/student/getCourses", {
+        headers: {'Authorization': 'Bearer ' + keycloak.token},
         params: {
-          cip: 'lepl1501'
+          cip: keycloak.tokenParsed.preferred_username
         }
       });
+      console.log(response);
       setCourses(response.data);
     } catch (err) {
       console.log("Error fetching data:", err);
