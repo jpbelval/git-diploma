@@ -35,6 +35,7 @@ public class SecurityConfig{
                         .requestMatchers(HttpMethod.GET, "/api/tutor/**").hasRole(TEACHER)
                         .requestMatchers(HttpMethod.GET, "/api/student/**").hasRole(STUDENT)
                         .requestMatchers(HttpMethod.GET, "/api/team/**").hasAnyRole(TEACHER,STUDENT)
+                        .requestMatchers(HttpMethod.GET, "/api/project").hasAnyRole(TEACHER,STUDENT)
                         .requestMatchers(HttpMethod.GET,"/oauth2/**").permitAll()
                         .anyRequest().authenticated());
 
@@ -44,42 +45,4 @@ public class SecurityConfig{
 
         return http.build();
     }
-
-//    private final KeycloakLogoutHandler keycloakLogoutHandler;
-//
-//    SecurityConfig(KeycloakLogoutHandler keycloakLogoutHandler) {
-//        this.keycloakLogoutHandler = keycloakLogoutHandler;
-//    }
-
-//    @Bean
-//    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-//        return http.cors(Customizer.withDefaults())
-//                .csrf(csrf -> csrf.ignoringRequestMatchers("/api/home/**"))
-//                .authorizeHttpRequests(httpRequests -> {
-//                    httpRequests.anyRequest().authenticated();
-//                })
-//                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-//                .oauth2ResourceServer(oauth2ResourceServer -> oauth2ResourceServer.jwt(Customizer.withDefaults()))
-//                 .oauth2Login(Customizer.withDefaults())
-//                .build();
-//    }
-
-//    @Bean
-//    public SecurityFilterChain resourceServerFilterChain(HttpSecurity http) throws Exception {
-//        http.authorizeHttpRequests(auth -> auth
-//                .requestMatchers(new AntPathRequestMatcher("*", HttpMethod.OPTIONS.name()))
-//                .permitAll()
-//                .requestMatchers(new AntPathRequestMatcher("*"))
-//                .hasRole("student")
-//                .requestMatchers(new AntPathRequestMatcher("/"))
-//                .permitAll()
-//                .anyRequest()
-//                .authenticated());
-//        http.oauth2ResourceServer((oauth2) -> oauth2
-//                .jwt(Customizer.withDefaults()));
-//        http.oauth2Login(Customizer.withDefaults())
-//                .logout(logout -> logout.addLogoutHandler(keycloakLogoutHandler).logoutSuccessUrl("/"));
-//        return http.build();
-//    }
-
 }
