@@ -5,11 +5,19 @@ import com.diploma.git.backend.model.Project;
 import com.diploma.git.backend.model.Student;
 import com.diploma.git.backend.mapper.StudentMapper;
 import com.diploma.git.backend.model.*;
+import gitolite.manager.exceptions.GitException;
+import gitolite.manager.exceptions.ModificationException;
+import gitolite.manager.exceptions.ServiceUnavailable;
+import gitolite.manager.models.Config;
+import gitolite.manager.models.User;
+import org.eclipse.jgit.api.TransportConfigCallback;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.*;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,6 +37,15 @@ public class StudentController {
     @GetMapping("/getStudents")
     public List<Student> getStudents(@RequestParam(value = "id_project") String id_project) {
         Student s;
+        try {
+            Config config = gitoliteManager.getConfigManager().get();
+            config.createUser("brol1606");
+            gitoliteManager.getConfigManager().apply(config);
+            User laurent = config.getUser("brol1606");
+
+        } catch (IOException | ServiceUnavailable | GitException | ModificationException e) {
+            throw new RuntimeException(e);
+        }
         List<Project> projects;
         List<Student>  students = studentMapper.getStudentsFromProject(id_project);
         for (int i = 0; i < students.size(); i++) {

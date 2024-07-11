@@ -1,8 +1,10 @@
 package com.diploma.git.backend.gitolite;
 
-import gitolite.ManagedConfig;
-import gitolite.ManagedConfigFactory;
-import gitolite.git.GitException;
+import gitolite.manager.models.ConfigManager;
+import org.eclipse.jgit.errors.UnsupportedCredentialItem;
+import org.eclipse.jgit.transport.CredentialItem;
+import org.eclipse.jgit.transport.CredentialsProvider;
+import org.eclipse.jgit.transport.URIish;
 import org.springframework.web.context.annotation.ApplicationScope;
 
 import java.io.IOException;
@@ -10,21 +12,16 @@ import java.io.IOException;
 
 public class GitoliteManager {
 
-    private ManagedConfig configManager;
+    private ConfigManager configManager;
 
 
     public GitoliteManager() {
-        ManagedConfigFactory factory = new ManagedConfigFactory();
         String gitRepoPath = null;
-        try {
-            gitRepoPath = "ssh://git@" + System.getenv("GIT_SERVER_URL") + "/gitolite-admin";
-            configManager = factory.init(gitRepoPath);
-        } catch (InterruptedException | IOException | GitException e) {
-            System.err.println("Couln't clone admin repository. Repository path: " + gitRepoPath);
-        }
+        gitRepoPath = "ssh://git@" + System.getenv("GIT_SERVER_URL") + "/gitolite-admin.git";
+        configManager = ConfigManager.create(gitRepoPath);
     }
 
-    public ManagedConfig getConfigManager(){
+    public ConfigManager getConfigManager(){
         return configManager;
     }
 }
