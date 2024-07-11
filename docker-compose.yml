@@ -2,16 +2,31 @@ version: '3.2'
 
 services:
 
-  #app:
-   # container_name: gitdiploma
-    #build:
-     # context: .
-      #dockerfile: ./Backend/backend/Dockerfile
-    #restart: always
-    #ports:
-    #  - "3000:3000"
-    #environment:
-    #  DATABASE_URL: postgres://gitdiploma:secret@db/gitdiploma
+  git-server:
+    image: git-server:latest
+    container_name: git-server
+    volumes:
+      - gitolite-sshkeys:/etc/ssh/keys
+      - gitolite-git:/var/lib/git
+    ports:
+      - "2222:22"
+    environment:
+      SSH_KEY_NAME: ${SSH_KEY_NAME}
+      SSH_KEY: ${SSH_KEY}
+
+  auth:
+    image: quay.io/keycloak/keycloak:19.0.3
+    container_name: auth
+    volumes:
+      - ./keycloak/data:/var/tmp
+      - ./keycloak/startup-scripts/init.sh:/docker-entrypoint-sh/init.sh
+    entrypoint: sh -c "/docker-entrypoint-sh/init.sh"
+    environment:
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+      KC_PROXY: edge
+    ports:
+      - 8180:8180
 
   db:
     container_name: git-diploma-db
@@ -25,9 +40,10 @@ services:
       - POSTGRES_DB=gd
     volumes:
       - ./init_db/init.sql:/docker-entrypoint-initdb.d/init.sql
-      #- gd-db:/var/lib/postgresql/data
-      
-      
+    networks:
+      gd-net:
+        #- gd-db:/var/lib/postgresql/data
+
   pgadmin:
     container_name: git-diploma-pgadmin
     image: dpage/pgadmin4
@@ -39,7 +55,16 @@ services:
       PGADMIN_DEFAULT_PASSWORD: postgres
     volumes:
       - pgadmin-data:/var/lib/pgadmin
+    networks:
+      gd-net:
+
 
 volumes:
   #gd-db:
   pgadmin-data:
+  git-repo-data:
+  gitolite-sshkeys:
+  gitolite-git:
+
+networks:
+  gd-net:

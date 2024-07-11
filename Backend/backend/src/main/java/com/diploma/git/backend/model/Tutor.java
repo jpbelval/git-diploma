@@ -3,49 +3,29 @@ package com.diploma.git.backend.model;
 import java.util.List;
 
 public class Tutor {
-    private String firstName;
-    private String lastName;
+    private String firstname;
+    private String lastname;
     private String email;
-    private String phone;
     private List<Course> courseList;
+    private String cip;
 
-    public String getFirstName() {
-        return firstName;
-    }
+    public String getFirstname() { return firstname; }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
+    public void setFirstname(String firstname) { this.firstname = firstname; }
 
-    public String getLastName() {
-        return lastName;
-    }
+    public String getCip() { return cip; }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
+    public void setCip(String cip) { this.cip = cip; }
 
-    public String getEmail() {
-        return email;
-    }
+    public List<Course> getCourseList() { return courseList; }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+    public void setCourseList(List<Course> courseList) { this.courseList = courseList; }
 
-    public String getPhone() {
-        return phone;
-    }
+    public String getEmail() { return email; }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
+    public void setEmail(String email) { this.email = email; }
 
-    public List<Course> getCourseList() {
-        return courseList;
-    }
+    public String getLastname() { return lastname; }
 
-    public void setCourseList(List<Course> courseList) {
-        this.courseList = courseList;
-    }
+    public void setLastname(String lastname) { this.lastname = lastname; }
 }
