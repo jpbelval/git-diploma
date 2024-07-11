@@ -43,6 +43,7 @@ CREATE TABLE Course(
    sigle VARCHAR(50),
    name VARCHAR(100),
    team_size INTEGER,
+   remise TIMESTAMP,
    PRIMARY KEY(sigle)
 );
 
