@@ -57,6 +57,11 @@ public interface StudentMapper {
             "WHERE e.id_project = #{id_project} ")
     List<Event> getEventFromProject(@PathParam("id_project") int id_project);
 
+    @Select("SELECT s.ssh " +
+            "FROM student s " +
+            "WHERE s.cip = #{cip} ")
+    String getSSHFromStudent(@PathParam("cip") String cip);
+
     @Select("SELECT f.id_file, f.name, f.size, f.last_change, f.id_project " +
             "FROM file f " +
             "WHERE f.id_project = #{id_project} ")

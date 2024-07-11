@@ -9,8 +9,11 @@ import {
     Title,
 } from "./navbarElements";
 import { Outlet, Link } from "react-router-dom";
+import { useKeycloak } from '@react-keycloak/web'
 
 const Navbar = () => {
+  const { keycloak } = useKeycloak()
+
     return (
         <>
           <Title to="/">
@@ -32,11 +35,12 @@ const Navbar = () => {
                 {/* <NavBtnLink to='/sign-in'>Sign In</NavBtnLink> */}
               </NavMenu>
               <NavBtn>
-                <NavBtnLink to="/login">
-                  sign in
-                </NavBtnLink>
+              {!!keycloak?.authenticated && (
+                <button type="button" onClick={() => keycloak.logout()}>
+                  Logout
+                </button>
+              )}
               </NavBtn>
-              
           </Nav>
         </>
     );
