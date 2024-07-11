@@ -22,8 +22,11 @@ const Navbar = () => {
                 <NavLink to="/" >
                   home
                 </NavLink>
-                <NavLink to="/aide">
-                  aide
+                <NavLink to="/equipe">
+                  équipe
+                </NavLink>
+                <NavLink to="/tutorDashboard">
+                tutor
                 </NavLink>
                 {/* Second Nav */}
                 {/* <NavBtnLink to='/sign-in'>Sign In</NavBtnLink> */}
@@ -33,6 +36,7 @@ const Navbar = () => {
                   sign in
                 </NavBtnLink>
               </NavBtn>
+              
           </Nav>
         </>
     );
