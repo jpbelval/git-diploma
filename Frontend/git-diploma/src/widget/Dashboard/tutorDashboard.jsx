@@ -1,6 +1,6 @@
 import React from "react";
-import styles from './styles.module.css';
-import { course } from "./data";
+import styles from '../styles.module.css';
+import { course } from "../data";
 import { Link } from "react-router-dom";
 
 
