@@ -1,10 +1,35 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styles from './styles.module.css';
-import { course } from "./data";
 import { Link } from "react-router-dom";
+import api from '../../api/axiosConfig';
+import { useKeycloak } from '@react-keycloak/web'
 
 
 const TutorDashboard = () =>{
+    const { keycloak } = useKeycloak()
+    const [course, setCourse] = useState([]);
+    let sigle = -1;
+
+    if(!keycloak?.authenticated)
+        window.location.href = '/';
+
+    const onValueChange = async (sigle) => {
+        sigle = sigle_cours
+        };        
+
+    const getCourse = async () => {
+        try {
+            const response = await api.get("/api/tutor/getCourses", {
+                headers: {'Authorization': 'Bearer ' + keycloak.token},
+                params: { cip }
+            });
+            console.log(response);
+            setCourse(response.data);
+        } catch (err) {
+            console.log("Error fetching data:", err);
+        }
+    };
+
     const pastCourse = course.filter(course => course.end != null && course.end < Date.now());
     const currentCourse = course.filter(course => course.end != null && course.start < Date.now() && course.end > Date.now());
     const futureCourse = course.filter(course => course.end != null && course.start > Date.now()).sort(course => course.start);
