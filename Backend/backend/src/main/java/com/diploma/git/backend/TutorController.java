@@ -49,4 +49,21 @@ public class TutorController {
     public List<File> getFiles(@RequestParam(value = "id_project") int id_project) {
         return tutorMapper.getFilesFromProject(id_project);
     }
+
+    @GetMapping("/getCourseEndDate")
+    public String getCourseEndDate(@RequestParam(value = "sigle") String sigle) {
+        return tutorMapper.getCourseEndDate(sigle);
+    }
+
+    @GetMapping()
+
+    @GetMapping("/setEndDate")
+    public boolean setEndDate(@RequestParam(value = "sigle") String sigle,
+                              @RequestParam(value = "remise") String end_date) {
+        if (!isInProject(sigle, ))
+            return false;
+        tutorMapper.setEndDate(id_project, cip, end_date);
+        return true;
+    }
+
 }

@@ -50,4 +50,9 @@ public interface TutorMapper {
             "FROM file f " +
             "WHERE f.id_project = #{id_project} ")
     List<File> getFilesFromProject(@PathParam("id_project") int id_project);
+
+    @Select("SELECT c.remise " +
+            "FROM course c " +
+            "WHERE c.sigle = #{sigle} ")
+    String getCourseEndDate(@PathParam("sigle") String sigle);    
 }
