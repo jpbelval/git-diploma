@@ -3,6 +3,7 @@ CREATE TABLE Student(
    lastname VARCHAR(50),
    firstname VARCHAR(50),
    email VARCHAR(50),
+   ssh VARCHAR(250),
    PRIMARY KEY(cip)
 );
 
@@ -36,6 +37,7 @@ CREATE TABLE Tutor(
    firstname VARCHAR(50),
    lastname VARCHAR(50),
    email VARCHAR(50),
+   ssh VARCHAR(250),
    PRIMARY KEY(cip)
 );
 
