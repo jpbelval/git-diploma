@@ -40,6 +40,11 @@ public class TutorController {
         return tutorMapper.getEventFromProject(id_project);
     }
 
+    @GetMapping("/getSSH")
+    public String getSSH(@RequestParam(value = "cip") String cip) {
+        return tutorMapper.getSSHFromTutor(cip);
+    }
+
     @GetMapping("/getFiles")
     public List<File> getFiles(@RequestParam(value = "id_project") int id_project) {
         return tutorMapper.getFilesFromProject(id_project);

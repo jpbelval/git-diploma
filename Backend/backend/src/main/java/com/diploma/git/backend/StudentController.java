@@ -91,6 +91,11 @@ public class StudentController {
         return studentMapper.getEventFromProject(id_project);
     }
 
+    @GetMapping("/getSSH")
+    public String getSSH(@RequestParam(value = "cip") String cip) {
+        return studentMapper.getSSHFromStudent(cip);
+    }
+
     @GetMapping("/getFiles")
     public List<File> getFiles(@RequestParam(value = "id_project") int id_project) {
         return studentMapper.getFilesFromProject(id_project);

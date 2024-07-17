@@ -20,7 +20,6 @@ public class GreetingController {
     UserMapper userMapper;
     @GetMapping("/greeting")
     public Greeting greeting(@RequestParam(value = "name", defaultValue = "World") String name) {
-        List<Users> userList = userMapper.findAll();
         return new Greeting(counter.incrementAndGet(), String.format(template, name));
     }
 }

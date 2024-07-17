@@ -2,10 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { redirect } from 'react-router-dom';
 import api from '../../api/axiosConfig';
 import styles from '../styles.module.css';
+import { useKeycloak } from '@react-keycloak/web'
 
 function TeamSelection({sigle}) {
+  const { keycloak } = useKeycloak()
   const [projects, setProjects] = useState([]);
   let id_project = -1;
+
+  if(!keycloak?.authenticated)
+    window.location.href = '/';
 
   const onValueChange = async (project_id) => {
       id_project = project_id;
@@ -14,6 +19,7 @@ function TeamSelection({sigle}) {
   const getProjects = async () => {
     try {
       const response = await api.get("/api/team/getProjects", {
+        headers: {'Authorization': 'Bearer ' + keycloak.token},
         params: { sigle }
       });
       console.log(response);
@@ -26,7 +32,8 @@ function TeamSelection({sigle}) {
   const registerInProject = async () => {
     try {
       const response = await api.get("/api/team/registerInProject", {
-        params: { sigle: sigle, id_project: id_project, cip: 'lepl1501' }
+        headers: {'Authorization': 'Bearer ' + keycloak.token},
+        params: { sigle: sigle, id_project: id_project, cip: keycloak.tokenParsed.preferred_username }
       });
       console.log(response);
       window.location.href = '/student/teamBody/' + sigle;

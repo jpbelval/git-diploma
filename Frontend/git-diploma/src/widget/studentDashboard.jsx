@@ -3,8 +3,19 @@ import styles from './styles.module.css';
 import { projet } from './data.js';
 import api from '../api/axiosConfig';
 import { Link } from "react-router-dom";
+import { useKeycloak } from '@react-keycloak/web'
+import { useCallback } from 'react'
 
 const StudentDashboard = () => {
+
+    const { keycloak } = useKeycloak()
+
+    const login = useCallback(() => {
+      keycloak?.login()
+    }, [keycloak])
+
+    if(!keycloak?.authenticated)
+        login();
 
     const [projects, setProjects] = useState([]);
 
@@ -47,7 +58,8 @@ const StudentDashboard = () => {
     const getProjects = async () => {
         try {
             const response = await api.get("/api/student/getProjects", {
-                params: { cip: "lepl1501" }
+                headers: {'Authorization' : 'Bearer' + keycloak.token},
+                params: { cip: keycloak.tokenParsed.preferred_username }
             });
             console.log(response);
             setProjects(response.data);
