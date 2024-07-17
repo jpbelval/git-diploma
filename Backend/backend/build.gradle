@@ -18,6 +18,8 @@ repositories {
  dependencies {
 	 // https://mvnrepository.com/artifact/org.apache.sshd/sshd-core
 	 implementation 'org.apache.sshd:sshd-core:2.13.1'
+	 // https://mvnrepository.com/artifact/org.apache.sshd/sshd-git
+	 implementation 'org.apache.sshd:sshd-git:2.13.1'
 	 // https://mvnrepository.com/artifact/org.eclipse.jgit/org.eclipse.jgit.ssh.apache
 	 implementation 'org.eclipse.jgit:org.eclipse.jgit.ssh.apache:6.10.0.202406032230-r'
 	 implementation 'org.apache.commons:commons-lang3:3.12.0'
@@ -29,7 +31,6 @@ repositories {
 	 // https://mvnrepository.com/artifact/org.eclipse.jgit/org.eclipse.jgit
 	 implementation group: 'org.eclipse.jgit', name: 'org.eclipse.jgit', version: '6.10.0.202406032230-r'
 	 implementation "commons-codec:commons-codec:1.10"
-	 implementation "org.apache.sshd:sshd-core:1.0.0"
 	 implementation "com.googlecode.concurrent-locks:concurrent-locks:1.0.0"
 	 testImplementation "junit:junit:4.12"
 	 testImplementation "org.mockito:mockito-core:1.10.19"
