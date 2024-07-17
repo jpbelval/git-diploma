@@ -2,20 +2,24 @@ package gitolite.manager.git;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.security.KeyPair;
 
-import com.diploma.git.backend.ssh.CustomSshSessionFactory;
 import gitolite.manager.exceptions.GitException;
 import gitolite.manager.exceptions.ServiceUnavailable;
 
-import org.apache.commons.io.FileUtils;
-import org.apache.sshd.agent.SshAgentFactory;
-import org.apache.sshd.client.SessionFactory;
 import org.apache.sshd.client.SshClient;
+import org.apache.sshd.client.keyverifier.ServerKeyVerifier;
+import org.apache.sshd.client.session.ClientSession;
+import org.apache.sshd.common.config.keys.loader.KeyPairResourceLoader;
+import org.apache.sshd.common.util.security.SecurityUtils;
+import org.apache.sshd.git.transport.GitSshdSessionFactory;
 import org.eclipse.jgit.api.*;
 import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.api.errors.JGitInternalException;
 import org.eclipse.jgit.api.errors.NoFilepatternException;
-import org.eclipse.jgit.errors.TransportException;
 import org.eclipse.jgit.transport.*;
 import org.eclipse.jgit.transport.sshd.SshdSessionFactory;
 import org.eclipse.jgit.transport.sshd.SshdSessionFactoryBuilder;
@@ -97,42 +101,20 @@ public class JGitManager implements GitManager {
 	@Override
 	public void clone(String uri) throws ServiceUnavailable, GitException, IOException {
 		Preconditions.checkNotNull(uri);
+		SshClient client = SshClient.setUpDefaultClient();
+		client.start();
 
-        try{
-			SshClient client = new SshClient();
-			SshSessionFactory sessionFactory = new SshSessionFactory() {
-				@Override
-				public RemoteSession getSession(URIish uri, CredentialsProvider credentialsProvider, FS fs, int tms) throws TransportException {
-					
-				}
 
-				@Override
-				public String getType() {
-					return "";
-				}
-			};
+
+		GitSshdSessionFactory sshdFactory = new GitSshdSessionFactory(client);
+		org.eclipse.jgit.transport.SshSessionFactory.setInstance(sshdFactory);
+
+		CloneCommand clone = Git.cloneRepository();
+		clone.setDirectory(workingDirectory);
+		clone.setURI(uri);
+		clone.setCredentialsProvider(new PassphraseCredentialsProvider(new String(Files.readAllBytes(Paths.get("~/.ssh/id_rsa")))));
 
 		synchronized (gitLock) {
-
-			ClassLoader classLoader = getClass().getClassLoader();
-			File sshPrK = new File(FS.DETECTED.userHome(), "/.ssh/id_rsa");
-			byte[] data = FileUtils.readFileToByteArray(sshPrK);
-
-
-
-            CloneCommand clone = Git.cloneRepository();
-			clone.setDirectory(workingDirectory);
-			clone.setTransportConfigCallback(transport -> {
-				if(transport instanceof SshTransport) {
-					SshTransport sshTransport = (SshTransport) transport;
-					// Provide private key to `CustomSshSessionFactory`
-					SshSessionFactory sshFactory = new CustomSshSessionFactory(data);
-					SshSessionFactory.setInstance();
-					sshTransport.setSshSessionFactory(sessionFactory);
-
-				}
-			});
-			clone.setURI(uri);
 			try {
 				git = clone.call();
 			} catch (NullPointerException e) {
@@ -140,6 +122,8 @@ public class JGitManager implements GitManager {
 			} catch (GitAPIException e) {
 				throw new GitException(e);
 			}
+			finally{
+				client.stop();
         }
 		}
 	}
