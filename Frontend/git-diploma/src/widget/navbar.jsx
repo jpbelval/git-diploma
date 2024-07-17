@@ -10,6 +10,7 @@ import {
 } from "./navbarElements";
 import { Outlet, Link } from "react-router-dom";
 import { useKeycloak } from '@react-keycloak/web'
+import { hasStudentRole } from '../keycloak.js';
 
 const Navbar = () => {
   const { keycloak } = useKeycloak()
@@ -25,12 +26,9 @@ const Navbar = () => {
                 <NavLink to="/" >
                   home
                 </NavLink>
-                <NavLink to="/equipe">
+                {hasStudentRole(keycloak.realmAccess.roles) ? (<NavLink to="/equipe">
                   équipe
-                </NavLink>
-                <NavLink to="/tutorDashboard">
-                tutor
-                </NavLink>
+                </NavLink>): (<></>)}
                 {/* Second Nav */}
                 {/* <NavBtnLink to='/sign-in'>Sign In</NavBtnLink> */}
               </NavMenu>
