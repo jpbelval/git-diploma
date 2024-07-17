@@ -1,32 +1,51 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styles from '../styles.module.css';
+import api from '../../api/axiosConfig.js';
 import { course } from "../data";
 import { Link } from "react-router-dom";
-
+import { useKeycloak } from '@react-keycloak/web'
 
 const TutorDashboard = () =>{
-    const pastCourse = course.filter(course => course.end != null && course.end < Date.now());
-    const currentCourse = course.filter(course => course.end != null && course.start < Date.now() && course.end > Date.now());
-    const futureCourse = course.filter(course => course.end != null && course.start > Date.now()).sort(course => course.start);
+    const [cours, setCours] = useState([]);
+    const { keycloak } = useKeycloak();
 
-    const pastCourseList = pastCourse.map(pastCourse =>
+
+    const getCours = async () => {
+        try {
+            const response = await api.get("/api/tutor/getCourses", {
+                headers: {'Authorization': 'Bearer ' + keycloak.token},
+                params: { cip: keycloak.tokenParsed.preferred_username }
+            });
+            console.log(response);
+            setCours(response.data);
+        } catch (err) {
+            console.log("Error fetching data:", err);
+        }
+    };
+
+    useEffect(() => {
+        getCours();
+    }, []);
+
+
+    const finished = cours.filter(c => c.remise != null && new Date(c.remise) < Date.now()).sort(c => c.remise).reverse();
+    const upcoming = cours.filter(c => c.remise != null && new Date(c.remise) >= Date.now()).sort(c => c.remise).reverse();
+
+    console.log(cours);
+    console.log(finished);
+    console.log(upcoming);
+
+    const pastCourseList = finished.map(finished =>
         <tr>
-            <td><Link to={`/courses/${pastCourse.code}`} params>{pastCourse.name}</Link></td>
-            <td>{pastCourse.code}</td>
+            <td><Link to={`/courses/${finished.code}`} params>{finished.name}</Link></td>
+            <td>{finished.sigle}</td>
         </tr>
     );
 
-    const currentCourseList = currentCourse.map(currentCourse =>
+    const currentCourseList = upcoming.map(upcoming =>
         <tr>
-            <td><Link to={`/courses/${currentCourse.code}`} params>{currentCourse.name}</Link></td>
-            <td>{currentCourse.code}</td>
-        </tr>
-    );
-
-    const futureCourseList = futureCourse.map(futureCourse =>
-        <tr>
-            <td><Link to={`/courses/${futureCourse.code}`} params>{futureCourse.name}</Link></td>
-            <td>{futureCourse.code}</td>
+            <td><Link to={`/courses/${upcoming.code}`} params>{upcoming.name}</Link></td>
+            <td>{upcoming.sigle}</td>
         </tr>
     );
 
@@ -35,7 +54,7 @@ const TutorDashboard = () =>{
         <div className={styles.divContentTuteur}>
             <div className={styles.divListe}>
                 <div>
-                    <h2>Cours Actifs</h2>
+                    <h2>Cours actifs</h2>
                     <div>
                         <table className={styles.tableProjet}>
                             <thead>
@@ -46,22 +65,6 @@ const TutorDashboard = () =>{
                             </thead>
                             <tbody>
                                 {currentCourseList}
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <div>
-                    <h2>Cours à venir</h2>
-                    <div>
-                        <table className={styles.tableProjet}>
-                            <thead>
-                                <tr>
-                                    <th>nom</th>
-                                    <th>sigle</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {futureCourseList}
                             </tbody>
                         </table>
                     </div>
