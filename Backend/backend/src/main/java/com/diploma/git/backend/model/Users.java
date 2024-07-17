@@ -1,5 +1,5 @@
 package com.diploma.git.backend.model;
-
+//Deprecated
 public class Users {
     private String cip;
     private String nom;
