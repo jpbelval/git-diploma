@@ -41,6 +41,7 @@ public class TutorController {
         return students;
     }
 
+    @CrossOrigin(origins = "http://localhost:5173")
     @GetMapping("/getCourses")
     public List<Course> getCourses(@RequestParam(value = "cip") String cip) {
         return tutorMapper.getCoursesFromTutor(cip);
@@ -84,9 +85,12 @@ public class TutorController {
     }
 
     @GetMapping("/createTeams")
-    public void setupProjet(@RequestParam(value = "teamSize") int teamSize,
+    public boolean setupProjet(@RequestParam(value = "teamSize") int teamSize,
                             @RequestParam(value = "endDate") String endDate,
                             @RequestParam(value= "sigle") String sigle) {
+        int nbStudent = getNumberStudents(sigle);
+        int teams = nbStudent / teamSize;
+
         ConfigManager gitManager = this.gitoliteManager.getConfigManager();
         try {
             Config config = gitManager.get();
@@ -101,6 +105,12 @@ public class TutorController {
         } catch (IOException | ServiceUnavailable | GitException | ModificationException e) {
             throw new RuntimeException(e);
         }
+        return true;
+    }
+
+    @GetMapping("/getCourseWithNoTeams")
+    public List<Course> getCourseWithNoTeams() {
+        return tutorMapper.getCourseWithNoTeams();
     }
 
     //@GetMapping("/")
