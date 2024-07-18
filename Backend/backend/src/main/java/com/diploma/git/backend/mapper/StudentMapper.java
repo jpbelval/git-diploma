@@ -5,6 +5,7 @@ import jakarta.websocket.server.PathParam;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
 
@@ -66,4 +67,10 @@ public interface StudentMapper {
             "FROM file f " +
             "WHERE f.id_project = #{id_project} ")
     List<File> getFilesFromProject(@PathParam("id_project") int id_project);
+
+    @Update("UPDATE Student " +
+            "SET ssh = #{sshKey} " +
+            "WHERE cip = #{cip}")
+    void setSSHFromStudent(@PathParam("cip") String cip, @PathParam("sshKey") String sshKey );
+
 }

@@ -70,6 +70,12 @@ public class StudentController {
         return studentMapper.getSSHFromStudent(cip);
     }
 
+    @GetMapping("/setSSH")
+    public boolean setSSH(@RequestParam(value = "cip") String cip, @RequestParam(value = "sshKey") String sshKey) {
+        studentMapper.setSSHFromStudent(cip, sshKey);
+        return true;
+    }
+
     @GetMapping("/getFiles")
     public List<File> getFiles(@RequestParam(value = "id_project") int id_project) {
         return studentMapper.getFilesFromProject(id_project);
