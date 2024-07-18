@@ -78,4 +78,13 @@ public interface StudentMapper {
             "JOIN course c ON c.sigle = s.sigle" +
             "WHERE s.cip = #{cip} AND c.remise < GETDATE()")
     List<Course> getOpenCoursesFromStudent(@PathParam("cip") String cip);
+
+    @Select("SELECT project.id_project " +
+            "FROM project " +
+            "INNER JOIN Student_Project " +
+            "ON Student_Project.id_project = project.id_project " +
+            "INNER JOIN Course_Project " +
+            "ON Course_Project.id_project = project.id_project " +
+            "WHERE Student_Project.cip = #{cip} AND Course_Project.sigle = #{sigle}")
+    int getProjectFromStudentCourse(@PathParam("cip") String cip, @PathParam("sigle") String sigle);
 }

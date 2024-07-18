@@ -1,39 +1,18 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 import { useKeycloak } from '@react-keycloak/web';
+import styles from '../styles.module.css';
 import api from '../../api/axiosConfig';
 
 function TeamDetails() {
     const { keycloak } = useKeycloak();
     const { sigle } = useParams();
-    const [SSH, setSSH] = useState('');
-    const [SSHData, setSSHData] = useState(true);
+    const [idProject, setIdProject] = useState('');
+    const [ students, setStudents ] = useState('');
+    
 
      const login = useCallback(() => {
          keycloak?.login();
-     }, [keycloak]);
-
-     useEffect(() => {
-         const fetchSSH = async () => {
-             try {
-                 const response = await api.get("/api/student/getSSH", {
-                     headers: { 'Authorization': 'Bearer ' + keycloak.token },
-                     params: { cip: keycloak.tokenParsed.preferred_username }
-                 });
-
-                 setSSH(response.data);
-
-                 setSSHData(false);
-                 if (response.data) {
-                     setSSHData(true);
-                 }
-             } catch (error) {
-                 console.error('Error fetching data:', error);
-                 console.log(keycloak.token);
-             }
-         };
-
-         fetchSSH();
      }, [keycloak]);
 
     useEffect(() => {
@@ -42,15 +21,44 @@ function TeamDetails() {
         }
     }, [keycloak, login]);
 
+    useEffect(() => {
+        const fetchSSH = async () => {
+            try {
+                const response1 = await api.get("/api/student/getProjectFromStudentCourse", {
+                    headers: { 'Authorization': 'Bearer ' + keycloak.token },
+                    params: { cip: keycloak.tokenParsed.preferred_username, sigle: sigle }
+                  });
+              
+                  // Set the project ID
+                  const idProject = response1.data;
+                  setIdProject(idProject);
+              
+                  // Second API call, after the first one is completed
+                  const response2 = await api.get("/api/student/getStudents", {
+                    headers: { 'Authorization': 'Bearer ' + keycloak.token },
+                    params: { id_project: idProject }
+                  });
+                setStudents(response2.data)
+                console.log(students)
+
+            } catch (error) {
+                console.error('Error fetching data:', error);
+                console.log(keycloak.token);
+            }
+        };
+
+        fetchSSH();
+    }, [keycloak]);
+
     return (
-        <div>
-            <h2>Team Details for {sigle}</h2>
-            {/* Affichage des données SSH */}
-            <p>{SSH}</p>
-            <div>
-               {SSHData ? <p>Il y a une cle SSH</p> : <p>Il n y a pas de cle SSH</p>}
-            </div>
+        <>
+        <div className={styles.divContent}>
+            <h2>détail d'équipe : {idProject}</h2>
         </div>
+        <div className={styles.divContent}>
+
+        </div>
+        </>
     );
 }
 

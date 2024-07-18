@@ -20,6 +20,7 @@ const TeamBody = () => {
                      headers: { 'Authorization': 'Bearer ' + keycloak.token },
                      params: { cip: keycloak.tokenParsed.preferred_username }
                  });
+                console.log(response.data)
 
                  setSSH(response.data);
 
@@ -36,22 +37,6 @@ const TeamBody = () => {
          fetchSSH();
      }, [keycloak]);
 
-     useEffect(() => {
-      const setSSH = async () => {
-          try {
-              const response = await api.get("/api/student/setSSH", {
-                  headers: { 'Authorization': 'Bearer ' + keycloak.token },
-                  params: { cip: keycloak.tokenParsed.preferred_username }
-              });
-          } catch (error) {
-              console.error('Error setting data:', error);
-              console.log(keycloak.token);
-          }
-      };
-
-      setSSH();
-  }, [keycloak]);
-
     if(!keycloak?.authenticated)
       window.location.href = '/';
 
@@ -65,7 +50,7 @@ const TeamBody = () => {
           setInTeam(response.data);
         } catch (err) {
           console.log("Error fetching data:", err);
-        }
+        }   
       };
 
     useEffect(() => {
@@ -78,7 +63,7 @@ const TeamBody = () => {
 
     return(
         <>
-        {SSH ? inTeam ? (<TeamDetails sigle={sigle}/>) : (<TeamSelection sigle={sigle}/>) : <TeamSetSSH/>}
+        {SSH ? inTeam ? (<TeamDetails sigle={sigle}/>) : (<TeamSelection sigle={sigle}/>) : <TeamSetSSH SSH={SSH}/>}
         </>
     )
 };

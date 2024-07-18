@@ -28,7 +28,7 @@ const StudentDashboard = () => {
         const sigles = project.courses.map(course => course.sigle).join(", ");
         return(
             <tr key={index}>
-                <td><Link to={`/project/${project.id_project}`}>{sigles}</Link></td>
+                <td><Link to={`/student/teamBody/${sigles}`}>{sigles}</Link></td>
                 <td>{new Date(project.courses[0].remise).toLocaleDateString("en-US")}</td>
             </tr>
         );

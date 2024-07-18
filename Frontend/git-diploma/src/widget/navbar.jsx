@@ -15,6 +15,10 @@ import { hasStudentRole } from '../keycloak.js';
 const Navbar = () => {
   const { keycloak } = useKeycloak();
 
+  const logout = () => {
+    keycloak.logout();
+    window.location.href = '/'
+  }
   return (
     <>
       <Title to="/">

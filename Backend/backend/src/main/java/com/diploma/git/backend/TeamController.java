@@ -39,7 +39,7 @@ public class TeamController {
             teams.get(i).setMax_member(teamMapper.getTeamSizeFromCourse(sigle));
         }
         return teams;
-    }
+    }   
 
     @GetMapping("/registerInProject")
     public boolean registerInProject(@RequestParam(value = "sigle") String sigle,
