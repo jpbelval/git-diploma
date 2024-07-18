@@ -72,8 +72,8 @@ const AddCourse = () => {
                     <select onChange={handleSelectCourse} value={selectedCourseId}>
                     <option value="">Select a course</option>
                     {courseNotSet.map((course) => (
-                        <option key={course.sigle} value={course.courseId}>
-                        {course.name}, {course.code}
+                        <option key={course.sigle} value={course.sigle}>
+                        {course.name}, {course.sigle}
                         </option>
                     ))}
                     </select>
