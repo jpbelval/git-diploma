@@ -97,7 +97,9 @@ public class TutorController {
             int currentTeamIterator = tutorMapper.getLastProjectId();
             for (int i = 0; i < getNumberStudents(sigle) / teamSize; i++) {
                 currentTeamIterator++;
-                config.createRepository(Integer.toString(currentTeamIterator));
+                if (config.getRepository(Integer.toString(currentTeamIterator)) == null){
+                    config.createRepository(Integer.toString(currentTeamIterator));
+                }
                 tutorMapper.createTeams(sigle);
             }
             gitManager.apply(config);

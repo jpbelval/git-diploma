@@ -75,7 +75,7 @@ public interface TutorMapper {
     List<Course> getCourseWithNoTeams();
 
     @Select("SELECT last_value" +
-            "FROM project_id_project_seq")
+            " FROM project_id_project_seq")
     int getLastProjectId();
 
 }
