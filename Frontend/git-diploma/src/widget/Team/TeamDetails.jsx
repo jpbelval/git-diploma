@@ -8,7 +8,7 @@ function TeamDetails() {
     const { keycloak } = useKeycloak();
     const { sigle } = useParams();
     const [idProject, setIdProject] = useState('');
-    const [ students, setStudents ] = useState('');
+    const [ students, setStudents ] = useState([]);
     
 
      const login = useCallback(() => {
@@ -20,6 +20,13 @@ function TeamDetails() {
             login();
         }
     }, [keycloak, login]);
+
+    const UserList = students.map((student, index) => (
+        <tr key={index}>
+          <td>{student.cip}</td>
+          <td>{student.firstname}, {student.lastname}</td>
+        </tr>
+      ));
 
     useEffect(() => {
         const fetchSSH = async () => {
@@ -39,7 +46,7 @@ function TeamDetails() {
                     params: { id_project: idProject }
                   });
                 setStudents(response2.data)
-                console.log(students)
+                console.log(response2.data)
 
             } catch (error) {
                 console.error('Error fetching data:', error);
@@ -56,7 +63,7 @@ function TeamDetails() {
             <h2>détail d'équipe : {idProject}</h2>
         </div>
         <div className={styles.divContent}>
-
+            {UserList}
         </div>
         </>
     );

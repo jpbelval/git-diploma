@@ -30,6 +30,7 @@ const AddCourse = () => {
         const handleSubmit = () => {
           console.log(selectedCourseId);
           createTeams();
+          window.location.href = '/'
         }
         
         const createTeams = async () => {

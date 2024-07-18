@@ -14,29 +14,6 @@ function TeamSetSSH() {
      const login = useCallback(() => {
          keycloak?.login();
      }, [keycloak]);
-     
-     useEffect(() => {
-         const fetchSSH = async () => {
-             try {
-                 const response = await api.get("/api/student/getSSH", {
-                     headers: { 'Authorization': 'Bearer ' + keycloak.token },
-                     params: { cip: keycloak.tokenParsed.preferred_username }
-                 });
-
-                 setSSH(response.data);
-
-                 setSSHData(false);
-                 if (response.data) {
-                     setSSHData(true);
-                 }
-             } catch (error) {
-                 console.error('Error fetching data:', error);
-                 console.log(keycloak.token);
-             }
-         };
-
-         fetchSSH();
-     }, [keycloak]);
 
 
     useEffect(() => {
