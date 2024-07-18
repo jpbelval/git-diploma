@@ -57,9 +57,16 @@ public class JGitManager implements GitManager {
 	 */
 	public JGitManager(File workingDirectory, CredentialsProvider credentialProvider) {
 		Preconditions.checkNotNull(workingDirectory);
+		String keyPath = System.getProperty("user.home") + "/.ssh/id_rsa";
 		this.workingDirectory = workingDirectory;
-		this.credentialProvider = credentialProvider;
-	}
+        try {
+            this.credentialProvider = new PassphraseCredentialsProvider(
+                    new String(Files.readAllBytes(
+                            Paths.get(keyPath))));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
 	/*
 	 * (non-Javadoc)
@@ -105,14 +112,13 @@ public class JGitManager implements GitManager {
 		client.start();
 
 
-
 		GitSshdSessionFactory sshdFactory = new GitSshdSessionFactory(client);
 		org.eclipse.jgit.transport.SshSessionFactory.setInstance(sshdFactory);
 
 		CloneCommand clone = Git.cloneRepository();
 		clone.setDirectory(workingDirectory);
 		clone.setURI(uri);
-		clone.setCredentialsProvider(new PassphraseCredentialsProvider(new String(Files.readAllBytes(Paths.get("~/.ssh/id_rsa")))));
+		clone.setCredentialsProvider(credentialProvider);
 
 		synchronized (gitLock) {
 			try {
@@ -212,6 +218,13 @@ public class JGitManager implements GitManager {
 	 */
 	@Override
 	public void push() throws ServiceUnavailable, GitException {
+		SshClient client = SshClient.setUpDefaultClient();
+		client.start();
+
+
+		GitSshdSessionFactory sshdFactory = new GitSshdSessionFactory(client);
+		org.eclipse.jgit.transport.SshSessionFactory.setInstance(sshdFactory);
+
 		synchronized (gitLock) {
 			try {
 				log.info("Pushing changes to remote git repo");
@@ -226,6 +239,9 @@ public class JGitManager implements GitManager {
 				throw new ServiceUnavailable(e);
 			} catch (GitAPIException | JGitInternalException e) {
 				throw new GitException(e);
+			}
+			finally {
+				client.stop();
 			}
 		}
 	}

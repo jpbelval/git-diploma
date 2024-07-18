@@ -38,15 +38,6 @@ public class StudentController {
     @GetMapping("/getStudents")
     public List<Student> getStudents(@RequestParam(value = "id_project") int id_project) {
         Student s;
-        try {
-            Config config = gitoliteManager.getConfigManager().get();
-            config.createUser("brol1606");
-            gitoliteManager.getConfigManager().apply(config);
-            User laurent = config.getUser("brol1606");
-
-        } catch (IOException | ServiceUnavailable | GitException | ModificationException e) {
-            throw new RuntimeException(e);
-        }
         List<Project> projects;
         List<Student>  students = studentMapper.getStudentsFromProject(id_project);
         for (int i = 0; i < students.size(); i++) {
