@@ -1,13 +1,24 @@
 package com.diploma.git.backend;
 
+import com.diploma.git.backend.gitolite.GitoliteManager;
+import com.diploma.git.backend.model.Project;
+import com.diploma.git.backend.model.Student;
 import com.diploma.git.backend.mapper.StudentMapper;
 import com.diploma.git.backend.model.*;
+import gitolite.manager.exceptions.GitException;
+import gitolite.manager.exceptions.ModificationException;
+import gitolite.manager.exceptions.ServiceUnavailable;
+import gitolite.manager.models.Config;
+import gitolite.manager.models.User;
+import org.eclipse.jgit.api.TransportConfigCallback;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.*;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,8 +26,15 @@ import java.util.List;
 @RequestMapping("/api/student")
 @CrossOrigin
 public class StudentController {
+    private GitoliteManager gitoliteManager;
     @Autowired
     StudentMapper studentMapper;
+
+
+    @Autowired
+    public StudentController(GitoliteManager gitoliteManager){
+        this.gitoliteManager = gitoliteManager;
+    }
 
     @GetMapping("/getStudents")
     public List<Student> getStudents(@RequestParam(value = "id_project") int id_project) {
@@ -51,6 +69,11 @@ public class StudentController {
         return studentMapper.getCoursesFromStudent(cip);
     }
 
+    @GetMapping("/getOpenCourses")
+    public List<Course> getOpenCourses(@RequestParam(value = "cip") String cip) {
+        return studentMapper.getOpenCoursesFromStudent(cip);
+    }
+
     @GetMapping("/getTutors")
     public List<Tutor> getTutors(@RequestParam(value = "id_project") int id_project) {
         List<Tutor> tutors = studentMapper.getTutorsFromProject(id_project);
@@ -68,6 +91,20 @@ public class StudentController {
     @GetMapping("/getSSH")
     public String getSSH(@RequestParam(value = "cip") String cip) {
         return studentMapper.getSSHFromStudent(cip);
+    }
+
+    @GetMapping("/setSSH")
+    public boolean setSSH(@RequestParam(value = "cip") String cip, @RequestParam(value = "sshKey") String sshKey) {
+        studentMapper.setSSHFromStudent(cip, sshKey);
+        try {
+            Config config = this.gitoliteManager.getConfigManager().get();
+            User newUser = config.createUser(cip);
+            newUser.setKey("", sshKey);
+            this.gitoliteManager.getConfigManager().apply(config);
+        } catch (IOException | ServiceUnavailable | GitException | ModificationException e) {
+            throw new RuntimeException(e);
+        }
+        return true;
     }
 
     @GetMapping("/getFiles")

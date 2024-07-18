@@ -6,13 +6,13 @@ import {
   createBrowserRouter,
   RouterProvider 
 } from 'react-router-dom';
-import StudentDashboard from './widget/studentDashboard.jsx';
+import DashboardBody from './widget/Dashboard/dashboardBody.jsx'
 import Login from './widget/loginPage.jsx'
-import TutorDashboard from './widget/tutorDashboard.jsx';
 import CourseDetails from './widget/courseDetails.jsx';
 import AddCourse from './widget/addCourse.jsx';
 import CourseSelection from './widget/CourseSelection.jsx';
 import TeamBody from './widget/Team/TeamBody.jsx';
+import TutorDashboard from './widget/Dashboard/tutorDashboard.jsx';
 
 import { ReactKeycloakProvider } from '@react-keycloak/web';
 import keycloak from './keycloak';
@@ -24,7 +24,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <StudentDashboard />,
+        element: <DashboardBody />,
       },
       {
         path: "Login",

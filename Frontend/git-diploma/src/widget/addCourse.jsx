@@ -3,6 +3,7 @@ import styles from "./styles.module.css"
 import api from '../api/axiosConfig';
 import { useKeycloak } from '@react-keycloak/web'
 
+
 const AddCourse = () => {
 
     const [courseNotSet, setCourseNotSet] = useState([]);
@@ -47,6 +48,24 @@ const createTeams = async () => {
     const handleSubmit = () => {
        console.log(selectedCourseId);
        createTeams();
+  
+    const handleSubmit = async () => {
+      try {
+        const response = await api.get("/api/tutor/getCourses", {
+            headers: {'Authorization': 'Bearer ' + keycloak.token},
+            params: { cip: keycloak.tokenParsed.preferred_username }
+        });
+        console.log(response);
+        setCours(response.data);
+    } catch (err) {
+        console.log("Error fetching data:", err);
+    }
+
+      setTempEndDates({
+        ...tempEndDates,
+        [selectedCourseId]: endDate
+      });
+      console.log(`Temporary End Date set for Course ID: ${selectedCourseId}, End Date: ${endDate}`);
     };
 
    const handleCourseNotSet = async () => {
@@ -65,7 +84,7 @@ const createTeams = async () => {
     return (
       <div className={styles.divCentered}>
         <div className={styles.divCenteredBorder}>
-            <h2>Course Selection</h2>
+            <h2>sélection de cours</h2>
             <div className={styles.divCenteredList}>
                 <div className={styles.inputGroup}>    
                     <select onChange={handleSelectCourse} value={selectedCourseId}>
@@ -103,9 +122,9 @@ const createTeams = async () => {
                 </button>
                 {selectedCourseId && (
                 <div>
-                    <h2>Selected Course</h2>
+                    <h2>cours choisi</h2>
                     <p>{courseNotSet.find(course => course.courseId === parseInt(selectedCourseId))?.name}</p>
-                    <p>Temporary End Date: {tempEndDates[selectedCourseId]}</p>
+                    <p>date de fin: {tempEndDates[selectedCourseId]}</p>
                 </div>
                 )}
             </div>

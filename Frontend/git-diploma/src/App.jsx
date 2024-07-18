@@ -36,7 +36,7 @@ function App() {
   //
   
   if (!initialized) {
-    return <div>Loading...</div>
+    return <div>chargement ...</div>
   }
 
   return (

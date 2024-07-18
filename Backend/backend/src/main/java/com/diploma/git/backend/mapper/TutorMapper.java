@@ -22,7 +22,7 @@ public interface TutorMapper {
             "WHERE student_project.cip = #{cip} ")
     List<Project> getProjectsFromStudent(@PathParam("cip") String cip);
 
-    @Select("SELECT c.sigle, c.name " +
+    @Select("SELECT c.sigle, c.name, c.remise " +
             "FROM course c " +
             "INNER JOIN tutor_course " +
             "ON c.sigle = tutor_course.sigle " +
@@ -73,5 +73,9 @@ public interface TutorMapper {
             "FROM Course " +
             "WHERE sigle NOT IN (SELECT sigle FROM Course_Project)")
     List<Course> getCourseWithNoTeams();
+
+    @Select("SELECT last_value" +
+            "FROM project_id_project_seq")
+    int getLastProjectId();
 
 }

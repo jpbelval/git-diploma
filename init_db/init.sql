@@ -3,7 +3,7 @@ CREATE TABLE Student(
    lastname VARCHAR(50),
    firstname VARCHAR(50),
    email VARCHAR(50),
-   ssh VARCHAR(250),
+   ssh TEXT,
    PRIMARY KEY(cip)
 );
 
