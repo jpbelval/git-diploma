@@ -1,11 +1,18 @@
 package com.diploma.git.backend;
 
+import com.diploma.git.backend.gitolite.GitoliteManager;
 import com.diploma.git.backend.mapper.StudentMapper;
 import com.diploma.git.backend.mapper.TutorMapper;
 import com.diploma.git.backend.model.*;
+import gitolite.manager.exceptions.GitException;
+import gitolite.manager.exceptions.ModificationException;
+import gitolite.manager.exceptions.ServiceUnavailable;
+import gitolite.manager.models.Config;
+import gitolite.manager.models.ConfigManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
@@ -17,6 +24,12 @@ public class TutorController {
     @Autowired
     private TutorMapper tutorMapper;
 
+    private GitoliteManager gitoliteManager;
+
+    @Autowired
+    public TutorController(GitoliteManager gitoliteManager){
+        this.gitoliteManager = gitoliteManager;
+    }
     
 
     @GetMapping("/getStudents")
@@ -74,13 +87,20 @@ public class TutorController {
     public void setupProjet(@RequestParam(value = "teamSize") int teamSize,
                             @RequestParam(value = "endDate") String endDate,
                             @RequestParam(value= "sigle") String sigle) {
-        int currentTeamIterator = tutorMapper.getLastProjectId();
-        for (int i = 0; i < getNumberStudents(sigle) / teamSize; i++) {
-            currentTeamIterator++;
-            tutorMapper.createTeams(sigle);
-
+        ConfigManager gitManager = this.gitoliteManager.getConfigManager();
+        try {
+            Config config = gitManager.get();
+            int currentTeamIterator = tutorMapper.getLastProjectId();
+            for (int i = 0; i < getNumberStudents(sigle) / teamSize; i++) {
+                currentTeamIterator++;
+                config.createRepository(Integer.toString(currentTeamIterator));
+                tutorMapper.createTeams(sigle);
+            }
+            gitManager.apply(config);
+            tutorMapper.setEndDate(sigle, endDate, teamSize);
+        } catch (IOException | ServiceUnavailable | GitException | ModificationException e) {
+            throw new RuntimeException(e);
         }
-        tutorMapper.setEndDate(sigle, endDate, teamSize);
     }
 
     //@GetMapping("/")
