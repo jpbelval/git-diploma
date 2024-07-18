@@ -4,72 +4,54 @@ import api from '../api/axiosConfig';
 import { useKeycloak } from '@react-keycloak/web'
 
 
-const AddCourse = () => {
 
-    const [courseNotSet, setCourseNotSet] = useState([]);
+const AddCourse = () => {
+  
+  const [courseNotSet, setCourseNotSet] = useState([]);
     const [selectedCourseId, setSelectedCourseId] = useState('');
     const [end_Date, setEndDate] = useState('');
     const [team_Size, setTeamSize] = useState('');
     const [tempEndDates, setTempEndDates] = useState({});
     const { keycloak } = useKeycloak()
-  
+    
     const handleSelectCourse = (e) => {
       setSelectedCourseId(e.target.value);
       setEndDate(tempEndDates[e.target.value] || '');
     };
-  
-    const handleEndDateChange = (e) => {
-      setEndDate(e.target.value);
-    };
-
-const createTeams = async () => {
-  try {
-    await api.get("/api/tutor/createTeams", {
-    params: {
-      teamSize: team_Size,
-      endDate: end_Date,
-      sigle: selectedCourseId,
-    },
-      headers: {
-        'Authorization': 'Bearer ' + keycloak.token
-      }
-    });
-    console.log("success");
-  } catch (error) {
-    console.error("failed :", error);
-  }
-};
-
-
-   const handleTeamSizeChange = (e) => {
-         setTeamSize(e.target.value);
+    
+    const handleTeamSizeChange = (e) => {
+      setTeamSize(e.target.value);
        };
-
-    const handleSubmit = () => {
-       console.log(selectedCourseId);
-       createTeams();
   
-    const handleSubmit = async () => {
-      try {
-        const response = await api.get("/api/tutor/getCourses", {
-            headers: {'Authorization': 'Bearer ' + keycloak.token},
-            params: { cip: keycloak.tokenParsed.preferred_username }
-        });
-        console.log(response);
-        setCours(response.data);
-    } catch (err) {
-        console.log("Error fetching data:", err);
-    }
+       const handleEndDateChange = (e) => {
+         setEndDate(e.target.value);
+        };
+        
+        const handleSubmit = () => {
+          console.log(selectedCourseId);
+          createTeams();
+        }
+        
+        const createTeams = async () => {
+          try {
+            await api.get("/api/tutor/createTeams", {
+            params: {
+              teamSize: team_Size,
+              endDate: end_Date,
+              sigle: selectedCourseId,
+            },
+              headers: {
+                'Authorization': 'Bearer ' + keycloak.token
+              }
+            });
+            console.log("success");
+          } catch (error) {
+            console.error("failed :", error);
+          }
+        };
 
-      setTempEndDates({
-        ...tempEndDates,
-        [selectedCourseId]: endDate
-      });
-      console.log(`Temporary End Date set for Course ID: ${selectedCourseId}, End Date: ${endDate}`);
-    };
-
-   const handleCourseNotSet = async () => {
-         try {
+        const handleCourseNotSet = async () => {
+          try {
             const response = await api.get("/api/tutor/getCourseWithNoTeams", {
               headers: {'Authorization': 'Bearer ' + keycloak.token},
             });
@@ -90,7 +72,7 @@ const createTeams = async () => {
                     <select onChange={handleSelectCourse} value={selectedCourseId}>
                     <option value="">Select a course</option>
                     {courseNotSet.map((course) => (
-                        <option key={course.courseId} value={course.courseId}>
+                        <option key={course.sigle} value={course.courseId}>
                         {course.name}, {course.code}
                         </option>
                     ))}

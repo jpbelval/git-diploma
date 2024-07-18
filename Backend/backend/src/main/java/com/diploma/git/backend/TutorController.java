@@ -41,6 +41,7 @@ public class TutorController {
         return students;
     }
 
+    @CrossOrigin(origins = "http://localhost:5173")
     @GetMapping("/getCourses")
     public List<Course> getCourses(@RequestParam(value = "cip") String cip) {
         return tutorMapper.getCoursesFromTutor(cip);
