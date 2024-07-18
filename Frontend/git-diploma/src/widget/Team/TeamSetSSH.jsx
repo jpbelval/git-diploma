@@ -57,6 +57,7 @@ function TeamSetSSH() {
             console.error('Error setting data:', error);
             console.log(keycloak.token);
         }
+        window.location.href = '/equipe'
     }
 
     const updateSSH = async (e) => {
