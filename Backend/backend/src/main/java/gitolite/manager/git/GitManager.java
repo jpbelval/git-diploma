@@ -48,6 +48,8 @@ public interface GitManager {
 	 */
 	void clone(String uri) throws ServiceUnavailable, GitException, IOException;
 
+	void bareClone(String uri) throws ServiceUnavailable, GitException, IOException;
+
 	/**
 	 * This method initializes a new git repository in the working directory.
 	 * 
