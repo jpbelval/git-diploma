@@ -13,7 +13,7 @@ const AddCourse = () => {
     const [team_Size, setTeamSize] = useState('');
     const [tempEndDates, setTempEndDates] = useState({});
     const { keycloak } = useKeycloak()
-    
+
     const handleSelectCourse = (e) => {
       setSelectedCourseId(e.target.value);
       setEndDate(tempEndDates[e.target.value] || '');
@@ -30,7 +30,6 @@ const AddCourse = () => {
         const handleSubmit = () => {
           console.log(selectedCourseId);
           createTeams();
-          window.location.href = '/'
         }
         
         const createTeams = async () => {
@@ -46,6 +45,7 @@ const AddCourse = () => {
               }
             });
             console.log("success");
+            window.location.href = '/'
           } catch (error) {
             console.error("failed :", error);
           }

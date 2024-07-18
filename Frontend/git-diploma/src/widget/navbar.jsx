@@ -17,8 +17,9 @@ const Navbar = () => {
 
   const logout = () => {
     keycloak.logout();
-    window.location.href = '/'
   }
+
+  
   return (
     <>
       <Title to="/">

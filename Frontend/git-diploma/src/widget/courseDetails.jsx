@@ -11,8 +11,6 @@ const CourseDetails = () => {
     const [projects, setProjects] = useState([]);
     let id_project = -1;
 
-    if(!keycloak?.authenticated)
-        window.location.href = '/';
 
     const onValueChange = async (project_id) => {
         id_project = project_id;

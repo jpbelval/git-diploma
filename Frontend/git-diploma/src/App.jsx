@@ -12,7 +12,7 @@ import { useKeycloak } from '@react-keycloak/web'
 
 
 function App() {
-  const { initialized } = useKeycloak();
+  const { initialized, keycloak } = useKeycloak();
 
   //const [membre, setMembre] = useState();
   //
@@ -38,6 +38,9 @@ function App() {
   if (!initialized) {
     return <div>chargement ...</div>
   }
+
+  if(!keycloak?.authenticated)
+    window.location.href = '/';
 
   return (
     <>
