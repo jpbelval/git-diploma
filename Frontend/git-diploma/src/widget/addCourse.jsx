@@ -8,6 +8,7 @@ const AddCourse = () => {
     const courseNotSet = course.filter(course => course.end == null);
     const [selectedCourseId, setSelectedCourseId] = useState('');
     const [endDate, setEndDate] = useState('');
+    const [teamSize, setTeamSize] = useState('');
     const [tempEndDates, setTempEndDates] = useState({});
   
     const handleSelectCourse = (e) => {
@@ -18,13 +19,13 @@ const AddCourse = () => {
     const handleEndDateChange = (e) => {
       setEndDate(e.target.value);
     };
-  
+
+   const handleTeamSizeChange = (e) => {
+         setTeamSize(e.target.value);
+       };
+
     const handleSubmit = () => {
-      setTempEndDates({
-        ...tempEndDates,
-        [selectedCourseId]: endDate
-      });
-      console.log(`Temporary End Date set for Course ID: ${selectedCourseId}, End Date: ${endDate}`);
+
     };
   
     return (
@@ -52,6 +53,17 @@ const AddCourse = () => {
                     disabled={!selectedCourseId}
                 />
                 </div>
+                <div className={styles.inputGroup}>
+                   <label htmlFor="teamSize">Nombre Equipe: </label>
+                 <input
+                     type="number"
+                     min="1"
+                     id="teamSize"
+                     value={teamSize}
+                     onChange={handleTeamSizeChange}
+                     disabled={!selectedCourseId}
+                 />
+                 </div>
                 <button onClick={handleSubmit} disabled={!selectedCourseId || !endDate} className={styles.setEndDateButton}>
                 Set End Date
                 </button>
