@@ -55,15 +55,13 @@ public class TutorController {
         return tutorMapper.getCourseEndDate(sigle);
     }
 
-    @GetMapping()
-
     @GetMapping("/setEndDate")
     public boolean setEndDate(@RequestParam(value = "sigle") String sigle,
                               @RequestParam(value = "remise") String end_date) {
-        if (!isInProject(sigle, ))
-            return false;
-        tutorMapper.setEndDate(id_project, cip, end_date);
+        tutorMapper.setEndDate(sigle, end_date);
         return true;
     }
+
+    //@GetMapping("/")
 
 }

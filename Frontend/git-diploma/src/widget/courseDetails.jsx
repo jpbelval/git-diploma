@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styles from './styles.module.css';
 import { Link } from "react-router-dom";
-import api from '../../api/axiosConfig';
+import api from "../api/axiosConfig"
 import { useKeycloak } from '@react-keycloak/web'
 
 

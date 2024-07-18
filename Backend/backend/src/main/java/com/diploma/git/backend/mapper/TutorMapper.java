@@ -5,6 +5,7 @@ import jakarta.websocket.server.PathParam;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
 
@@ -54,5 +55,10 @@ public interface TutorMapper {
     @Select("SELECT c.remise " +
             "FROM course c " +
             "WHERE c.sigle = #{sigle} ")
-    String getCourseEndDate(@PathParam("sigle") String sigle);    
+    String getCourseEndDate(@PathParam("sigle") String sigle);
+
+    @Update("UPDATE Course " +
+            "SET remise = #{id_project}" +
+            "WHERE sigle = #{sigle}")
+    void setEndDate(@PathParam("sigle") String sigle, @PathParam("end_date") String end_date );
 }
