@@ -68,4 +68,8 @@ public interface TutorMapper {
     @Insert("INSERT INTO project(id_project) VALUES (DEFAULT); " +
             "INSERT INTO Course_Project VALUES (#{sigle}, (SELECT last_value FROM project_id_project_seq)); ")
     void createTeams(@PathParam("sigle") String sigle);
+
+    @Select("SELECT last_value" +
+            "FROM project_id_project_seq")
+    int getLastProjectId();
 }
