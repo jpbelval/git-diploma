@@ -73,4 +73,9 @@ public interface StudentMapper {
             "WHERE cip = #{cip}")
     void setSSHFromStudent(@PathParam("cip") String cip, @PathParam("sshKey") String sshKey );
 
+    @Select("SELECT s.sigle " +
+            "FROM student_course s " +
+            "JOIN course c ON c.sigle = s.sigle" +
+            "WHERE s.cip = #{cip} AND c.remise < GETDATE()")
+    List<Course> getOpenCoursesFromStudent(@PathParam("cip") String cip);
 }

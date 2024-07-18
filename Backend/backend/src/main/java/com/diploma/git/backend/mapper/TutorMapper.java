@@ -22,7 +22,7 @@ public interface TutorMapper {
             "WHERE student_project.cip = #{cip} ")
     List<Project> getProjectsFromStudent(@PathParam("cip") String cip);
 
-    @Select("SELECT c.sigle, c.name " +
+    @Select("SELECT c.sigle, c.name, c.remise " +
             "FROM course c " +
             "INNER JOIN tutor_course " +
             "ON c.sigle = tutor_course.sigle " +
