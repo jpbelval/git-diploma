@@ -47,7 +47,7 @@ function TeamSelection({sigle}) {
 
   const ProjectList = projects.map((project, index) => (
     <tr key={index}>
-      <td>{project.max_member > project.students.length? <input type='radio' onClick={() => onValueChange(project.id_project)} /> : ""} {project.id_project}</td>
+      <td>{project.max_member > project.students.length? <input type='radio' name="projectSelection" onClick={() => onValueChange(project.id_project)} /> : ""} {project.id_project}</td>
       <td>{project.students.map(student => (<p>{student.firstname} {student.lastname},</p>))}</td>
     </tr>
   ));
