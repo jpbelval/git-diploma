@@ -85,7 +85,7 @@ public class TutorController {
     }
 
     @GetMapping("/createTeams")
-    public void setupProjet(@RequestParam(value = "teamSize") int teamSize,
+    public boolean setupProjet(@RequestParam(value = "teamSize") int teamSize,
                             @RequestParam(value = "endDate") String endDate,
                             @RequestParam(value= "sigle") String sigle) {
         int nbStudent = getNumberStudents(sigle);
@@ -105,6 +105,7 @@ public class TutorController {
         } catch (IOException | ServiceUnavailable | GitException | ModificationException e) {
             throw new RuntimeException(e);
         }
+        return true;
     }
 
     @GetMapping("/getCourseWithNoTeams")
