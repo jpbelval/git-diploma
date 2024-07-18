@@ -11,6 +11,7 @@ const TeamBody = () => {
     const { sigle } = useParams();
     const [inTeam, setInTeam] = useState([]);
     const [SSH, setSSH] = useState('');
+    const [idProject, setIdProject] = useState('');
     const [SSHData, setSSHData] = useState(true);
 
     useEffect(() => {
@@ -20,6 +21,13 @@ const TeamBody = () => {
                      headers: { 'Authorization': 'Bearer ' + keycloak.token },
                      params: { cip: keycloak.tokenParsed.preferred_username }
                  });
+                 const response2 = await api.get("/api/student/getProjectFromStudentCourse", {
+                  headers: { 'Authorization': 'Bearer ' + keycloak.token },
+                  params: { cip: keycloak.tokenParsed.preferred_username, sigle: sigle }
+              });
+              console.log(response2.data)
+              setIdProject(response2.data)
+              console.log(idProject)
 
                  setSSH(response.data);
 
@@ -35,22 +43,6 @@ const TeamBody = () => {
 
          fetchSSH();
      }, [keycloak]);
-
-     useEffect(() => {
-      const setSSH = async () => {
-          try {
-              const response = await api.get("/api/student/setSSH", {
-                  headers: { 'Authorization': 'Bearer ' + keycloak.token },
-                  params: { cip: keycloak.tokenParsed.preferred_username }
-              });
-          } catch (error) {
-              console.error('Error setting data:', error);
-              console.log(keycloak.token);
-          }
-      };
-
-      setSSH();
-  }, [keycloak]);
 
     if(!keycloak?.authenticated)
       window.location.href = '/';
@@ -78,7 +70,7 @@ const TeamBody = () => {
 
     return(
         <>
-        {SSH ? inTeam ? (<TeamDetails sigle={sigle}/>) : (<TeamSelection sigle={sigle}/>) : <TeamSetSSH/>}
+        {SSH ? inTeam ? (<TeamDetails sigle={sigle} idProject={idProject}/>) : (<TeamSelection sigle={sigle}/>) : <TeamSetSSH SSH={SSH}/>}
         </>
     )
 };

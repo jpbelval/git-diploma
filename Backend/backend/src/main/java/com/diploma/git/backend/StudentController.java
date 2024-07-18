@@ -111,4 +111,10 @@ public class StudentController {
     public List<File> getFiles(@RequestParam(value = "id_project") int id_project) {
         return studentMapper.getFilesFromProject(id_project);
     }
+
+    @GetMapping("/getProjectFromStudentCourse")
+    public int getProjectFromStudentCourse(@RequestParam(value = "cip") String cip,
+                                              @RequestParam(value = "sigle") String sigle) {
+        return studentMapper.getProjectFromStudentCourse(cip, sigle);
+    }
 }
