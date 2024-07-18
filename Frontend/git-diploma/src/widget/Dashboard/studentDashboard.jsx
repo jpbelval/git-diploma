@@ -74,8 +74,8 @@ const StudentDashboard = () => {
                         <table className={styles.tableProjet}>
                             <thead>
                                 <tr>
-                                    <th>Identifiant</th>
-                                    <th>last commit</th>
+                                    <th>identifiant</th>
+                                    <th>dernier commit</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -91,7 +91,7 @@ const StudentDashboard = () => {
                             <thead>
                                 <tr>
                                     <th>cours</th>
-                                    <th>last commit</th>
+                                    <th>dernier commit</th>
                                 </tr>
                             </thead>
                             <tbody>

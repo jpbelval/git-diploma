@@ -41,13 +41,13 @@ const CourseSelection = () => {
     <div className={styles.divContent}>
       <div className={styles.divListe}>
         <div>
-          <h2>Rejoindre une équipe dans le cours:</h2>
+          <h2>rejoindre une équipe:</h2>
           <div>
             <table className={styles.tableProjet}>
               <thead>
                 <tr>
-                  <th>Sigle</th>
-                  <th>Informations supplementaires</th>
+                  <th>sigle</th>
+                  <th>informations supplémentaires</th>
                 </tr>
               </thead>
               <tbody>

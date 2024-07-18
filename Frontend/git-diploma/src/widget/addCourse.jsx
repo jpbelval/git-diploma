@@ -47,7 +47,7 @@ const AddCourse = () => {
     return (
       <div className={styles.divCentered}>
         <div className={styles.divCenteredBorder}>
-            <h2>Course Selection</h2>
+            <h2>sélection de cours</h2>
             <div className={styles.divCenteredList}>
                 <div className={styles.inputGroup}>    
                     <select onChange={handleSelectCourse} value={selectedCourseId}>
@@ -60,7 +60,7 @@ const AddCourse = () => {
                     </select>
                 </div>
                 <div className={styles.inputGroup}>
-                <label htmlFor="endDate">End Date: </label>
+                <label htmlFor="endDate">fin: </label>
                 <input
                     type="date"
                     id="endDate"
@@ -70,7 +70,7 @@ const AddCourse = () => {
                 />
                 </div>
                 <div className={styles.inputGroup}>
-                <label htmlFor="teamSize">Taille des équipes: </label>
+                <label htmlFor="teamSize">taille des équipes: </label>
                 <input
                     type="number"
                     id="teamSize"
@@ -81,13 +81,13 @@ const AddCourse = () => {
                 />
                 </div>
                 <button onClick={handleSubmit} disabled={!selectedCourseId || !endDate} className={styles.setEndDateButton}>
-                Set End Date
+                soumettre
                 </button>
                 {selectedCourseId && (
                 <div>
-                    <h2>Selected Course</h2>
+                    <h2>cours choisi</h2>
                     <p>{courseNotSet.find(course => course.courseId === parseInt(selectedCourseId))?.name}</p>
-                    <p>Temporary End Date: {tempEndDates[selectedCourseId]}</p>
+                    <p>date de fin: {tempEndDates[selectedCourseId]}</p>
                 </div>
                 )}
             </div>
