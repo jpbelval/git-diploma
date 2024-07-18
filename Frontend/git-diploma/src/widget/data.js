@@ -51,7 +51,7 @@ export const course = [{
     start: new Date('2024-05-01'),
     end: new Date('2024-07-8')
 }, {
-    courseId: 5,
+    courseId: "GIF325",
     name: 'check la miata aek le w16',
     code: 'S2-APP5',
     start: new Date('2024-07-10'),

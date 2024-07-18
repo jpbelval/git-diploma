@@ -72,10 +72,17 @@ public class TutorController {
     public void setupProjet(@RequestParam(value = "teamSize") int teamSize,
                             @RequestParam(value = "endDate") String endDate,
                             @RequestParam(value= "sigle") String sigle) {
-        for (int i = 0; i < getNumberStudents(sigle) / teamSize; i++) {
+        int nbStudent = getNumberStudents(sigle);
+        int teams = nbStudent / teamSize;
+        for (int i = 0; i < teams; i++) {
             tutorMapper.createTeams(sigle);
         }
         tutorMapper.setEndDate(sigle, endDate, teamSize);
+    }
+
+    @GetMapping("/getCourseWithNoTeams")
+    public List<Course> getCourseWithNoTeams() {
+        return tutorMapper.getCourseWithNoTeams();
     }
 
     //@GetMapping("/")
