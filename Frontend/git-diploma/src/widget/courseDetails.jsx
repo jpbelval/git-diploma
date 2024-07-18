@@ -14,11 +14,11 @@ const CourseDetails = () => {
     )
 
     const courseStart = cours.map(cours =>
-        <p>Start Date: {cours.start.toLocaleDateString("en-US")}</p>
+        <p>début: {cours.start.toLocaleDateString("en-US")}</p>
     )
 
     const courseEnd = cours.map(cours =>
-        <p>End Date: {cours.end.toLocaleDateString("en-US")}</p>
+        <p>fin: {cours.end.toLocaleDateString("en-US")}</p>
     )
 
     const projLink = coursProj.map(project => (
@@ -35,7 +35,7 @@ const CourseDetails = () => {
         <div className={styles.divContentTuteur}>
             <div className={styles.divListe}>
                 <div>
-                    <h1>Course Info:</h1>
+                    <h1>cours:</h1>
                     <div>
                         <h2>{courseInfo}</h2>
                         {courseStart}
@@ -43,13 +43,13 @@ const CourseDetails = () => {
                     </div>
                 </div>
                 <div>
-                    <h2>Projects:</h2>
+                    <h2>équipes:</h2>
                     <div>
                         <table className={styles.tableProjet}>
                             <thead>
                                 <tr>
-                                    <th>Team</th>
-                                    <th>Members</th>
+                                    <th>équipe</th>
+                                    <th>membres</th>
                                 </tr>
                             </thead>
                             <tbody>

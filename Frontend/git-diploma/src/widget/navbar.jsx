@@ -24,7 +24,7 @@ const Navbar = () => {
             <Bars />
               <NavMenu>
                 <NavLink to="/" >
-                  home
+                  tableau de bord
                 </NavLink>
                 {hasStudentRole(keycloak.realmAccess.roles) ? (<NavLink to="/equipe">
                   équipe
@@ -35,7 +35,7 @@ const Navbar = () => {
               <NavBtn>
               {!!keycloak?.authenticated && (
                 <button type="button" onClick={() => keycloak.logout()}>
-                  Logout
+                  se déconnecter
                 </button>
               )}
               </NavBtn>

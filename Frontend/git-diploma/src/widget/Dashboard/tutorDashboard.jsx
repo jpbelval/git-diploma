@@ -54,7 +54,7 @@ const TutorDashboard = () =>{
         <div className={styles.divContentTuteur}>
             <div className={styles.divListe}>
                 <div>
-                    <h2>Cours actifs</h2>
+                    <h2>cours actifs</h2>
                     <div>
                         <table className={styles.tableProjet}>
                             <thead>
@@ -70,7 +70,7 @@ const TutorDashboard = () =>{
                     </div>
                 </div>
                 <div>
-                    <h2>Cours finis</h2>
+                    <h2>cours finis</h2>
                     <div>
                         <table className={styles.tableProjet}>
                             <thead>
@@ -87,7 +87,7 @@ const TutorDashboard = () =>{
                 </div>
                 <div className={styles.divAddButton}>
                     <Link to="/tutorDashboard/addCourse">
-                        <button className={styles.buttonForm}>Ajouter un Cours</button>
+                        <button className={styles.buttonForm}>ajouter</button>
                     </Link>
                 </div>
             </div>
