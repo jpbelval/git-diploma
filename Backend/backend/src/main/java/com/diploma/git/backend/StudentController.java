@@ -68,6 +68,11 @@ public class StudentController {
         return studentMapper.getCoursesFromStudent(cip);
     }
 
+    @GetMapping("/getOpenCourses")
+    public List<Course> getOpenCourses(@RequestParam(value = "cip") String cip) {
+        return studentMapper.getOpenCoursesFromStudent(cip);
+    }
+
     @GetMapping("/getTutors")
     public List<Tutor> getTutors(@RequestParam(value = "id_project") int id_project) {
         List<Tutor> tutors = studentMapper.getTutorsFromProject(id_project);

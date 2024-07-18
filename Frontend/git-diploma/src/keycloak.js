@@ -9,3 +9,18 @@ const keycloak = new Keycloak({
   })
 
 export default keycloak
+
+export const hasStudentRole = (roles) => {
+  let allowed = false;
+
+  for (let index = 0; index < roles.length; index++) {
+    const element = roles[index];
+    if(element == 'student'){
+      allowed = true;
+      return allowed;
+    }
+  }
+
+
+  return allowed;
+};

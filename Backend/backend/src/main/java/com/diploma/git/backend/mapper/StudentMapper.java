@@ -66,4 +66,10 @@ public interface StudentMapper {
             "FROM file f " +
             "WHERE f.id_project = #{id_project} ")
     List<File> getFilesFromProject(@PathParam("id_project") int id_project);
+
+    @Select("SELECT s.sigle " +
+            "FROM student_course s " +
+            "JOIN course c ON c.sigle = s.sigle" +
+            "WHERE s.cip = #{cip} AND c.remise < GETDATE()")
+    List<Course> getOpenCoursesFromStudent(@PathParam("cip") String cip);
 }
