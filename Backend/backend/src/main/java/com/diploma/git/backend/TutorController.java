@@ -6,6 +6,7 @@ import com.diploma.git.backend.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 
@@ -56,10 +57,25 @@ public class TutorController {
     }
 
     @GetMapping("/setEndDate")
-    public boolean setEndDate(@RequestParam(value = "sigle") String sigle,
+    public boolean endateBrise(@RequestParam(value = "sigle") String sigle,
                               @RequestParam(value = "remise") String end_date) {
-        tutorMapper.setEndDate(sigle, end_date);
+        //tutorMapper.setEndDate(sigle, end_date);
         return true;
+    }
+
+    @GetMapping("/getNumberStudents")
+    public int getNumberStudents(@RequestParam(value = "sigle") String sigle) {
+        return tutorMapper.getNumberStudentsCourse(sigle);
+    }
+
+    @GetMapping("/createTeams")
+    public void setupProjet(@RequestParam(value = "teamSize") int teamSize,
+                            @RequestParam(value = "endDate") String endDate,
+                            @RequestParam(value= "sigle") String sigle) {
+        for (int i = 0; i < getNumberStudents(sigle) / teamSize; i++) {
+            tutorMapper.createTeams(sigle);
+        }
+        tutorMapper.setEndDate(sigle, endDate, teamSize);
     }
 
     //@GetMapping("/")
