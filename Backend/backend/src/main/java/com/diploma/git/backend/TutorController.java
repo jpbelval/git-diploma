@@ -17,6 +17,8 @@ public class TutorController {
     @Autowired
     private TutorMapper tutorMapper;
 
+    
+
     @GetMapping("/getStudents")
     public List<Student> getStudents(@RequestParam(value = "id_project") int id_project) {
         List<Student>  students = tutorMapper.getStudentsFromProject(id_project);
@@ -72,8 +74,11 @@ public class TutorController {
     public void setupProjet(@RequestParam(value = "teamSize") int teamSize,
                             @RequestParam(value = "endDate") String endDate,
                             @RequestParam(value= "sigle") String sigle) {
+        int currentTeamIterator = tutorMapper.getLastProjectId();
         for (int i = 0; i < getNumberStudents(sigle) / teamSize; i++) {
+            currentTeamIterator++;
             tutorMapper.createTeams(sigle);
+
         }
         tutorMapper.setEndDate(sigle, endDate, teamSize);
     }

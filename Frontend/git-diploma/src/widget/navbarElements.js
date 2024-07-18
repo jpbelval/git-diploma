@@ -33,8 +33,8 @@ export const NavLink = styled(Link)`
     align-items: end;
     text-decoration: none;
     padding: 0 1rem;
-    padding-top:20%;
-    height: 5%;
+    padding-top:"25px";
+    height: 100%;
     cursor: pointer;
     font-size: 20px;
     &.active {

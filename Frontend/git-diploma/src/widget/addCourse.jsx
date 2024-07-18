@@ -3,6 +3,7 @@ import styles from "./styles.module.css"
 import { course } from "./data";
 
 
+
 const AddCourse = () => {
 
     const courseNotSet = course.filter(course => course.end == null);
@@ -20,18 +21,33 @@ const AddCourse = () => {
       setEndDate(e.target.value);
     };
 
-   const handleTeamSizeChange = (e) => {
-         setTeamSize(e.target.value);
-       };
+    const handleTeamSizeChange = (e) => {
+      setTeamSize(e.target.value);
+    };
+  
+    const handleSubmit = async () => {
+      try {
+        const response = await api.get("/api/tutor/getCourses", {
+            headers: {'Authorization': 'Bearer ' + keycloak.token},
+            params: { cip: keycloak.tokenParsed.preferred_username }
+        });
+        console.log(response);
+        setCours(response.data);
+    } catch (err) {
+        console.log("Error fetching data:", err);
+    }
 
-    const handleSubmit = () => {
-
+      setTempEndDates({
+        ...tempEndDates,
+        [selectedCourseId]: endDate
+      });
+      console.log(`Temporary End Date set for Course ID: ${selectedCourseId}, End Date: ${endDate}`);
     };
   
     return (
       <div className={styles.divCentered}>
         <div className={styles.divCenteredBorder}>
-            <h2>Course Selection</h2>
+            <h2>sélection de cours</h2>
             <div className={styles.divCenteredList}>
                 <div className={styles.inputGroup}>    
                     <select onChange={handleSelectCourse} value={selectedCourseId}>
@@ -44,7 +60,7 @@ const AddCourse = () => {
                     </select>
                 </div>
                 <div className={styles.inputGroup}>
-                <label htmlFor="endDate">End Date: </label>
+                <label htmlFor="endDate">fin: </label>
                 <input
                     type="date"
                     id="endDate"
@@ -54,24 +70,24 @@ const AddCourse = () => {
                 />
                 </div>
                 <div className={styles.inputGroup}>
-                   <label htmlFor="teamSize">Nombre Equipe: </label>
-                 <input
-                     type="number"
-                     min="1"
-                     id="teamSize"
-                     value={teamSize}
-                     onChange={handleTeamSizeChange}
-                     disabled={!selectedCourseId}
-                 />
-                 </div>
+                <label htmlFor="teamSize">taille des équipes: </label>
+                <input
+                    type="number"
+                    id="teamSize"
+                    value={teamSize}
+                    onChange={handleTeamSizeChange}
+                    disabled={!selectedCourseId}
+                    min="1"
+                />
+                </div>
                 <button onClick={handleSubmit} disabled={!selectedCourseId || !endDate} className={styles.setEndDateButton}>
-                Set End Date
+                soumettre
                 </button>
                 {selectedCourseId && (
                 <div>
-                    <h2>Selected Course</h2>
+                    <h2>cours choisi</h2>
                     <p>{courseNotSet.find(course => course.courseId === parseInt(selectedCourseId))?.name}</p>
-                    <p>Temporary End Date: {tempEndDates[selectedCourseId]}</p>
+                    <p>date de fin: {tempEndDates[selectedCourseId]}</p>
                 </div>
                 )}
             </div>

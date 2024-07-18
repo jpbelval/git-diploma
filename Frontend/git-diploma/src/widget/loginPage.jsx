@@ -8,14 +8,14 @@ const Login = () => {
             <div className={Styles.divForm}>
                 <form className={Styles.formStyle}>
                     <div>
-                        <label className={Styles.labelForm}>CIP:</label><br/>
+                        <label className={Styles.labelForm}>cip:</label><br/>
                         <input type="text" className={Styles.inputTextForm}/>
                     </div><br/>
                     <div>
-                        <label className={Styles.labelForm}>Mot de passe:</label><br/>
+                        <label className={Styles.labelForm}>mot de passe:</label><br/>
                         <input type="text" className={Styles.inputTextForm}/>
                     </div><br/>
-                    <button className={Styles.buttonForm}>Login</button>
+                    <button className={Styles.buttonForm}>se connecter</button>
 
                 </form>
             </div>
