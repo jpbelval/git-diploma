@@ -86,7 +86,7 @@ const TutorDashboard = () =>{
                     </div>
                 </div>
                 <div className={styles.divAddButton}>
-                    <Link to="/tutorDashboard/addCourse">
+                    <Link to="/tutorDashboard/AddCourse">
                         <button className={styles.buttonForm}>ajouter</button>
                     </Link>
                 </div>

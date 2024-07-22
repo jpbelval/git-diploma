@@ -8,9 +8,6 @@ const CourseSelection = () => {
   const [courses, setCourses] = useState([]);
   const { keycloak } = useKeycloak()
 
-  if(!keycloak?.authenticated)
-    window.location.href = '/';
-
   const getCourses = async () => {
     try {
       const response = await api.get("/api/student/getCourses", {

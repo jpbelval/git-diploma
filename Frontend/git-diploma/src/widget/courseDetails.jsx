@@ -1,12 +1,36 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styles from './styles.module.css';
-import { course, projet } from "./data";
-import { useParams, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
+import api from "../api/axiosConfig"
+import { useKeycloak } from '@react-keycloak/web'
+
 
 const CourseDetails = () => {
-    const { code } = useParams();
-    const cours = course.filter(course => course.code === code);
-    const coursProj = projet.filter(projet => projet.cour === code);
+
+    const { keycloak } = useKeycloak()
+    const [projects, setProjects] = useState([]);
+    let id_project = -1;
+
+
+    const onValueChange = async (project_id) => {
+        id_project = project_id;
+    }
+
+    const getProjects = async () => {
+        try {
+            const response = await api.get("/api/tutor/getProjects", {
+                headers: {'Authorization': 'Bearer ' + keycloak.token},
+                params: { sigle }
+            });
+            console.log(response);
+            setProjects(response.data);
+        } catch (err) {
+            console.log("Error fetching data:", err);
+        }
+    }
+
+
+
 
 
     const courseInfo = cours.map(cours => 

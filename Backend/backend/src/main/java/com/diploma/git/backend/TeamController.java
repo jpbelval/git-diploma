@@ -48,18 +48,12 @@ public class TeamController {
         if (isInProject(sigle, cip))
             return false;
         try {
-            ConfigManager gitManager = this.gitoliteManager.getConfigManager();
-            Config config = gitManager.get();
+            Config config = this.gitoliteManager.getConfigManager().get();
             Repository repo = config.getRepository(Integer.toString(id_project));
             repo.setPermission(config.getUser(cip), Permission.ALL);
-            gitManager.apply(config);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } catch (ServiceUnavailable e) {
-            throw new RuntimeException(e);
-        } catch (GitException e) {
-            throw new RuntimeException(e);
-        } catch (ModificationException e) {
+            repo.setPermission(config.getUser("admin"), Permission.ALL);
+            this.gitoliteManager.getConfigManager().apply(config);
+        } catch (IOException | ServiceUnavailable | GitException | ModificationException e) {
             throw new RuntimeException(e);
         }
         teamMapper.registerStudentInProject(id_project, cip);

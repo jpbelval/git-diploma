@@ -41,7 +41,7 @@ public class JGitManager implements GitManager {
 	
 	private final File workingDirectory;
 	private final CredentialsProvider credentialProvider;
-
+	private final File saveDirectory = new File(System.getProperty("user.home") + "/savedRepos");
 	private final Object gitLock = new Object();
 	private Git git;
 
@@ -56,9 +56,12 @@ public class JGitManager implements GitManager {
 	 *           authenticate when cloning, pulling or pushing, from or to.
 	 */
 	public JGitManager(File workingDirectory, CredentialsProvider credentialProvider) {
-		Preconditions.checkNotNull(workingDirectory);
+        Preconditions.checkNotNull(workingDirectory);
 		String keyPath = System.getProperty("user.home") + "/.ssh/id_rsa";
 		this.workingDirectory = workingDirectory;
+		if (!saveDirectory.exists()){
+			saveDirectory.mkdirs();
+		}
         try {
             this.credentialProvider = new PassphraseCredentialsProvider(
                     new String(Files.readAllBytes(
@@ -131,6 +134,37 @@ public class JGitManager implements GitManager {
 			finally{
 				client.stop();
         }
+		}
+	}
+
+
+	@Override
+	public void bareClone(String uri) throws ServiceUnavailable, GitException, IOException {
+		Preconditions.checkNotNull(uri);
+		SshClient client = SshClient.setUpDefaultClient();
+		client.start();
+
+
+		GitSshdSessionFactory sshdFactory = new GitSshdSessionFactory(client);
+		org.eclipse.jgit.transport.SshSessionFactory.setInstance(sshdFactory);
+
+		CloneCommand clone = Git.cloneRepository();
+		clone.setDirectory(workingDirectory);
+		clone.setBare(true);
+		clone.setURI(uri);
+		clone.setCredentialsProvider(credentialProvider);
+
+		synchronized (gitLock) {
+			try {
+				git = clone.call();
+			} catch (NullPointerException e) {
+				throw new ServiceUnavailable(e);
+			} catch (GitAPIException e) {
+				throw new GitException(e);
+			}
+			finally{
+				client.stop();
+			}
 		}
 	}
 

@@ -2,9 +2,7 @@ package com.diploma.git.backend.mapper;
 
 import com.diploma.git.backend.model.*;
 import jakarta.websocket.server.PathParam;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -50,4 +48,34 @@ public interface TutorMapper {
             "FROM file f " +
             "WHERE f.id_project = #{id_project} ")
     List<File> getFilesFromProject(@PathParam("id_project") int id_project);
+
+    @Select("SELECT c.remise " +
+            "FROM course c " +
+            "WHERE c.sigle = #{sigle} ")
+    String getCourseEndDate(@PathParam("sigle") String sigle);
+
+    @Update("UPDATE Course " +
+            "SET remise = #{end_date}, team_size = #{teamSize} " +
+            "WHERE sigle = #{sigle}")
+    void setEndDate(@Param("sigle") String sigle, @Param("end_date") String end_date, @Param("teamSize") int teamSize);
+
+
+    @Select("SELECT count(*) " +
+            "FROM Student_Course s " +
+            "WHERE s.sigle = #{sigle} ")
+    int getNumberStudentsCourse(@PathParam("sigle") String sigle);
+
+    @Insert("INSERT INTO project(id_project) VALUES (DEFAULT); " +
+            "INSERT INTO Course_Project VALUES (#{sigle}, (SELECT last_value FROM project_id_project_seq)); ")
+    void createTeams(@PathParam("sigle") String sigle);
+
+    @Select("SELECT * " +
+            "FROM Course " +
+            "WHERE sigle NOT IN (SELECT sigle FROM Course_Project)")
+    List<Course> getCourseWithNoTeams();
+
+    @Select("SELECT last_value" +
+            " FROM project_id_project_seq")
+    int getLastProjectId();
+
 }

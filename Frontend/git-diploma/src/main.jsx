@@ -12,9 +12,10 @@ import CourseDetails from './widget/courseDetails.jsx';
 import AddCourse from './widget/addCourse.jsx';
 import CourseSelection from './widget/CourseSelection.jsx';
 import TeamBody from './widget/Team/TeamBody.jsx';
+import TutorDashboard from './widget/Dashboard/tutorDashboard.jsx';
 
-import { ReactKeycloakProvider } from '@react-keycloak/web'
-import keycloak from './keycloak'
+import { ReactKeycloakProvider } from '@react-keycloak/web';
+import keycloak from './keycloak';
 
 const router = createBrowserRouter([
   {
@@ -28,6 +29,11 @@ const router = createBrowserRouter([
       {
         path: "Login",
         element: <Login />
+      },
+      {
+        path: "tutorDashboard",
+
+        element: <TutorDashboard />
       },
       {
         path: "courses/:code",

@@ -30,6 +30,7 @@ public class StudentController {
     @Autowired
     StudentMapper studentMapper;
 
+
     @Autowired
     public StudentController(GitoliteManager gitoliteManager){
         this.gitoliteManager = gitoliteManager;
@@ -92,8 +93,28 @@ public class StudentController {
         return studentMapper.getSSHFromStudent(cip);
     }
 
+    @GetMapping("/setSSH")
+    public boolean setSSH(@RequestParam(value = "cip") String cip, @RequestParam(value = "sshKey") String sshKey) {
+        studentMapper.setSSHFromStudent(cip, sshKey);
+        try {
+            Config config = this.gitoliteManager.getConfigManager().get();
+            User newUser = config.createUser(cip);
+            newUser.setKey("", sshKey);
+            this.gitoliteManager.getConfigManager().apply(config);
+        } catch (IOException | ServiceUnavailable | GitException | ModificationException e) {
+            throw new RuntimeException(e);
+        }
+        return true;
+    }
+
     @GetMapping("/getFiles")
     public List<File> getFiles(@RequestParam(value = "id_project") int id_project) {
         return studentMapper.getFilesFromProject(id_project);
+    }
+
+    @GetMapping("/getProjectFromStudentCourse")
+    public int getProjectFromStudentCourse(@RequestParam(value = "cip") String cip,
+                                              @RequestParam(value = "sigle") String sigle) {
+        return studentMapper.getProjectFromStudentCourse(cip, sigle);
     }
 }
