@@ -62,9 +62,17 @@
     color: white
 }
 
+.buttonAddForm{
+    width: 200px;
+    background-color: #018849;
+    color: white
+}
+
 
 .divAddButton{
-    padding-top: 10px;
+    position: fixed;
+    bottom: 20px;
+    right: 350px;
 }
 
 .divContentTuteur{
@@ -142,3 +150,9 @@
     flex: 1;
     text-align: right;
   }
+  
+.noCoursesMessage {
+text-align: center;
+font-size: 18px;
+margin-top: 20px;
+}
