@@ -53,23 +53,33 @@ function TeamSelection({sigle}) {
   ));
 
   return (
+    <>
+    { projects.length > 0 ? 
     <div className={styles.divContent}>
-      <div className={styles.divListe}>
-        <h2>Choix d'équipe pour le cours: {sigle}</h2>
-        <table className={styles.tableProjet}>
-          <thead>
-            <tr>
-              <th>Numéro d'équipe</th>
-              <th>Membres de l'équipe</th>
-            </tr>
-          </thead>
-          <tbody>
-            {ProjectList}
-          </tbody>
-        </table>
-        <button onClick={registerInProject}> Confirmer </button>
-      </div>
+    <div className={styles.divListe}>
+      <h2>Choix d'équipe pour le cours: {sigle}</h2>
+      <table className={styles.tableProjet}>
+        <thead>
+          <tr>
+            <th>Numéro d'équipe</th>
+            <th>Membres de l'équipe</th>
+          </tr>
+        </thead>
+        <tbody>
+          {ProjectList}
+        </tbody>
+      </table>
+      <button onClick={registerInProject}> Confirmer </button>
     </div>
+  </div> :
+   <div className={styles.divContent}>
+   <div className={styles.divListe}>
+     <h2>choix d'équipe pour le cours {sigle} fermé</h2>
+     <p>si vous pensez qu'il s'agit d'une erreur, veuillez contacter votre tuteur</p>
+   </div>
+ </div>}
+  </>
+    
   );
 };
 
