@@ -49,7 +49,7 @@ public class TeamController {
             return false;
         try {
             Config config = this.gitoliteManager.getConfigManager().get();
-            Repository repo = config.getRepository(Integer.toString(id_project));
+            Repository repo = config.getRepository(sigle + "-" + Integer.toString(id_project));
             repo.setPermission(config.getUser(cip), Permission.ALL);
             repo.setPermission(config.getUser("admin"), Permission.ALL);
             this.gitoliteManager.getConfigManager().apply(config);

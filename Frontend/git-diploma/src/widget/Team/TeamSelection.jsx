@@ -7,10 +7,10 @@ import { useKeycloak } from '@react-keycloak/web'
 function TeamSelection({sigle}) {
   const { keycloak } = useKeycloak()
   const [projects, setProjects] = useState([]);
-  let id_project = -1;
+  const [id_project, setIdProject] = useState(-1);
 
   const onValueChange = async (project_id) => {
-      id_project = project_id;
+      setIdProject(project_id);
     };
 
   const getProjects = async () => {
@@ -57,19 +57,21 @@ function TeamSelection({sigle}) {
     { projects.length > 0 ? 
     <div className={styles.divContent}>
     <div className={styles.divListe}>
-      <h2>Choix d'équipe pour le cours: {sigle}</h2>
+      <h2>choix d'équipe pour le cours: {sigle}</h2>
       <table className={styles.tableProjet}>
         <thead>
           <tr>
-            <th>Numéro d'équipe</th>
-            <th>Membres de l'équipe</th>
+            <th>numéro d'équipe</th>
+            <th>membres de l'équipe</th>
           </tr>
         </thead>
         <tbody>
           {ProjectList}
         </tbody>
       </table>
-      <button onClick={registerInProject}> Confirmer </button>
+      <>
+        <button style={id_project === -1 ? {backgroundColor:"gray", color:"white"} : {backgroundColor:"#018849"}} disabled={id_project === -1 ? true : false} onClick={registerInProject}> confirmer </button>
+      </>
     </div>
   </div> :
    <div className={styles.divContent}>

@@ -70,7 +70,8 @@ const StudentDashboard = () => {
             <div className={styles.divListe}>
                 <div>
                     <h2>projets</h2>
-                    <div>
+                    {openProjet.length > 0 ?
+                        <div>
                         <table className={styles.tableProjet}>
                             <thead>
                                 <tr>
@@ -82,11 +83,17 @@ const StudentDashboard = () => {
                                 {listeProjet}
                             </tbody>
                         </table>
-                    </div>
+                    </div> :
+                        <div className={styles.divListe} style={{paddingLeft:"40%"}}>
+                            aucun projet
+                        </div>
+                        }
+                    
                 </div>
                 <div>
                     <h2>anciens projets</h2>
-                    <div>
+                    {closedProjet.length > 0 ?
+                        <div>
                         <table className={styles.tableProjet}>
                             <thead>
                                 <tr>
@@ -98,7 +105,12 @@ const StudentDashboard = () => {
                                 {ancienProjet}
                             </tbody>
                         </table>
-                    </div>
+                    </div>:
+                        <div className={styles.divListe} style={{paddingLeft:"40%"}}>
+                            aucun projet
+                        </div>
+                        }
+                    
                 </div>
             </div>
             <div className={styles.divUpcoming}>
