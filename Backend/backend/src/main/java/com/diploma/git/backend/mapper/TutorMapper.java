@@ -78,4 +78,10 @@ public interface TutorMapper {
             " FROM project_id_project_seq")
     int getLastProjectId();
 
+    @Select("SELECT * " +
+            "FROM Course " +
+            "WHERE sigle NOT IN (SELECT sigle FROM Course_Project)" + 
+            "AND sigle IN (SELECT sigle FROM Tutor_Course WHERE cip = #{cip})")
+    List<Course> getNoTeamsFromTutor(@PathParam("cip") String cip);
+
 }
