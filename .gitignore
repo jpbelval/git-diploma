@@ -28,3 +28,4 @@ replay_pid*
 workspace.xml
 tasks.xml
 *.iml
+.env
