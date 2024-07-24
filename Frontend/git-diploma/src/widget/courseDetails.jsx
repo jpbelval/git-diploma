@@ -56,7 +56,7 @@ const CourseDetails = () => {
     const projLink = projects.map(project => (
         <tr key={project.projectId}>
             <td className={styles.tableSectionName}>
-                <Link to={`/project/${project.id_project}`}>{project.id_project}</Link>              
+                {project.id_project}            
             </td>
             <td className={styles.tableSectionMembers}>aucun membre à date lol</td>
         </tr>
