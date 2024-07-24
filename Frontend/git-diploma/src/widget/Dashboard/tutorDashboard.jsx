@@ -54,9 +54,10 @@ const TutorDashboard = () =>{
         <>
         <div className={styles.divContentTuteur}>
             <div className={styles.divListe}>
-                <div>
-                    <h2>cours actifs</h2>
                     <div>
+                        <h2>cours actifs</h2>
+                        {upcoming.length > 0 ?
+                        <div>
                         <table className={styles.tableProjet}>
                             <thead>
                                 <tr>
@@ -68,34 +69,42 @@ const TutorDashboard = () =>{
                                 {currentCourseList}
                             </tbody>
                         </table>
-                    </div>
-                </div>
-                <div>
-                <>
-                    <h2>cours finis</h2>
-                    {finished.length > 0 ?
-                     <div>
-                        <table className={styles.tableProjet}>
-                            <thead>
-                                <tr>
-                                    <th>Nom</th>
-                                    <th>Sigle</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {pastCourseList}
-                            </tbody>
-                        </table>
                     </div> :
-                    <div className={styles.divListe} style={{paddingLeft:"40%"}}>
-                        aucun cours
-                    </div>}
-                    
-                </>
+                        <div className={styles.divListe} style={{paddingLeft:"40%"}}>
+                            aucun cours
+                        </div>
+                        }
+                        
+                    </div>
+            <div>
+                <h2>cours finis</h2>
+                {finished.length > 0 ?
+                <div>
+                    <table className={styles.tableProjet}>
+                        <thead>
+                            <tr>
+                                <th>Nom</th>
+                                <th>Sigle</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {pastCourseList}
+                        </tbody>
+                    </table>
+                </div> :
+                <div className={styles.divListe} style={{paddingLeft:"40%"}}>
+                    aucun cours
                 </div>
+                }
+            </div>
+            {/* // {currentCourseList.length === 0 && pastCourseList.length === 0 && (
+            //     <div className={styles.noCoursesMessage}>
+            //         Ajouter des cours pour visualiser les équipes
+            //     </div>
+            // )} */}
                 <div className={styles.divAddButton}>
                     <Link to="/tutorDashboard/AddCourse">
-                        <button className={styles.buttonForm}>Ajouter</button>
+                        <button className={styles.buttonAddForm}>ajouter</button>
                     </Link>
                 </div>
             </div>
