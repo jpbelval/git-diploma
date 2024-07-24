@@ -85,7 +85,7 @@ const StudentDashboard = () => {
                         </table>
                     </div> :
                         <div className={styles.divListe} style={{paddingLeft:"40%"}}>
-                            aucun projets
+                            aucun projet
                         </div>
                         }
                     
@@ -107,7 +107,7 @@ const StudentDashboard = () => {
                         </table>
                     </div>:
                         <div className={styles.divListe} style={{paddingLeft:"40%"}}>
-                            aucun projets
+                            aucun projet
                         </div>
                         }
                     

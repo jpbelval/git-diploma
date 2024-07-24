@@ -69,11 +69,11 @@ const AddCourse = () => {
   return (
     <div className={styles.divCentered}>
       <div className={styles.divCenteredBorder}>
-          <h2>Configuration de cours</h2>
+          <h2>configuration de cours</h2>
           <div className={styles.divCenteredList}>
               <div className={styles.inputGroup}>    
                   <select onChange={handleSelectCourse} value={selectedCourseId}>
-                  <option value="">Sélectionnez un cours</option>
+                  <option value="">sélectionnez un cours</option>
                   {courseNotSet.map((course) => (
                       <option key={course.sigle} value={course.sigle}>
                       {course.name}, {course.sigle}
@@ -82,7 +82,7 @@ const AddCourse = () => {
                   </select>
               </div>
               <div className={styles.inputGroup}>
-              <label htmlFor="end_Date">Date de fin: </label>
+              <label htmlFor="end_Date">date de fin: </label>
               <input
                   type="date"
                   id="end_Date"
@@ -92,7 +92,7 @@ const AddCourse = () => {
               />
               </div>
               <div className={styles.inputGroup}>
-                  <label htmlFor="team_Size">Taille des équipes: </label>
+                  <label htmlFor="team_Size">taille des équipes: </label>
                 <input
                     type="number"
                     min="1"
@@ -104,7 +104,7 @@ const AddCourse = () => {
               </div>
               <Link to="/tutorDashboard">
                 <button onClick={handleSubmit} disabled={!selectedCourseId || !end_Date} className={styles.setEndDateButton}>
-                Créer les équipes
+                créer les équipes
                 </button>
               </Link>
           </div>

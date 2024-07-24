@@ -45,12 +45,12 @@ function TeamSetSSH() {
     return (
         <div className={styles.divContent}>
       <div className={styles.divListe}>
-        <h2>Veuillez ajouter votre clée SSH</h2>
+        <h2>veuillez ajouter votre clef SSH</h2>
         <label>
             <textarea id='SSHkey' onChange={updateSSH}></   textarea>
         </label>
         <div style={{marginTop: 15}}>
-            <button onClick={submitSSH}> Confirmer </button>
+            <button onClick={submitSSH}> confirmer </button>
         </div>
       </div>
     </div>

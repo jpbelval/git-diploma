@@ -70,20 +70,20 @@ const CourseDetails = () => {
         <div className={styles.divContentTuteur}>
             <div className={styles.divListe}>
                 <div>
-                    <h1>Cours:{sigle}</h1>
+                    <h2>{sigle}</h2>
                     <div>
-                        <h2>{courseInfo}</h2>
+                        <h3>{courseInfo}</h3>
                         {courseEnd}
                     </div>
                 </div>
                 <div>
-                    <h2>Équipes:</h2>
+                    <h3>équipes:</h3>
                     <div>
                         <table className={styles.tableProjet}>
                             <thead>
                                 <tr>
-                                    <th>Équipe</th>
-                                    <th>Membres</th>
+                                    <th>équipe</th>
+                                    <th>membres</th>
                                 </tr>
                             </thead>
                             <tbody>
