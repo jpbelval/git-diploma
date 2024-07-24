@@ -22,6 +22,7 @@ const CourseDetails = () => {
                 headers: {'Authorization': 'Bearer ' + keycloak.token},
                 params: { sigle }
             });
+            console.log(response.data)
             setProjects(response.data);
         } catch (err) {
             console.log("Error fetching projects:", err);
@@ -53,12 +54,15 @@ const CourseDetails = () => {
         <p key={course.remise}>fin: {new Date(course.remise).toLocaleDateString("en-US")}</p>
     );
 
+
     const projLink = projects.map(project => (
         <tr key={project.projectId}>
             <td className={styles.tableSectionName}>
                 {project.id_project}            
             </td>
-            <td className={styles.tableSectionMembers}>aucun membre à date lol</td>
+            <td className={styles.tableSectionMembers}>{project.students.map(student =>
+                <p>{student.firstname} {student.lastname} </p>
+            )}</td>
         </tr>
     ));
 

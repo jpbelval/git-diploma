@@ -1,6 +1,7 @@
 package com.diploma.git.backend;
 
 import com.diploma.git.backend.gitolite.GitoliteManager;
+import com.diploma.git.backend.mapper.ProjectMapper;
 import com.diploma.git.backend.mapper.StudentMapper;
 import com.diploma.git.backend.mapper.TutorMapper;
 import com.diploma.git.backend.model.*;
@@ -23,6 +24,8 @@ import java.util.List;
 public class TutorController {
     @Autowired
     private TutorMapper tutorMapper;
+    @Autowired
+    private ProjectMapper projectMapper;
 
     private GitoliteManager gitoliteManager;
 
@@ -49,7 +52,12 @@ public class TutorController {
 
     @GetMapping("/getProjects")
     public List<Project> getProjects(@RequestParam(value = "sigle") String sigle) {
-        return tutorMapper.getProjectsFromCourse(sigle);
+        List<Project> projects = tutorMapper.getProjectsFromCourse(sigle);
+        for (Project p : projects) {
+            List<Student> s =  projectMapper.getProjectMembers(p.getId_project());
+            p.setStudents(s);
+        }
+        return projects;
     }
 
     @GetMapping("/getEvents")
