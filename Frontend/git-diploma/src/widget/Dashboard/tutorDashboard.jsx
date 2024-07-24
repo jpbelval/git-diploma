@@ -71,8 +71,10 @@ const TutorDashboard = () =>{
                     </div>
                 </div>
                 <div>
+                <>
                     <h2>cours finis</h2>
-                    <div>
+                    {finished.length > 0 ?
+                     <div>
                         <table className={styles.tableProjet}>
                             <thead>
                                 <tr>
@@ -84,7 +86,12 @@ const TutorDashboard = () =>{
                                 {pastCourseList}
                             </tbody>
                         </table>
-                    </div>
+                    </div> :
+                    <div className={styles.divListe} style={{paddingLeft:"40%"}}>
+                        aucun cours
+                    </div>}
+                    
+                </>
                 </div>
                 <div className={styles.divAddButton}>
                     <Link to="/tutorDashboard/AddCourse">
