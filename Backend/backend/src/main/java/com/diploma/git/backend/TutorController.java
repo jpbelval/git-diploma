@@ -104,10 +104,14 @@ public class TutorController {
             Config config = gitManager.get();
             int currentTeamIterator = tutorMapper.getLastProjectId();
             for (int i = 0; i < getNumberStudents(sigle) / teamSize; i++) {
+
                 currentTeamIterator++;
-                if (config.getRepository(Integer.toString(currentTeamIterator)) == null){
-                    config.createRepository(Integer.toString(currentTeamIterator));
+                String repoName = sigle + "-" + Integer.toString(currentTeamIterator);
+
+                if (config.getRepository(repoName) == null){
+                    config.createRepository(repoName);
                 }
+
                 tutorMapper.createTeams(sigle);
             }
             gitManager.apply(config);
