@@ -34,8 +34,7 @@ const CourseDetails = () => {
                 headers: {'Authorization': 'Bearer ' + keycloak.token},
                 params: { sigle }
             });
-            setCours(response.data.cours);
-            setCoursProj(response.data.coursProj);
+            setCours(response.data);
         } catch (err) {
             console.log("Error fetching course details:", err);
         }
@@ -46,18 +45,18 @@ const CourseDetails = () => {
         getProjects();
     }, [sigle]);
 
-    const courseInfo = cours.map(course => 
+    const courseInfo = (course =>
         <p key={course.sigle}>{course.name}, {course.sigle}</p>
     );
 
-    const courseEnd = cours.map(course =>
+    const courseEnd = (course =>
         <p key={course.remise}>fin: {new Date(course.remise).toLocaleDateString("en-US")}</p>
     );
 
-    const projLink = coursProj.map(project => (
+    const projLink = projects.map(project => (
         <tr key={project.projectId}>
             <td className={styles.tableSectionName}>
-                <Link to={`/project/${project.projectId}`}>{project.name}</Link>              
+                <Link to={`/project/${project.id_project}`}>{project.id_project}</Link>              
             </td>
             <td className={styles.tableSectionMembers}>aucun membre à date lol</td>
         </tr>
