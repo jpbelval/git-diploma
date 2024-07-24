@@ -1,20 +1,20 @@
 import React, { useState, useEffect } from "react";
+import { useParams, Link } from "react-router-dom";
+import { useKeycloak } from '@react-keycloak/web';
+import api from "../api/axiosConfig";
 import styles from './styles.module.css';
-import { Link } from "react-router-dom";
-import api from "../api/axiosConfig"
-import { useKeycloak } from '@react-keycloak/web'
-
 
 const CourseDetails = () => {
-
-    const { keycloak } = useKeycloak()
+    const { sigle } = useParams();
+    const { keycloak } = useKeycloak();
     const [projects, setProjects] = useState([]);
+    const [cours, setCours] = useState([]);
+    const [coursProj, setCoursProj] = useState([]);
     let id_project = -1;
-
 
     const onValueChange = async (project_id) => {
         id_project = project_id;
-    }
+    };
 
     const getProjects = async () => {
         try {
@@ -22,58 +22,64 @@ const CourseDetails = () => {
                 headers: {'Authorization': 'Bearer ' + keycloak.token},
                 params: { sigle }
             });
-            console.log(response);
             setProjects(response.data);
         } catch (err) {
-            console.log("Error fetching data:", err);
+            console.log("Error fetching projects:", err);
         }
-    }
+    };
 
+    const getCourseDetails = async () => {
+        try {
+            const response = await api.get(`/api/tutor/getCourseDetails/${sigle}`, {
+                headers: {'Authorization': 'Bearer ' + keycloak.token}
+            });
+            setCours(response.data.cours);
+            setCoursProj(response.data.coursProj);
+        } catch (err) {
+            console.log("Error fetching course details:", err);
+        }
+    };
 
+    useEffect(() => {
+        getCourseDetails();
+        getProjects();
+    }, [sigle]);
 
+    const courseInfo = cours.map(course => 
+        <p key={course.sigle}>{course.name}, {course.sigle}</p>
+    );
 
-
-    const courseInfo = cours.map(cours => 
-        <p>{cours.name}, {cours.code}</p>
-    )
-
-    const courseStart = cours.map(cours =>
-        <p>début: {cours.start.toLocaleDateString("en-US")}</p>
-    )
-
-    const courseEnd = cours.map(cours =>
-        <p>fin: {cours.end.toLocaleDateString("en-US")}</p>
-    )
+    const courseEnd = cours.map(course =>
+        <p key={course.end}>fin: {new Date(course.remise).toLocaleDateString("en-US")}</p>
+    );
 
     const projLink = coursProj.map(project => (
-        <tr>
-            <td key={project.projectId} className={styles.tableSectionName}>
-                <Link to={`/project/${project.projectId}`} params>{project.name}</Link>              
+        <tr key={project.projectId}>
+            <td className={styles.tableSectionName}>
+                <Link to={`/project/${project.projectId}`}>{project.name}</Link>              
             </td>
-            <td className={styles.tableSectionMembers}>aucun membre a date lol</td>
+            <td className={styles.tableSectionMembers}>aucun membre à date lol</td>
         </tr>
-    ))
+    ));
 
     return (
-        <>
         <div className={styles.divContentTuteur}>
             <div className={styles.divListe}>
                 <div>
-                    <h1>cours:</h1>
+                    <h1>Cours:{sigle}</h1>
                     <div>
                         <h2>{courseInfo}</h2>
-                        {courseStart}
                         {courseEnd}
                     </div>
                 </div>
                 <div>
-                    <h2>équipes:</h2>
+                    <h2>Équipes:</h2>
                     <div>
                         <table className={styles.tableProjet}>
                             <thead>
                                 <tr>
-                                    <th>équipe</th>
-                                    <th>membres</th>
+                                    <th>Équipe</th>
+                                    <th>Membres</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -84,7 +90,6 @@ const CourseDetails = () => {
                 </div>
             </div>    
         </div>
-        </>
     );
 };
 

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styles from '../styles.module.css';
 import api from '../../api/axiosConfig.js';
-import { course } from "../data";
 import { Link } from "react-router-dom";
 import { useKeycloak } from '@react-keycloak/web'
 
@@ -37,14 +36,14 @@ const TutorDashboard = () =>{
 
     const pastCourseList = finished.map(finished =>
         <tr>
-            <td><Link to={`/courses/${finished.code}`} params>{finished.name}</Link></td>
+            <td><Link to={`/courses/${finished.sigle}`} params>{finished.name}</Link></td>
             <td>{finished.sigle}</td>
         </tr>
     );
 
     const currentCourseList = upcoming.map(upcoming =>
         <tr>
-            <td><Link to={`/courses/${upcoming.code}`} params>{upcoming.name}</Link></td>
+            <td><Link to={`/courses/${upcoming.sigle}`} params>{upcoming.name}</Link></td>
             <td>{upcoming.sigle}</td>
         </tr>
     );
@@ -75,8 +74,8 @@ const TutorDashboard = () =>{
                         <table className={styles.tableProjet}>
                             <thead>
                                 <tr>
-                                    <th>nom</th>
-                                    <th>sigle</th>
+                                    <th>Nom</th>
+                                    <th>Sigle</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -87,7 +86,7 @@ const TutorDashboard = () =>{
                 </div>
                 <div className={styles.divAddButton}>
                     <Link to="/tutorDashboard/AddCourse">
-                        <button className={styles.buttonForm}>ajouter</button>
+                        <button className={styles.buttonForm}>Ajouter</button>
                     </Link>
                 </div>
             </div>

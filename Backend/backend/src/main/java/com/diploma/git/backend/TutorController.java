@@ -119,6 +119,11 @@ public class TutorController {
     public List<Course> getCoursesWithNoTeamsFromTutor(@RequestParam(value = "cip") String cip) {
         return tutorMapper.getNoTeamsFromTutor(cip);
     }
+
+    @GetMapping("/getCourseDetails")
+    public Course getCourseDetails(@RequestParam(value = "sigle") String sigle) {
+        return tutorMapper.getSingleCourseDetails(sigle);
+    }
     //@GetMapping("/")
 
 }

@@ -84,4 +84,8 @@ public interface TutorMapper {
             "AND sigle IN (SELECT sigle FROM Tutor_Course WHERE cip = #{cip})")
     List<Course> getNoTeamsFromTutor(@PathParam("cip") String cip);
 
+    @Select("SELECT * " +
+            "FROM Course " +
+            "WHERE sigle = #{sigle} ")
+    Course getSingleCourseDetails(@PathParam("sigle") String sigle);
 }
