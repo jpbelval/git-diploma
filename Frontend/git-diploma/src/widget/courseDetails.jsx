@@ -30,8 +30,9 @@ const CourseDetails = () => {
 
     const getCourseDetails = async () => {
         try {
-            const response = await api.get(`/api/tutor/getCourseDetails/${sigle}`, {
-                headers: {'Authorization': 'Bearer ' + keycloak.token}
+            const response = await api.get(`/api/tutor/getCourseDetails`, {
+                headers: {'Authorization': 'Bearer ' + keycloak.token},
+                params: { sigle }
             });
             setCours(response.data.cours);
             setCoursProj(response.data.coursProj);
@@ -50,7 +51,7 @@ const CourseDetails = () => {
     );
 
     const courseEnd = cours.map(course =>
-        <p key={course.end}>fin: {new Date(course.remise).toLocaleDateString("en-US")}</p>
+        <p key={course.remise}>fin: {new Date(course.remise).toLocaleDateString("en-US")}</p>
     );
 
     const projLink = coursProj.map(project => (

@@ -36,14 +36,14 @@ const TutorDashboard = () =>{
 
     const pastCourseList = finished.map(finished =>
         <tr>
-            <td><Link to={`/courses/${finished.sigle}`} params>{finished.name}</Link></td>
+            <td><Link to={`/courses/${finished.sigle}`} params={sigle}>{finished.name}</Link></td>
             <td>{finished.sigle}</td>
         </tr>
     );
 
     const currentCourseList = upcoming.map(upcoming =>
         <tr>
-            <td><Link to={`/courses/${upcoming.sigle}`} params>{upcoming.name}</Link></td>
+            <td><Link to={`/courses/${upcoming.sigle}`} params={sigle}>{upcoming.name}</Link></td>
             <td>{upcoming.sigle}</td>
         </tr>
     );
