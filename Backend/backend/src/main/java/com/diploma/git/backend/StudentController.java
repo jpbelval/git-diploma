@@ -20,7 +20,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/student")
@@ -113,8 +115,12 @@ public class StudentController {
     }
 
     @GetMapping("/getProjectFromStudentCourse")
-    public int getProjectFromStudentCourse(@RequestParam(value = "cip") String cip,
-                                              @RequestParam(value = "sigle") String sigle) {
-        return studentMapper.getProjectFromStudentCourse(cip, sigle);
+    public Map<String, String> getProjectFromStudentCourse(@RequestParam(value = "cip") String cip,
+                                                           @RequestParam(value = "sigle") String sigle) {
+        HashMap<String, String> map = new HashMap<>();
+        String idProject = Integer.toString(studentMapper.getProjectFromStudentCourse(cip, sigle));
+        map.put("id_project", idProject);
+        map.put("gitUrl", "ssh://git@" + System.getenv("GIT_SERVER_URL") + "/" + sigle + "-" + idProject);
+        return map;
     }
 }
